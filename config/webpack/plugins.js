@@ -1,11 +1,24 @@
+/* eslint-disable import/no-extraneous-dependencies */
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-function getStandardPlugins(isProduction) {
-  return [
+const devPlugins = [
+  new webpack.HotModuleReplacementPlugin(),
+  new webpack.NamedModulesPlugin()
+];
+
+const prodPlugins = [
+  new webpack.LoaderOptionsPlugin({
+    minimize: true,
+    debug: false
+  })
+];
+
+module.exports = function getPlugins(isProduction) {
+  return (isProduction ? prodPlugins : devPlugins).concat([
     new StyleLintPlugin({
       configFile: 'config/linters/.stylelintrc',
       syntax: 'scss'
@@ -40,23 +53,5 @@ function getStandardPlugins(isProduction) {
       from: 'img',
       to: 'img'
     }])
-  ];
-}
-
-const devPlugins = [
-  new webpack.HotModuleReplacementPlugin(),
-  new webpack.NamedModulesPlugin()
-];
-
-const prodPlugins = [
-  new webpack.LoaderOptionsPlugin({
-    minimize: true,
-    debug: false
-  })
-];
-
-module.exports = function (isProductionMode) {
-  return isProductionMode ?
-    getStandardPlugins(true).concat(prodPlugins) :
-    getStandardPlugins(false).concat(devPlugins)
-}
+  ]);
+};

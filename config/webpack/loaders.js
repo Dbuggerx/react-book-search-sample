@@ -1,6 +1,7 @@
+/* eslint-disable import/no-extraneous-dependencies, global-require */
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-module.exports = function (isProductionMode) {
+module.exports = function getLoaders(isProductionMode) {
   return [{
     test: /\.html$/,
     exclude: /node_modules/,
@@ -27,6 +28,7 @@ module.exports = function (isProductionMode) {
     use: {
       loader: 'babel-loader',
       options: {
+        cacheDirectory: true,
         plugins: [
           ['transform-object-rest-spread',
             {
@@ -121,4 +123,4 @@ module.exports = function (isProductionMode) {
       }
     }]
   }];
-}
+};
