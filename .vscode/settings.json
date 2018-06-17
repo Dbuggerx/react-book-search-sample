@@ -1,0 +1,21 @@
+// Place your settings in this file to overwrite the default settings
+{
+  "editor.tabSize": 2,
+  "editor.detectIndentation": false,
+  "window.zoomLevel": 1,
+  "editor.minimap.enabled": true,
+  "editor.renderIndentGuides": true,
+  "prettier.eslintIntegration": true,
+  "prettier.singleQuote": true,
+  "stylelint.enable": true,
+  "stylelint.config": { "extends": "./config/linters/.stylelintrc" },
+  "css.validate": false,
+  "scss.validate": false,
+  "eslint.enable": true,
+  "eslint.options": {
+    "configFile": "./config/linters/.eslintrc.json"
+  },
+  "editor.codeLens": true,
+  "flow.useNPMPackagedFlow": true,
+  "flow.enabled": true
+}

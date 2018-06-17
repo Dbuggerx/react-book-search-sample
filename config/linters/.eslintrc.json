@@ -36,6 +36,7 @@
     "curly": ["error", "multi"],
     "import/extensions": 0,
     "react/prop-types": 0,
+    "import/no-named-as-default": 0,
     "jest/no-disabled-tests": "warn",
     "jest/no-focused-tests": "error",
     "jest/no-identical-title": "error",

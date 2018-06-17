@@ -1,9 +1,9 @@
 import React from 'react';
 
 const render = props => (
-  <div {...props}>TESTING!</div>
+  <div {...props}>SearchContainer!</div>
 );
 
-render.displayName = 'Home';
+render.displayName = 'SearchContainer';
 
 export default render;
