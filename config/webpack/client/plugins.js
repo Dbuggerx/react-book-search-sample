@@ -30,7 +30,7 @@ module.exports = function getPlugins(isProduction) {
     }),
     new webpack.EnvironmentPlugin({
       NODE_ENV: process.env.NODE_ENV || 'development',
-      BROWSER: 'true'
+      SERVER: false
     }),
     new HtmlWebpackPlugin({
       title: 'React book search sample - By Danilo Cestari',

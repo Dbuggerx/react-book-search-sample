@@ -34,7 +34,9 @@ module.exports = function getLoaders(isProductionMode) {
             {
               useBuiltIns: true
             }
-          ]
+          ],
+          'syntax-dynamic-import',
+          'transform-runtime'
         ],
         presets: [
           'flow', ['env', {

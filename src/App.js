@@ -1,16 +1,20 @@
 // @flow
 // $FlowFixMe: React Flow typings are not updated to React 16 yet
 import React, { StrictMode } from 'react';
-import { Provider } from 'react-redux';
+import { Route, Link } from 'react-router-dom';
 import { hot } from 'react-hot-loader'; // eslint-disable-line
-import store from './redux/store';
-import Home from './containers/routes/home';
+import asyncComponent from './components/asyncComponent';
 
-const App = () =>
-  <Provider store={store}>
-    <StrictMode>
-      <Home />
-    </StrictMode>
-  </Provider>;
+const AsyncHome = asyncComponent(() =>
+  (process.env.SERVER
+    ? import(/* webpackMode: "weak" */ './containers/routes/home')
+    : import('./containers/routes/home')));
+
+const App = () => (
+  <StrictMode>
+    <Link to="/">Home</Link>
+    <Route exact path="/" component={AsyncHome} />
+  </StrictMode>
+);
 
 export default hot(module)(App);
