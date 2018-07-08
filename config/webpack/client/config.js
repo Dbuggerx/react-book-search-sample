@@ -31,7 +31,20 @@ module.exports = {
   },
   output: {
     path: distPath,
-    filename: '[hash].[name].bundle.js'
+    filename: '[chunkhash].[name].bundle.js'
+  },
+  optimization: {
+    runtimeChunk: 'single',
+    splitChunks: {
+      cacheGroups: {
+        styles: {
+          name: 'styles',
+          test: /\.css$/,
+          chunks: 'all',
+          enforce: true
+        }
+      }
+    }
   },
   module: {
     rules: loaders(isProductionMode)
@@ -40,7 +53,7 @@ module.exports = {
     extensions: ['.js'],
     modules: [path.resolve(__dirname, '../../../node_modules'), sourcePath]
   },
-  plugins: plugins(isProductionMode),
+  plugins: plugins(isProductionMode, distPath),
   devtool: isProductionMode ? 'none' : 'inline-source-map',
   context: sourcePath,
   target: 'web',

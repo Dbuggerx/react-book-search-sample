@@ -6,6 +6,7 @@ import type { Dispatch as ReduxDispatch } from 'redux';
 import { selectors, getBookPage } from '../../../redux/books';
 import type { Book, Action } from '../../../redux/books/types';
 import type { State } from '../../../redux/store';
+import './test.scss';
 
 type ValueProps = {
   currentPage: number,

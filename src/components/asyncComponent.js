@@ -7,9 +7,15 @@ export default function asyncComponent(importComponent) {
     constructor(props) {
       super(props);
 
-      this.state = {
-        component: null
-      };
+      if (process.env.SERVER) {
+        const { default: component } = importComponent();
+        this.state = {
+          component
+        };
+      } else
+        this.state = {
+          component: null
+        };
     }
 
     async componentDidMount() {
@@ -22,7 +28,6 @@ export default function asyncComponent(importComponent) {
 
     render() {
       const C = this.state.component;
-
       return C ? <C {...this.props} /> : null;
     }
   }

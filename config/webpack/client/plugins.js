@@ -3,30 +3,44 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const ManifestPlugin = require('webpack-manifest-plugin');
 
 const devPlugins = [
   new webpack.HotModuleReplacementPlugin(),
   new webpack.NamedModulesPlugin()
 ];
 
-const prodPlugins = [
+const prodPlugins = distPath => [
+  new CleanWebpackPlugin([distPath], { root: process.cwd() }),
+  new webpack.HashedModuleIdsPlugin({
+    hashFunction: 'sha256',
+    hashDigest: 'hex',
+    hashDigestLength: 20
+  }),
   new webpack.LoaderOptionsPlugin({
     minimize: true,
     debug: false
-  })
+  }),
+  new ManifestPlugin()
 ];
 
-module.exports = function getPlugins(isProduction) {
-  return (isProduction ? prodPlugins : devPlugins).concat([
+module.exports = function getPlugins(isProduction, distPath) {
+  return (isProduction ? prodPlugins(distPath) : devPlugins).concat([
+    new CopyWebpackPlugin([
+      {
+        from: 'img',
+        to: distPath
+      }
+    ]),
     new StyleLintPlugin({
       configFile: 'config/linters/.stylelintrc',
       syntax: 'scss'
     }),
-    new ExtractTextPlugin({
-      filename: isProduction ? '[chunkhash].[name].css' : '[name].css',
-      disable: false,
-      allChunks: true,
+    new MiniCssExtractPlugin({
+      filename: isProduction ? '[name].[hash].css' : '[name].css',
+      chunkFilename: isProduction ? '[id].[hash].css' : '[id].css'
     }),
     new webpack.EnvironmentPlugin({
       NODE_ENV: process.env.NODE_ENV || 'development',
@@ -45,13 +59,15 @@ module.exports = function getPlugins(isProduction) {
         keepClosingSlash: true,
         minifyJS: true,
         minifyCSS: true,
-        minifyURLs: true,
+        minifyURLs: true
       },
       inject: true
     }),
-    new CopyWebpackPlugin([{
-      from: 'img',
-      to: 'img'
-    }])
+    new CopyWebpackPlugin([
+      {
+        from: 'img',
+        to: 'img'
+      }
+    ])
   ]);
 };
