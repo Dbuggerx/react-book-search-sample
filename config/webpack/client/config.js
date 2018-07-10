@@ -27,15 +27,19 @@ const stats = {
 module.exports = {
   mode: isProductionMode ? 'production' : 'development',
   entry: {
-    main: './index.js'
+    main: './browser.js'
   },
   output: {
     path: distPath,
-    filename: '[chunkhash].[name].bundle.js'
+    filename: '[name].[chunkhash].bundle.js'
+  },
+  performance: {
+    hints: 'warning'
   },
   optimization: {
     runtimeChunk: 'single',
     splitChunks: {
+      chunks: 'all',
       cacheGroups: {
         styles: {
           name: 'styles',
@@ -57,7 +61,6 @@ module.exports = {
   devtool: isProductionMode ? 'none' : 'inline-source-map',
   context: sourcePath,
   target: 'web',
-  stats: 'errors-only',
   devServer: {
     contentBase: sourcePath,
     historyApiFallback: true,

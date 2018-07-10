@@ -7,7 +7,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const isProductionMode =
   (process.env.NODE_ENV || 'development') === 'production';
 const sourcePath = path.join(__dirname, '../../../src');
-const distPath = path.join(__dirname, '../../../server/');
+const distPath = path.join(__dirname, '../../../server-dist/');
 
 // const nodeModules = {};
 // fs.readdirSync('node_modules')

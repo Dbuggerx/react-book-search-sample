@@ -61,6 +61,7 @@
     "stylelint-selector-bem-pattern": "^2.0.0",
     "stylelint-webpack-plugin": "^0.10.5",
     "webpack": "^4.12.0",
+    "webpack-bundle-analyzer": "^2.13.1",
     "webpack-cli": "^3.0.8",
     "webpack-dev-server": "^3.1.4",
     "webpack-manifest-plugin": "^2.0.3",
@@ -71,6 +72,8 @@
     "start": "webpack-dev-server --config config/webpack/client/config.js",
     "flow": "flow",
     "flow-typed": "flow-typed",
-    "build": "cross-env NODE_ENV=\"'production'\" webpack --config config/webpack/webpack.config.js"
+    "build": "cross-env NODE_ENV=\"'production'\" webpack --config config/webpack/webpack.config.js",
+    "prewebpack-bundle-analyzer": "cross-env NODE_ENV=\"'production'\" webpack --profile --json --config config/webpack/client/config.js > ./stats.json",
+    "webpack-bundle-analyzer": "webpack-bundle-analyzer ./stats.json ./dist"
   }
 }
