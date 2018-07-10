@@ -1,21 +1,31 @@
+// @flow
 import React, { Component } from 'react';
 
-// @see: https://github.com/AnomalyInnovations/serverless-stack-demo-client/blob/code-splitting-in-create-react-app/src/components/AsyncComponent.js
+type State = {
+  component: ?React$ComponentType<*>
+};
 
-export default function asyncComponent(importComponent) {
-  class AsyncComponent extends Component {
-    constructor(props) {
+type ImportedComponent = { default: React$ComponentType<*> };
+
+// @see: https://github.com/AnomalyInnovations/serverless-stack-demo-client/blob/code-splitting-in-create-react-app/src/components/AsyncComponent.js
+export default function
+asyncComponent(importComponent: () => ImportedComponent | Promise<ImportedComponent>) {
+  class AsyncComponent extends Component<any, State> {
+    constructor(props: any) {
       super(props);
 
+      this.state = {
+        component: null
+      };
+
       if (process.env.SERVER) {
-        const { default: component } = importComponent();
-        this.state = {
-          component
-        };
-      } else
-        this.state = {
-          component: null
-        };
+        const mod = importComponent();
+        if (!(mod instanceof Promise))
+          this.state = {
+            component: mod.default
+          };
+        else throw Error('Promise not expected!');
+      }
     }
 
     async componentDidMount() {
@@ -28,7 +38,7 @@ export default function asyncComponent(importComponent) {
 
     render() {
       const C = this.state.component;
-      return C ? <C {...this.props} /> : null;
+      return C ? <C {...this.props} /> : <div>Loading...</div>;
     }
   }
 
