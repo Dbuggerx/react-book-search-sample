@@ -6,21 +6,22 @@ import { hot } from 'react-hot-loader'; // eslint-disable-line
 import asyncComponent from './components/asyncComponent';
 
 type Props = {
-  loadedChunkNames: ?[]
+  loadedChunkNames: ?(string[])
 };
 
 class App extends Component<Props> {
   AsyncHome: React$ComponentType<*>;
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
 
-    this.AsyncHome = asyncComponent(() =>
-      (process.env.SERVER
+    this.AsyncHome = asyncComponent(
+      () => (process.env.SERVER
         ? require('./containers/routes/home') // eslint-disable-line
-        : import(/* webpackChunkName: "home" */ './containers/routes/home')));
-
-    if (process.env.SERVER) props.loadedChunkNames.push('home');
+        : import(/* webpackChunkName: "books" */ './containers/routes/home')),
+      props.loadedChunkNames,
+      'books'
+    );
   }
 
   render() {

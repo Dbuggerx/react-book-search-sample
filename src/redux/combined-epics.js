@@ -1,4 +1,4 @@
 import { combineEpics } from 'redux-observable';
-import { epics } from './books';
+import { epics } from './search';
 
 export default combineEpics(epics);

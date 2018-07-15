@@ -22,6 +22,7 @@
     }
   },
   "rules": {
+    "nonblock-statement-body-position": "off",
     "new-cap": "off",
     "object-curly-spacing": "off",
     "babel/object-curly-spacing": ["error", "always"],

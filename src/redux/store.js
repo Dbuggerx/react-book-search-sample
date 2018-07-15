@@ -1,8 +1,10 @@
 // @flow
 import { applyMiddleware, createStore, combineReducers } from 'redux';
 import { createEpicMiddleware } from 'redux-observable';
-import reducers from './reducers';
+import initialReducers from './initial-reducers';
 import combinedEpics from './combined-epics';
+import type { Reducer as SearchReducer } from './search/types';
+import type { Reducer as BooksReducer } from './books/types';
 
 function getServerPreloadedState() {
   // Grab the state from a global variable injected into the server-generated HTML
@@ -19,15 +21,14 @@ const epicMiddleware = createEpicMiddleware();
 function getMiddlewares() {
   const middlewares = [epicMiddleware];
   if (process.env.NODE_ENV === 'development') {
-    // eslint-disable-next-line import/no-extraneous-dependencies, global-require
-    const { logger } = require('redux-logger');
+    const { logger } = require('redux-logger'); // eslint-disable-line
     middlewares.push(logger);
   }
   return middlewares;
 }
 
 const store = createStore(
-  combineReducers(reducers),
+  combineReducers(initialReducers),
   getServerPreloadedState(),
   applyMiddleware(...getMiddlewares())
 );
@@ -38,5 +39,10 @@ export default store;
 
 // @see: https://blog.callstack.io/type-checking-react-and-redux-thunk-with-flow-part-2-206ce5f6e705
 // @see: https://flow.org/en/docs/types/utilities/#toc-objmap
-type ExtractReturnType = <V>((...args: any) => V) => V;
-export type State = $ObjMap<typeof reducers, ExtractReturnType>;
+// type ExtractReturnType = <V>((...args: any) => V) => V;
+// export type State = $ObjMap<typeof initialReducers, ExtractReturnType>;
+
+export type State = {
+  ...$Exact<SearchReducer>,
+  ...$Exact<BooksReducer>
+};

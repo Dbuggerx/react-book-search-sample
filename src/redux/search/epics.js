@@ -2,10 +2,11 @@
 import { combineEpics } from 'redux-observable';
 import { Observable } from 'rxjs/Observable';
 import { filter, mapTo } from 'rxjs/operators';
-import type { Action, PagedBooksReceivedAction } from './types';
+import type { Action } from './types';
+import type { PagedBooksReceivedAction } from '../books/types';
 
-const filterGetBookPageAction = filter((value: Action) => value.type
-  === ('react-book-search/books/GET_BOOK_PAGE': $PropertyType<Action, 'type'>));
+const filterSearchUpdatedAction = filter((value: Action) => value.type
+  === ('react-book-search/search/SEARCH_UPDATED': $PropertyType<Action, 'type'>));
 
 // TODO: make the ajax request
 const mapToPagedBooksReturnedAction = mapTo({
@@ -36,8 +37,8 @@ const mapToPagedBooksReturnedAction = mapTo({
   }
 });
 
-function getBookPageEpic(action$: Observable<Action>): Observable<PagedBooksReceivedAction> {
-  return action$.pipe(filterGetBookPageAction, mapToPagedBooksReturnedAction);
+function bookSearchEpic(action$: Observable<Action>): Observable<PagedBooksReceivedAction> {
+  return action$.pipe(filterSearchUpdatedAction, mapToPagedBooksReturnedAction);
 }
 
-export default combineEpics(getBookPageEpic);
+export default combineEpics(bookSearchEpic);

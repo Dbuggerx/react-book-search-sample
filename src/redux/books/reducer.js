@@ -7,9 +7,9 @@ const initialState: State = {
   pageCount: 0
 };
 
-export default function searchReducer(state: State = initialState, action: Action): State {
+export default function booksReducer(state: State = initialState, action: Action): State {
   switch (action.type) {
-    case 'react-book-search/home/PAGED_BOOKS_RECEIVED':
+    case 'react-book-search/books/PAGED_BOOKS_RECEIVED':
       return {
         ...state,
         pagedBooks: [...state.pagedBooks, action.payload.books],

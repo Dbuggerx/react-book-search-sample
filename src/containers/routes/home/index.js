@@ -41,8 +41,8 @@ function mapStateToProps(state: State): ValueProps {
   // eslint-disable-next-line
   return {
     books: selectors(state),
-    currentPage: state.books.currentPage,
-    pageCount: state.books.pageCount
+    currentPage: state.books ? state.books.currentPage : 0,
+    pageCount: state.books ? state.books.pageCount : 0
   };
 }
 
@@ -56,3 +56,5 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(Home);
+
+export { default as reducer } from '../../../redux/books';
