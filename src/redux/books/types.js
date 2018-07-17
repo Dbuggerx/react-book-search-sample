@@ -38,6 +38,6 @@ export type State = {|
   +pageCount: number
 |};
 
-export type Reducer = {
-  'books'?: State
-}
+export type BookState = {|
+  books?: State
+|}

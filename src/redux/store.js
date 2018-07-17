@@ -3,8 +3,7 @@ import { applyMiddleware, createStore, combineReducers } from 'redux';
 import { createEpicMiddleware } from 'redux-observable';
 import initialReducers from './initial-reducers';
 import combinedEpics from './combined-epics';
-import type { Reducer as SearchReducer } from './search/types';
-import type { Reducer as BooksReducer } from './books/types';
+import type { BookState } from './books/types';
 
 function getServerPreloadedState() {
   // Grab the state from a global variable injected into the server-generated HTML
@@ -39,10 +38,10 @@ export default store;
 
 // @see: https://blog.callstack.io/type-checking-react-and-redux-thunk-with-flow-part-2-206ce5f6e705
 // @see: https://flow.org/en/docs/types/utilities/#toc-objmap
-// type ExtractReturnType = <V>((...args: any) => V) => V;
-// export type State = $ObjMap<typeof initialReducers, ExtractReturnType>;
+type ExtractReturnType = <V>((...args: any) => V) => V;
+type InitialState = $ObjMap<typeof initialReducers, ExtractReturnType>;
 
-export type State = {
-  ...$Exact<SearchReducer>,
-  ...$Exact<BooksReducer>
-};
+export type State = {|
+  ...InitialState,
+  ...BookState
+|};

@@ -2,8 +2,7 @@ const path = require('path');
 const loaders = require('./loaders');
 const plugins = require('./plugins');
 
-const isProductionMode =
-  (process.env.NODE_ENV || 'development') === 'production';
+const isProductionMode = (process.env.NODE_ENV || 'development') === 'production';
 const sourcePath = path.join(__dirname, '../../../src');
 const distPath = path.join(__dirname, '../../../dist');
 
@@ -36,7 +35,7 @@ module.exports = {
       : '[name].[hash].bundle.js'
   },
   performance: {
-    hints: 'warning'
+    hints: isProductionMode ? 'warning' : false
   },
   optimization: {
     runtimeChunk: 'single',

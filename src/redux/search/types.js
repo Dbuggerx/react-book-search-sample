@@ -16,7 +16,3 @@ export type State = {|
   +genre: string,
   +term: string
 |}
-
-export type Reducer = {
-  'search': State
-}

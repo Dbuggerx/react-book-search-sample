@@ -3,8 +3,7 @@ import type {
   SearchUpdatedAction
 } from './types';
 
-// eslint-disable-next-line
-export function searchUpdated(
+function searchUpdated(
   category: string,
   genre: string,
   term: string
@@ -18,3 +17,7 @@ export function searchUpdated(
     }
   };
 }
+
+export default {
+  searchUpdated
+};

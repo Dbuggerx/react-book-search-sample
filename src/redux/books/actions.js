@@ -5,7 +5,7 @@ import type {
   GetBookPageAction
 } from './types';
 
-export function getBookPage(pageNumber: number): GetBookPageAction {
+function getBookPage(pageNumber: number): GetBookPageAction {
   return {
     type: 'react-book-search/books/GET_BOOK_PAGE',
     payload: {
@@ -14,7 +14,7 @@ export function getBookPage(pageNumber: number): GetBookPageAction {
   };
 }
 
-export function booksReturned(
+function booksReturned(
   books: Book[],
   page: number,
   pageCount: number
@@ -29,3 +29,7 @@ export function booksReturned(
   };
 }
 
+export default {
+  getBookPage,
+  booksReturned
+};

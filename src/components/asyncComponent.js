@@ -2,19 +2,15 @@
 import React, { Component } from 'react';
 import appendReducer from '../redux/append-reducer';
 import type { State as StoreState } from '../redux/store';
+import type { RouteModule } from '../containers/routes/types';
 
 type State = {
   component: ?React$ComponentType<*>
 };
 
-type ImportedComponent = {
-  default: React$ComponentType<*>,
-  reducer: any
-};
-
 // @see: https://github.com/AnomalyInnovations/serverless-stack-demo-client/blob/code-splitting-in-create-react-app/src/components/AsyncComponent.js
 export default function asyncComponent(
-  importComponent: () => ImportedComponent | Promise<ImportedComponent>,
+  importComponent: () => RouteModule | Promise<RouteModule>,
   loadedChunkNames: ?(string[]),
   chunkName: $Keys<StoreState>
 ) {
@@ -39,7 +35,11 @@ export default function asyncComponent(
     }
 
     async componentDidMount() {
-      const component = await importComponent();
+      const modulePromise = importComponent();
+      if (!(modulePromise instanceof Promise))
+        throw Error('Promise expected!');
+
+      const component = await modulePromise;
 
       appendReducer({
         name: chunkName,

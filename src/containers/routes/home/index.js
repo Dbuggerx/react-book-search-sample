@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import type { Dispatch as ReduxDispatch } from 'redux';
-import { selectors, getBookPage } from '../../../redux/books';
+import { selectors, actions } from '../../../redux/books';
 import type { Book, Action } from '../../../redux/books/types';
 import type { State } from '../../../redux/store';
 import './test.scss';
@@ -20,9 +20,7 @@ type ActionProps = {
   }
 };
 
-type Props = ValueProps & ActionProps;
-
-class Home extends Component<Props> {
+class Home extends Component<ValueProps & ActionProps> {
   componentDidMount() {
     this.props.actions.getBookPage(1);
   }
@@ -38,7 +36,6 @@ class Home extends Component<Props> {
 }
 
 function mapStateToProps(state: State): ValueProps {
-  // eslint-disable-next-line
   return {
     books: selectors(state),
     currentPage: state.books ? state.books.currentPage : 0,
@@ -48,7 +45,7 @@ function mapStateToProps(state: State): ValueProps {
 
 function mapDispatchToProps(dispatch: ReduxDispatch<Action>): ActionProps {
   return {
-    actions: bindActionCreators({ getBookPage }, dispatch)
+    actions: bindActionCreators({ ...actions }, dispatch)
   };
 }
 
