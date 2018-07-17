@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import appendReducer from '../redux/append-reducer';
 import type { State as StoreState } from '../redux/store';
 import type { RouteModule } from '../containers/routes/types';
+import { epic$ } from '../redux/combined-epics';
 
 type State = {
   component: ?React$ComponentType<*>
@@ -26,12 +27,23 @@ export default function asyncComponent(
         if (loadedChunkNames) loadedChunkNames.push(chunkName);
 
         const mod = importComponent();
-        if (!(mod instanceof Promise))
-          this.state = {
-            component: mod.default
-          };
-        else throw Error('Promise not expected!');
+        if ((mod instanceof Promise))
+          throw Error('Promise not expected!');
+
+        this.constructor.setupModuleState(mod);
+        this.state = {
+          component: mod.default
+        };
       }
+    }
+
+    static setupModuleState(mod: RouteModule) {
+      appendReducer({
+        name: chunkName,
+        reducer: mod.reducer
+      });
+
+      epic$.next(mod.epic);
     }
 
     async componentDidMount() {
@@ -39,15 +51,11 @@ export default function asyncComponent(
       if (!(modulePromise instanceof Promise))
         throw Error('Promise expected!');
 
-      const component = await modulePromise;
-
-      appendReducer({
-        name: chunkName,
-        reducer: component.reducer
-      });
+      const mod = await modulePromise;
+      this.constructor.setupModuleState(mod);
 
       this.setState({
-        component: component.default
+        component: mod.default
       });
     }
 

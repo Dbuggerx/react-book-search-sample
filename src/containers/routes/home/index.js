@@ -54,4 +54,4 @@ export default connect(
   mapDispatchToProps
 )(Home);
 
-export { default as reducer } from '../../../redux/books';
+export { default as reducer, epic } from '../../../redux/books';

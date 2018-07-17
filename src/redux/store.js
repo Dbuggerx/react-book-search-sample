@@ -2,7 +2,7 @@
 import { applyMiddleware, createStore, combineReducers } from 'redux';
 import { createEpicMiddleware } from 'redux-observable';
 import initialReducers from './initial-reducers';
-import combinedEpics from './combined-epics';
+import { rootEpic } from './combined-epics';
 import type { BookState } from './books/types';
 
 function getServerPreloadedState() {
@@ -32,7 +32,7 @@ const store = createStore(
   applyMiddleware(...getMiddlewares())
 );
 
-epicMiddleware.run(combinedEpics);
+epicMiddleware.run(rootEpic);
 
 export default store;
 

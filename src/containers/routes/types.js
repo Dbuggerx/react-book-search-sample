@@ -1,8 +1,9 @@
 // @flow
 
-import typeof HomeComponent, { reducer as HomeReducer } from './home';
+import typeof HomeComponent, { reducer as HomeReducer, epic as HomeEpic } from './home';
 
 export type RouteModule = {
   default: HomeComponent,
-  reducer: HomeReducer
+  reducer: HomeReducer,
+  epic: HomeEpic
 };
