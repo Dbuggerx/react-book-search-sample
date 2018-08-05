@@ -17,5 +17,6 @@
   },
   "editor.codeLens": true,
   "flow.useNPMPackagedFlow": true,
-  "flow.enabled": true
+  "flow.enabled": true,
+  "flow.stopFlowOnExit": true
 }

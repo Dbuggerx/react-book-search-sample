@@ -59,8 +59,7 @@ module.exports = function getLoaders(isProductionMode) {
                     '> 1%'
                   ]
                 },
-                debug: false,
-                loose: true,
+                debug: !isProductionMode,
                 modules: false,
                 useBuiltIns: true
               }

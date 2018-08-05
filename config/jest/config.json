@@ -1,0 +1,16 @@
+{
+  "moduleNameMapper": {
+    "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/config/jest/fileTransformer.js",
+    "\\.(css|scss)$": "identity-obj-proxy"
+  },
+  "collectCoverageFrom": ["**/*.{js,jsx}", "!**/node_modules/**"],
+  "rootDir": "../..",
+  "roots": ["<rootDir>/src/"],
+  "testRegex": "(_test|_spec|\\.test|\\.spec)\\.jsx?$",
+  "moduleFileExtensions": ["js", "jsx"],
+  "moduleDirectories": ["node_modules"],
+  "testURL": "http://localhost",
+  "transform": {
+    "^.+\\.jsx?$": "<rootDir>/config/jest/babelJestCustomTransformer.js"
+  }
+}
