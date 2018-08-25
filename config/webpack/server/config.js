@@ -4,8 +4,7 @@ const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
-const isProductionMode =
-  (process.env.NODE_ENV || 'development') === 'production';
+const isProductionMode = (process.env.NODE_ENV || 'development') === 'production';
 const sourcePath = path.join(__dirname, '../../../src');
 const distPath = path.join(__dirname, '../../../server-dist/');
 
@@ -27,7 +26,7 @@ module.exports = {
     __dirname: false
   },
   context: sourcePath,
-  entry: './server.js',
+  entry: './server/index.js',
   output: {
     path: distPath,
     filename: 'server.bundle.js'
@@ -45,7 +44,7 @@ module.exports = {
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'production',
       SERVER: true
-    }),
+    })
     // new webpack.BannerPlugin({
     //   banner: 'require("source-map-support").install();',
     //   raw: true,
