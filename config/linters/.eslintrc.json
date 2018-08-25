@@ -21,6 +21,12 @@
       "jsx": true
     }
   },
+  "settings": {
+    "react": {
+      "version": "16.4.2",
+      "flowVersion": "0.79.1"
+    }
+  },
   "rules": {
     "nonblock-statement-body-position": "off",
     "new-cap": "off",
