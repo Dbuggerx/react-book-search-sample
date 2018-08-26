@@ -35,7 +35,7 @@ module.exports = function getPlugins(isProduction, distPath) {
       }
     ]),
     new StyleLintPlugin({
-      configFile: 'config/linters/.stylelintrc',
+      configFile: 'config/linters/.stylelintrc.json',
       syntax: 'scss'
     }),
     new MiniCssExtractPlugin({
