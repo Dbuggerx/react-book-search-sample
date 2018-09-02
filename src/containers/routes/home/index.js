@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import type { Dispatch as ReduxDispatch } from 'redux';
+import { hot } from 'react-hot-loader';
 import { selectors, actions } from '../../../redux/books';
 import BookList from '../../../components/BookList';
 import type { Book, Action } from '../../../redux/books/types';
@@ -31,7 +32,7 @@ class Home extends Component<ValueProps & ActionProps> {
       <div>
         <h1>Home!</h1>
         Showing page {this.props.currentPage} of {this.props.pageCount}
-        <BookList books={this.props.books}></BookList>
+        <BookList books={this.props.books} />
       </div>
     );
   }
@@ -54,6 +55,9 @@ function mapDispatchToProps(dispatch: ReduxDispatch<Action>): ActionProps {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Home);
+)(hot(module)(Home));
+/* To make HMR work properly
+* @see: https://github.com/gaearon/react-hot-loader/issues/959#issuecomment-385680569
+*/
 
 export { default as reducer, epic } from '../../../redux/books';

@@ -28,7 +28,7 @@ module.exports = function getPlugins(isProduction, distPath) {
     new CopyWebpackPlugin([
       {
         from: 'img',
-        to: distPath
+        to: `${distPath}/img`
       }
     ]),
     new StyleLintPlugin({
@@ -59,13 +59,6 @@ module.exports = function getPlugins(isProduction, distPath) {
         minifyURLs: true
       },
       inject: true
-    }),
-    new CopyWebpackPlugin([
-      {
-        from: 'img',
-        to: 'img'
-      }
-    ]),
-    new webpack.HotModuleReplacementPlugin()
+    })
   ]);
 };
