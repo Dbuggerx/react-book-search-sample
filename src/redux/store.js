@@ -1,6 +1,7 @@
 // @flow
 import { applyMiddleware, createStore, combineReducers } from 'redux';
 import { createEpicMiddleware } from 'redux-observable';
+import { ajax } from 'rxjs/ajax';
 import initialReducers from './initial-reducers';
 import { rootEpic } from './combined-epics';
 import type { BookState } from './books/types';
@@ -15,7 +16,9 @@ function getServerPreloadedState() {
   return preloadedState;
 }
 
-const epicMiddleware = createEpicMiddleware();
+const epicMiddleware = createEpicMiddleware({
+  dependencies: { getJSON: ajax.getJSON }
+});
 
 function getMiddlewares() {
   const middlewares = [epicMiddleware];

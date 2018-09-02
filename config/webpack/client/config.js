@@ -30,9 +30,7 @@ module.exports = {
   },
   output: {
     path: distPath,
-    filename: isProductionMode
-      ? '[name].[chunkhash].bundle.js'
-      : '[name].[hash].bundle.js'
+    filename: isProductionMode ? '[name].[chunkhash].bundle.js' : '[name].[hash].bundle.js'
   },
   performance: {
     hints: isProductionMode ? 'warning' : false
@@ -69,7 +67,7 @@ module.exports = {
     host,
     compress: isProductionMode,
     inline: !isProductionMode,
-    hot: !isProductionMode,
+    hot: true,
     open: false,
     stats
   }

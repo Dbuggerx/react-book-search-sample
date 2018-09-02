@@ -12,9 +12,10 @@ export type Book = {
     name: string
   },
   id: string,
-  introduction: {
-    content: string
-  }[]
+  introduction: string,
+  likes: number,
+  name: string,
+  published: Date
 };
 
 export type GetBookPageAction = {

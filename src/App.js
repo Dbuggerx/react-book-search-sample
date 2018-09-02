@@ -2,7 +2,7 @@
 // $FlowFixMe: React Flow typings are not updated to React 16 yet
 import React, { StrictMode, Component } from 'react';
 import { Route, Link } from 'react-router-dom';
-import { hot } from 'react-hot-loader'; // eslint-disable-line
+import { hot } from 'react-hot-loader';
 import asyncComponent from './components/asyncComponent';
 
 type Props = {
@@ -17,7 +17,7 @@ class App extends Component<Props> {
 
     this.AsyncHome = asyncComponent(
       () => (process.env.SERVER
-        ? require('./containers/routes/home') // eslint-disable-line
+          ? require('./containers/routes/home') // eslint-disable-line
         : import(/* webpackChunkName: "books" */ './containers/routes/home')),
       props.loadedChunkNames,
       'books'

@@ -1,6 +1,7 @@
 {
   "plugins": ["babel", "react", "jest", "flowtype"],
-  "extends": ["airbnb-base",
+  "extends": [
+    "airbnb-base",
     "plugin:react/recommended",
     "plugin:import/react",
     "plugin:flowtype/recommended"
@@ -34,7 +35,8 @@
     "babel/object-curly-spacing": ["error", "always"],
     "arrow-parens": [2, "as-needed", { "requireForBlockBody": false }],
     "no-multiple-empty-lines": [
-      "error", {
+      "error",
+      {
         "max": 1,
         "maxEOF": 1
       }

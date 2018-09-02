@@ -55,7 +55,7 @@ module.exports = function getLoaders(isProductionMode) {
                 },
                 debug: !isProductionMode,
                 modules: false,
-                useBuiltIns: 'entry'
+                useBuiltIns: 'usage'
               }
             ],
             '@babel/preset-react',

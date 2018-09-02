@@ -7,10 +7,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 
-const devPlugins = [
-  new webpack.HotModuleReplacementPlugin(),
-  new webpack.NamedModulesPlugin()
-];
+const devPlugins = [new webpack.HotModuleReplacementPlugin(), new webpack.NamedModulesPlugin()];
 
 const prodPlugins = distPath => [
   new CleanWebpackPlugin([distPath], { root: process.cwd() }),
@@ -68,6 +65,7 @@ module.exports = function getPlugins(isProduction, distPath) {
         from: 'img',
         to: 'img'
       }
-    ])
+    ]),
+    new webpack.HotModuleReplacementPlugin()
   ]);
 };

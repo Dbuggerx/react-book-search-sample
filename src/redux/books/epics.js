@@ -1,43 +1,36 @@
 // @flow
 import { combineEpics } from 'redux-observable';
 import { Observable } from 'rxjs/Observable';
-import { filter, mapTo } from 'rxjs/operators';
-import type { Action, PagedBooksReceivedAction } from './types';
+import { filter, map, mergeMap } from 'rxjs/operators';
+import type { Action, PagedBooksReceivedAction, Book } from './types';
+import type { State } from '../store';
 
-const filterGetBookPageAction = filter((value: Action) => value.type
-  === ('react-book-search/books/GET_BOOK_PAGE': $PropertyType<Action, 'type'>));
+const filterGetBookPageAction = filter(
+  (value: Action) => value.type === ('react-book-search/books/GET_BOOK_PAGE': $PropertyType<Action, 'type'>)
+);
 
-// TODO: make the ajax request
-const mapToPagedBooksReturnedAction = mapTo({
-  type: 'react-book-search/books/PAGED_BOOKS_RECEIVED',
-  payload: {
-    page: 1,
-    pageCount: 10,
-    books: [
-      {
-        author: {
-          avatar: 'aaa',
-          name: 'aaaaaaa'
-        },
-        cover: 'aa',
-        description: 'aaa',
-        genre: {
-          category: 'aaa',
-          name: 'aaa'
-        },
-        id: 'aaa',
-        introduction: [
-          {
-            content: 'aaa'
-          }
-        ]
+function callApi(getJSON: (url: string) => Observable<Book[]>) {
+  return mergeMap(() => getJSON('http://localhost:3001/api').pipe(
+    map(response => ({
+      type: 'react-book-search/books/PAGED_BOOKS_RECEIVED',
+      payload: {
+        books: response,
+        page: 1,
+        pageCount: 1
       }
-    ]
-  }
-});
+    }))
+  ));
+}
 
-function getBookPageEpic(action$: Observable<Action>): Observable<PagedBooksReceivedAction> {
-  return action$.pipe(filterGetBookPageAction, mapToPagedBooksReturnedAction);
+function getBookPageEpic(
+  action$: Observable<Action>,
+  state$: Observable<State>,
+  { getJSON }: { getJSON: (url: string) => Observable<Book[]> }
+): Observable<PagedBooksReceivedAction> {
+  return action$.pipe(
+    filterGetBookPageAction,
+    callApi(getJSON)
+  );
 }
 
 export default combineEpics(getBookPageEpic);

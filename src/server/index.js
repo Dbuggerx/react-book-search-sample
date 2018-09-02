@@ -4,7 +4,7 @@ import ssr from './ssr';
 import api from './api';
 
 const app = express();
-const port = 3000;
+const port = 3001;
 
 // Main API endpoint
 app.use('/api', api);
@@ -22,5 +22,5 @@ app.use(ssr);
 
 app.listen(port, '0.0.0.0', err => {
   if (err) console.error(err);
-  else console.info('Listening at http://localhost:3000');
+  else console.info(`Listening at http://localhost:${port}`);
 });
