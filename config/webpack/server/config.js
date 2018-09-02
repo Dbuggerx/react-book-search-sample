@@ -86,18 +86,13 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             plugins: [
-              [
-                'transform-object-rest-spread',
-                {
-                  useBuiltIns: true
-                }
-              ],
-              'syntax-dynamic-import',
-              'transform-runtime'
+              '@babel/plugin-proposal-object-rest-spread',
+              '@babel/plugin-syntax-dynamic-import',
+              '@babel/plugin-transform-runtime'
             ],
             presets: [
               [
-                'env',
+                '@babel/preset-env',
                 {
                   targets: {
                     browsers: [
@@ -112,10 +107,11 @@ module.exports = {
                   debug: false,
                   loose: true,
                   modules: false,
-                  useBuiltIns: true
+                  useBuiltIns: 'entry'
                 }
               ],
-              'react'
+              '@babel/preset-react',
+              '@babel/preset-flow'
             ]
           }
         }
