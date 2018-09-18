@@ -10,7 +10,7 @@ import type { Book, Action } from '../../../redux/books/types';
 import type { State } from '../../../redux/store';
 import './test.scss';
 
-type ValueProps = {
+type StateProps = {
   currentPage: number,
   pageCount: number,
   books: Book[]
@@ -22,7 +22,7 @@ type ActionProps = {
   }
 };
 
-class Home extends Component<ValueProps & ActionProps> {
+class Home extends Component<StateProps & ActionProps> {
   componentDidMount() {
     this.props.actions.getBookPage(1);
   }
@@ -38,7 +38,7 @@ class Home extends Component<ValueProps & ActionProps> {
   }
 }
 
-function mapStateToProps(state: State): ValueProps {
+function mapStateToProps(state: State): StateProps {
   return {
     books: selectors(state),
     currentPage: state.books ? state.books.currentPage : 0,

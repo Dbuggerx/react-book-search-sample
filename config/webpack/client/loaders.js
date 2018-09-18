@@ -33,7 +33,6 @@ module.exports = function getLoaders(isProductionMode) {
       use: {
         loader: 'babel-loader',
         options: {
-          cacheDirectory: true,
           plugins: [
             '@babel/plugin-proposal-object-rest-spread',
             '@babel/plugin-syntax-dynamic-import',
@@ -43,16 +42,6 @@ module.exports = function getLoaders(isProductionMode) {
             [
               '@babel/preset-env',
               {
-                targets: {
-                  browsers: [
-                    'last 2 versions',
-                    'ios_saf >= 8',
-                    'not IE <= 10',
-                    'chrome >= 49',
-                    'firefox >= 49',
-                    '> 1%'
-                  ]
-                },
                 debug: !isProductionMode,
                 modules: false,
                 useBuiltIns: 'usage'
@@ -91,7 +80,11 @@ module.exports = function getLoaders(isProductionMode) {
           options: {
             sourceMap: !isProductionMode,
             plugins() {
-              return [require('autoprefixer')];
+              return [
+                require('autoprefixer')({
+                  grid: true
+                })
+              ];
             }
           }
         },

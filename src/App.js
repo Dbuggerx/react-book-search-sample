@@ -3,6 +3,7 @@
 import React, { StrictMode, Component } from 'react';
 import { Route, Link } from 'react-router-dom';
 import { hot } from 'react-hot-loader';
+import type { ComponentType } from 'react';
 import asyncComponent from './components/asyncComponent';
 
 type Props = {
@@ -10,7 +11,7 @@ type Props = {
 };
 
 class App extends Component<Props> {
-  AsyncHome: React$ComponentType<*>;
+  AsyncHome: ComponentType<*>;
 
   constructor(props: Props) {
     super(props);

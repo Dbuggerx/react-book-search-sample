@@ -1,12 +1,13 @@
 // @flow
 import React, { Component } from 'react';
+import type { ComponentType } from 'react';
 import appendReducer from '../redux/append-reducer';
 import type { State as StoreState } from '../redux/store';
 import type { RouteModule } from '../containers/routes/types';
 import { epic$ } from '../redux/combined-epics';
 
 type State = {
-  component: ?React$ComponentType<*>
+  component: ?ComponentType<*>
 };
 
 // @see: https://github.com/AnomalyInnovations/serverless-stack-demo-client/blob/code-splitting-in-create-react-app/src/components/AsyncComponent.js
@@ -27,8 +28,7 @@ export default function asyncComponent(
         if (loadedChunkNames) loadedChunkNames.push(chunkName);
 
         const mod = importComponent();
-        if ((mod instanceof Promise))
-          throw Error('Promise not expected!');
+        if (mod instanceof Promise) throw Error('Promise not expected!');
 
         this.constructor.setupModuleState(mod);
         this.state = {
@@ -48,8 +48,7 @@ export default function asyncComponent(
 
     async componentDidMount() {
       const modulePromise = importComponent();
-      if (!(modulePromise instanceof Promise))
-        throw Error('Promise expected!');
+      if (!(modulePromise instanceof Promise)) throw Error('Promise expected!');
 
       const mod = await modulePromise;
       this.constructor.setupModuleState(mod);

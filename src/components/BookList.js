@@ -7,10 +7,10 @@ type Props = {
   books: Book[]
 };
 
-const render = (props: Props) => (
+const BookList = (props: Props) => (
   <div {...props}>BookList - {props.books && props.books.length} books</div>
 );
 
-render.displayName = 'BookList';
+BookList.displayName = 'BookList';
 
-export default render;
+export default BookList;
