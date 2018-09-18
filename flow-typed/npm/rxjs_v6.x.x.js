@@ -1,5 +1,5 @@
-// flow-typed signature: 304495199262702cbd213a48933305e4
-// flow-typed version: 4f634d5e06/rxjs_v6.x.x/flow_>=v0.34.x
+// flow-typed signature: e9b5f9bb1f82422c649d5952904060c8
+// flow-typed version: 46f6e6132d/rxjs_v6.x.x/flow_>=v0.34.x
 
 type rxjs$PartialObserver<-T> =
   | {
@@ -1824,7 +1824,7 @@ declare module "rxjs/Subscription" {
   };
 }
 
-declare module "rxjs/testing/TestScheduler" {
+declare module "rxjs/testing" {
   declare module.exports: {
     TestScheduler: typeof rxjs$SchedulerClass
   };

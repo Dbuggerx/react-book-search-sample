@@ -1,4 +1,5 @@
 [ignore]
+.*/node_modules/.*
 
 [include]
 
@@ -12,4 +13,5 @@ module.file_ext=.scss
 module.name_mapper.extension='scss' -> 'empty/object'
 module.file_ext=.json
 module.name_mapper.extension='json' -> 'empty/object'
+emoji=true
 [strict]
