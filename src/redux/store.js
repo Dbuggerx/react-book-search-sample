@@ -1,7 +1,6 @@
 // @flow
 import { applyMiddleware, createStore, combineReducers } from 'redux';
 import { createEpicMiddleware } from 'redux-observable';
-// $FlowFixMe: No types available for 'rxjs/ajax'
 import { ajax } from 'rxjs/ajax';
 import initialReducers from './initial-reducers';
 import { rootEpic } from './combined-epics';
@@ -18,7 +17,7 @@ function getServerPreloadedState() {
 }
 
 const epicMiddleware = createEpicMiddleware({
-  dependencies: { getJSON: ajax.getJSON }
+  dependencies: { ajax }
 });
 
 function getMiddlewares() {

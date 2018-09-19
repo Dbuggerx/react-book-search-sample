@@ -18,27 +18,37 @@ export type Book = {
   published: Date
 };
 
-export type GetBookPageAction = {
-  type: 'react-book-search/books/GET_BOOK_PAGE'
-};
+export type SearchParams = {|
+  page: number,
+  category?: string,
+  genre?: string,
+  query?: string
+|};
 
-export type PagedBooksReceivedAction = {
+export type GetBookPageAction = {|
+  type: 'react-book-search/books/GET_BOOK_PAGE',
+  payload: SearchParams
+|};
+
+export type PagedBooksReceivedAction = {|
   type: 'react-book-search/books/PAGED_BOOKS_RECEIVED',
-  payload: {
+  payload: {|
     books: Book[],
-    page: number,
     pageCount: number
-  }
-};
+  |}
+|};
 
 export type Action = GetBookPageAction | PagedBooksReceivedAction;
 
 export type State = {|
-  +pagedBooks: Book[][],
+  +books: Book[],
   +currentPage: number,
-  +pageCount: number
+  +pageCount: number,
+  +category?: string,
+  +genre?: string,
+  +query?: string
 |};
 
 export type BookState = {|
   books?: State
-|}
+|};

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import type { ComponentType } from 'react';
 import appendReducer from '../redux/append-reducer';
 import type { State as StoreState } from '../redux/store';
-import type { RouteModule } from '../containers/routes/types';
+import type { RouteModule } from '../routes/types';
 import { epic$ } from '../redux/combined-epics';
 
 type State = {
@@ -38,11 +38,13 @@ export default function asyncComponent(
     }
 
     static setupModuleState(mod: RouteModule) {
+      console.log('Appending reducer for:', chunkName);
       appendReducer({
         name: chunkName,
         reducer: mod.reducer
       });
 
+      console.log('Appending epic for:', chunkName);
       epic$.next(mod.epic);
     }
 

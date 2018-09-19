@@ -4,10 +4,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import type { Dispatch as ReduxDispatch } from 'redux';
 import { hot } from 'react-hot-loader';
-import { selectors, actions } from '../../../redux/books';
-import BookList from '../../../components/BookList';
-import type { Book, Action } from '../../../redux/books/types';
-import type { State } from '../../../redux/store';
+import { selectors, actions } from '../../redux/books';
+import BookList from '../../components/BookList';
+import type { Book, Action } from '../../redux/books/types';
+import type { State } from '../../redux/store';
 import './test.scss';
 
 type StateProps = {
@@ -22,7 +22,7 @@ type ActionProps = {
   }
 };
 
-class Home extends Component<StateProps & ActionProps> {
+export class Home extends Component<StateProps & ActionProps> {
   componentDidMount() {
     this.props.actions.getBookPage(1);
   }
@@ -60,4 +60,4 @@ export default connect(
 * @see: https://github.com/gaearon/react-hot-loader/issues/959#issuecomment-385680569
 */
 
-export { default as reducer, epic } from '../../../redux/books';
+export { default as reducer, epic } from '../../redux/books';

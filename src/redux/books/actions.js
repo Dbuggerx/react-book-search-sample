@@ -1,29 +1,28 @@
 // @flow
-import type {
-  Book,
-  PagedBooksReceivedAction,
-  GetBookPageAction
-} from './types';
+import type { Book, PagedBooksReceivedAction, GetBookPageAction } from './types';
 
-function getBookPage(pageNumber: number): GetBookPageAction {
+function getBookPage(
+  page: number,
+  category?: string,
+  genre?: string,
+  query?: string
+): GetBookPageAction {
   return {
     type: 'react-book-search/books/GET_BOOK_PAGE',
     payload: {
-      pageNumber
+      page,
+      category,
+      genre,
+      query
     }
   };
 }
 
-function booksReturned(
-  books: Book[],
-  page: number,
-  pageCount: number
-): PagedBooksReceivedAction {
+function booksReturned(books: Book[], page: number, pageCount: number): PagedBooksReceivedAction {
   return {
     type: 'react-book-search/books/PAGED_BOOKS_RECEIVED',
     payload: {
       books,
-      page,
       pageCount
     }
   };

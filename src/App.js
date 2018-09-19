@@ -18,8 +18,8 @@ class App extends Component<Props> {
 
     this.AsyncHome = asyncComponent(
       () => (process.env.SERVER
-          ? require('./containers/routes/home') // eslint-disable-line
-        : import(/* webpackChunkName: "books" */ './containers/routes/home')),
+          ? require('./routes/home') // eslint-disable-line
+        : import(/* webpackChunkName: "books" */ './routes/home')),
       props.loadedChunkNames,
       'books'
     );

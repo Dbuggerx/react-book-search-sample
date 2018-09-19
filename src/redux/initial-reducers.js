@@ -1,7 +1,7 @@
 // @flow
 
-import searchReducer from './search';
+import dummyReducer from './dummy';
 
 export default {
-  search: searchReducer
+  dummy: dummyReducer
 };

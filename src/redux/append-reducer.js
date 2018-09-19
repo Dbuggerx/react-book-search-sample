@@ -14,8 +14,6 @@ type ModuleInfo = {
 const asyncReducers = {};
 
 export default (newModuleInfo: ModuleInfo) => {
-  console.log('appending reducer', newModuleInfo.name);
-
   asyncReducers[newModuleInfo.name] = newModuleInfo.reducer;
 
   store.replaceReducer(
