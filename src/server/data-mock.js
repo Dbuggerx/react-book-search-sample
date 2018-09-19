@@ -32,7 +32,14 @@ function filterBookResults(params: SearchParams): Book[] {
 
 export const pageSize = 8;
 
-export const availablePages = Math.ceil(bookData.length / pageSize);
+function calcAvailablePages(books: Book[]) {
+  return Math.ceil(books.length / pageSize);
+}
+
+type BookResult = {
+  totalPages: number,
+  books: Book[]
+};
 
 export function getBookById(id: string): Book {
   return bookData.filter(book => book.id === id);
@@ -53,12 +60,13 @@ export function* getRelatedBooks(bookId: string, qty: number): Iterable<Book> {
   }
 }
 
-export function getPagedBooksSearch(params: SearchParams): Book[] {
+export function getPagedBooksSearch(params: SearchParams): BookResult {
   const currentIndex = (params.page - 1 || 0) * pageSize;
-  return (paramsHaveValues(params) ? filterBookResults(params) : bookData).slice(
-    currentIndex,
-    currentIndex + pageSize
-  );
+  const books = paramsHaveValues(params) ? filterBookResults(params) : bookData;
+  return {
+    totalPages: calcAvailablePages(books),
+    books: books.slice(currentIndex, currentIndex + pageSize)
+  };
 }
 
 export const bookCategories = ['Fiction', 'Non-Fiction'];

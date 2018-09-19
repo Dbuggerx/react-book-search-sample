@@ -8,7 +8,6 @@ import type { State } from '../store';
 */
 
 export default createSelector(
-  (state: State) => (state.books ? state.books.currentPage : 1),
   (state: State) => (state.books ? state.books.books : []),
-  (currentPage, books) => books || []
+  books => books
 );

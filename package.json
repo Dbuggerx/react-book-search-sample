@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.1.0",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
     "@babel/plugin-syntax-dynamic-import": "^7.0.0",
     "@babel/plugin-transform-runtime": "^7.1.0",
@@ -85,6 +86,7 @@
     "prebuild": "npm run flow",
     "build": "cross-env NODE_ENV=\"'production'\" webpack --config config/webpack/webpack.config.js",
     "prewebpack-bundle-analyzer": "cross-env NODE_ENV=\"'production'\" webpack --profile --json --config config/webpack/client/config.js > ./stats.json",
-    "webpack-bundle-analyzer": "webpack-bundle-analyzer ./stats.json ./dist"
+    "webpack-bundle-analyzer": "webpack-bundle-analyzer ./stats.json ./dist",
+    "serve": "npm run build && node ./server-dist/server.bundle.js"
   }
 }

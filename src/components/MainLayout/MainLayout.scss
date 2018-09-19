@@ -1,0 +1,42 @@
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+}
+
+.main-layout {
+  background: purple;
+  display: grid;
+  grid-template-columns: 1fr 25vw;
+  grid-template-rows: 130px 1fr 50px;
+  grid-template-areas:
+    'main-layout-search main-layout-info'
+    'main-layout-books main-layout-info'
+    'main-layout-pagination main-layout-info';
+  height: 100%;
+
+  &__search {
+    grid-area: main-layout-search;
+  }
+
+  &__books {
+    grid-area: main-layout-books;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+  }
+
+  &__pagination {
+    grid-area: main-layout-pagination;
+    display: flex;
+    flex-flow: row nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__info {
+    grid-area: main-layout-info;
+  }
+}

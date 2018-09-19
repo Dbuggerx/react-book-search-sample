@@ -36,7 +36,8 @@ module.exports = function getLoaders(isProductionMode) {
           plugins: [
             '@babel/plugin-proposal-object-rest-spread',
             '@babel/plugin-syntax-dynamic-import',
-            '@babel/plugin-transform-runtime'
+            '@babel/plugin-transform-runtime',
+            '@babel/plugin-proposal-class-properties'
           ],
           presets: [
             [
@@ -60,42 +61,62 @@ module.exports = function getLoaders(isProductionMode) {
     },
     {
       test: /\.s?css$/,
-      // use: [
-      //   'style-loader',
-      //   { loader: 'css-loader', options: { modules: true, importLoaders: 1 } },
-      //   'postcss-loader'
-      // ]
-      use: [
-        MiniCssExtractPlugin.loader,
-        {
-          loader: 'css-loader',
-          options: {
-            sourceMap: !isProductionMode,
-            modules: true,
-            localIdentName: '[name]__[local]___[hash:base64:5]'
-          }
-        },
-        {
-          loader: 'postcss-loader',
-          options: {
-            sourceMap: !isProductionMode,
-            plugins() {
-              return [
-                require('autoprefixer')({
-                  grid: true
-                })
-              ];
+      use: isProductionMode
+        ? [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: !isProductionMode,
+              modules: false,
+              localIdentName: '[name]__[local]___[hash:base64:5]'
+            }
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: !isProductionMode,
+              plugins() {
+                return [
+                  require('autoprefixer')({
+                    grid: true
+                  })
+                ];
+              }
+            }
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: !isProductionMode,
+              includePaths: ['node_modules']
             }
           }
-        },
-        {
-          loader: 'sass-loader',
-          options: {
-            sourceMap: !isProductionMode,
-            includePaths: ['node_modules']
+        ]
+        : [
+          'style-loader',
+          { loader: 'css-loader' },
+          {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: !isProductionMode,
+              plugins() {
+                return [
+                  require('autoprefixer')({
+                    grid: true
+                  })
+                ];
+              }
+            }
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: !isProductionMode,
+              includePaths: ['node_modules']
+            }
           }
-        }
-      ]
+        ]
     },
     {
       test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,

@@ -1,7 +1,6 @@
 // @flow
-// $FlowFixMe: React Flow typings are not updated to React 16 yet
-import React, { StrictMode, Component } from 'react';
-import { Route, Link } from 'react-router-dom';
+import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
 import { hot } from 'react-hot-loader';
 import type { ComponentType } from 'react';
 import asyncComponent from './components/asyncComponent';
@@ -26,12 +25,7 @@ class App extends Component<Props> {
   }
 
   render() {
-    return (
-      <StrictMode>
-        <Link to="/">Go to Home</Link>
-        <Route exact path="/" component={this.AsyncHome} />
-      </StrictMode>
-    );
+    return <Route exact path="/" component={this.AsyncHome} />;
   }
 }
 

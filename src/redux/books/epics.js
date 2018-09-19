@@ -11,15 +11,21 @@ const filterGetBookPageAction = filter(
 );
 
 function callApi(ajax: AjaxCreationMethod) {
-  return mergeMap(() => ajax({ url: 'http://localhost:3001/api/books' }).pipe(
-    map(result => ({
-      type: 'react-book-search/books/PAGED_BOOKS_RECEIVED',
-      payload: {
-        books: result.response,
-        pageCount: parseInt(result.xhr.getResponseHeader('x-total-count'), 10)
-      }
-    }))
-  ));
+  return mergeMap((value: Action) => {
+    const params = Object.entries(value.payload).reduce(
+      (agg, cur) => (cur[1] ? `${agg + (agg.length > 0 ? '&' : '')}${cur[0]}=${String(cur[1])}` : agg),
+      ''
+    );
+    return ajax({ url: `http://localhost:3001/api/books?${params}` }).pipe(
+      map(result => ({
+        type: 'react-book-search/books/PAGED_BOOKS_RECEIVED',
+        payload: {
+          books: result.response,
+          pageCount: parseInt(result.xhr.getResponseHeader('x-total-count'), 10)
+        }
+      }))
+    );
+  });
 }
 
 function getBookPageEpic(
