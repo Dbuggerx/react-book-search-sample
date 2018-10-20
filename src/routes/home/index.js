@@ -41,8 +41,7 @@ export class Home extends Component<StateProps & ActionProps> {
   };
 
   render() {
-    /* eslint-disable-next-line no-shadow */ // (clashing with flow type)
-    const { actions, ...values } = this.props;
+    const { ...values } = this.props;
     const propValues = { ...values, search: this.search, showPage: this.showPage };
     return (
       <StrictMode>

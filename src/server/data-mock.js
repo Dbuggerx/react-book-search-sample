@@ -4,7 +4,7 @@ import bookData from './bookData.json';
 import type { Book, SearchParams } from '../redux/books/types';
 
 function paramsHaveValues(params: SearchParams) {
-  return !!(params.category || params.genre || params.query);
+  return (params.category || params.genre || params.query);
 }
 
 function normalizeString(str: string) {
