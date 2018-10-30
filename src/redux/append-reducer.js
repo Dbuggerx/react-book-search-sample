@@ -1,19 +1,19 @@
 // @flow
 import { combineReducers } from 'redux';
-import store from './store';
+import type { Store } from 'redux';
 import initialReducers from './initial-reducers';
 
 // @see: https://medium.com/front-end-hacking/code-splitting-redux-reducers-4073db30c72e
 // @see: http://nicolasgallagher.com/redux-modules-and-code-splitting/
 
-type ModuleInfo = {
+export type ModuleInfo = {
   name: string,
   reducer: {}
 };
 
 const asyncReducers = {};
 
-export default (newModuleInfo: ModuleInfo) => {
+export default (store: Store<*, *>, newModuleInfo: ModuleInfo) => {
   asyncReducers[newModuleInfo.name] = newModuleInfo.reducer;
 
   store.replaceReducer(

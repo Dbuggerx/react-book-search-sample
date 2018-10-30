@@ -16,7 +16,9 @@ function callApi(ajax: AjaxCreationMethod) {
       (agg, cur) => (cur[1] ? `${agg + (agg.length > 0 ? '&' : '')}${cur[0]}=${String(cur[1])}` : agg),
       ''
     );
-    return ajax({ url: `http://localhost:3001/api/books?${params}` }).pipe(
+    return ajax({
+      url: `http://localhost:3001/api/books?${params}`
+    }).pipe(
       map(result => ({
         type: 'react-book-search/books/PAGED_BOOKS_RECEIVED',
         payload: {

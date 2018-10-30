@@ -17,18 +17,17 @@ type StateProps = {
   category: string,
   genre: string,
   query: string,
-  books: Book[]
+  books: Book[],
+  loadingBooks: boolean
 };
 
 type ActionProps = {
-  actions: {
-    getBookPage: *
-  }
+  actions: typeof actions
 };
 
 export class Home extends Component<StateProps & ActionProps> {
   componentDidMount() {
-    this.props.actions.getBookPage(1);
+    if (this.props.books.length === 0) this.props.actions.getBookPage(1);
   }
 
   search = (category: string, genre: string, query: string) => {
@@ -40,12 +39,22 @@ export class Home extends Component<StateProps & ActionProps> {
     this.props.actions.getBookPage(page, this.props.category, this.props.genre, this.props.query);
   };
 
+  handleBookClick = () => {
+    console.log('TODO!!!');
+  };
+
   render() {
-    const { ...values } = this.props;
-    const propValues = { ...values, search: this.search, showPage: this.showPage };
     return (
       <StrictMode>
-        <MainLayout {...propValues} />
+        <MainLayout
+          books={this.props.books}
+          currentPage={this.props.currentPage}
+          loadingBooks={this.props.loadingBooks}
+          pageCount={this.props.pageCount}
+          search={this.search}
+          showPage={this.showPage}
+          onBookClick={this.handleBookClick}
+        />
       </StrictMode>
     );
   }
@@ -53,20 +62,12 @@ export class Home extends Component<StateProps & ActionProps> {
 
 function mapStateToProps(state: State): StateProps {
   const books = selectors(state);
+  const loading = state.books ? state.books.loading : false;
 
-  return state.books
-    ? { ...state.books, books }
-    : {
-      currentPage: 0,
-      pageCount: 0,
-      category: '',
-      genre: '',
-      query: '',
-      books
-    };
+  return { ...state.books, books, loadingBooks: loading };
 }
 
-function mapDispatchToProps(dispatch: ReduxDispatch<Action>): ActionProps {
+function mapDispatchToProps(dispatch: ReduxDispatch<Action>) {
   return {
     actions: bindActionCreators({ ...actions }, dispatch)
   };

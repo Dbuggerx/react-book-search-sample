@@ -8,15 +8,8 @@ const isProductionMode = (process.env.NODE_ENV || 'development') === 'production
 const sourcePath = path.join(__dirname, '../../../src');
 const distPath = path.join(__dirname, '../../../server-dist/');
 
-// const nodeModules = {};
-// fs.readdirSync('node_modules')
-//   .filter(x => ['.bin'].indexOf(x) === -1)
-//   .forEach(mod => {
-//     nodeModules[mod] = `commonjs ${mod}`;
-//   });
-
 module.exports = {
-  mode: 'production',
+  mode: isProductionMode ? 'production' : 'development',
   target: 'node',
   node: {
     global: false,
@@ -35,23 +28,16 @@ module.exports = {
   externals: [nodeExternals()], // in order to ignore all modules in node_modules folder
   plugins: [
     new CleanWebpackPlugin([distPath], { root: process.cwd() }),
-    // new webpack.NamedModulesPlugin(),
     new webpack.HashedModuleIdsPlugin({
       hashFunction: 'sha256',
       hashDigest: 'hex',
       hashDigestLength: 20
     }),
     new webpack.EnvironmentPlugin({
-      NODE_ENV: 'production',
       SERVER: true
     })
-    // new webpack.BannerPlugin({
-    //   banner: 'require("source-map-support").install();',
-    //   raw: true,
-    //   entryOnly: false
-    // })
   ],
-  // devtool: 'inline-source-map',
+  devtool: isProductionMode ? 'none' : 'inline-source-map',
 
   module: {
     rules: [

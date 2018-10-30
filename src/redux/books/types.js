@@ -41,6 +41,7 @@ export type PagedBooksReceivedAction = {|
 export type Action = GetBookPageAction | PagedBooksReceivedAction;
 
 export type State = {|
+  +loading: boolean,
   +books: Book[],
   +currentPage: number,
   +pageCount: number,

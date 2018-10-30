@@ -22,7 +22,7 @@
     "redux-observable": "^1.0.0",
     "reselect": "^4.0.0",
     "rxjs": "^6.3.3",
-    "rxjs-compat": "^6.3.3"
+    "xmlhttprequest": "^1.8.0"
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",
@@ -77,7 +77,7 @@
   },
   "scripts": {
     "test": "cross-env NODE_ENV='test' jest --config config/jest/config.json",
-    "prestart-server": "cross-env NODE_ENV=\"'production'\" webpack --config config/webpack/server/config.js",
+    "prestart-server": "webpack --config config/webpack/server/config.js",
     "start-server": "node server-dist/server.bundle.js",
     "prestart": "npm run flow",
     "start": "npm run start-server & webpack-dev-server --config config/webpack/client/config.js",

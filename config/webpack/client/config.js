@@ -30,7 +30,7 @@ module.exports = {
   },
   output: {
     path: distPath,
-    filename: isProductionMode ? '[name].[chunkhash].bundle.js' : '[name].[hash].bundle.js'
+    filename: isProductionMode ? '[name].[contenthash].bundle.js' : '[name].[hash].bundle.js' // @see: https://github.com/webpack/webpack.js.org/issues/2096
   },
   performance: {
     hints: isProductionMode ? 'warning' : false

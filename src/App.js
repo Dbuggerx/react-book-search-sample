@@ -4,9 +4,11 @@ import { Route } from 'react-router-dom';
 import { hot } from 'react-hot-loader';
 import type { ComponentType } from 'react';
 import asyncComponent from './components/asyncComponent';
+import type { ModuleInfo } from './redux/append-reducer';
 
 type Props = {
-  loadedChunkNames: ?(string[])
+  loadedChunkNames?: (string[]),
+  appendAsyncReducer: (newModuleInfo: ModuleInfo) => void
 };
 
 class App extends Component<Props> {
@@ -16,6 +18,7 @@ class App extends Component<Props> {
     super(props);
 
     this.AsyncHome = asyncComponent(
+      this.props.appendAsyncReducer,
       () => (process.env.SERVER
           ? require('./routes/home') // eslint-disable-line
         : import(/* webpackChunkName: "books" */ './routes/home')),
@@ -25,8 +28,9 @@ class App extends Component<Props> {
   }
 
   render() {
-    return <Route exact path="/" component={this.AsyncHome} />;
+    const Home = this.AsyncHome;
+    return <Route exact path="/" render={props => <Home {...props} />} />;
   }
 }
 
-export default hot(module)(App);
+export default (hot(module)(App): typeof App);

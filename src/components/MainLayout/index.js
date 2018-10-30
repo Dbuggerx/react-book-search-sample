@@ -14,7 +14,11 @@ type Props = BookListProps & SearchFormProps & PaginationProps;
 const MainLayout = (props: Props) => (
   <div className="main-layout">
     <div className="main-layout__books">
-      <BookList books={props.books} onBookClick={props.onBookClick} />
+      <BookList
+        books={props.books}
+        loadingBooks={props.loadingBooks}
+        onBookClick={props.onBookClick}
+      />
     </div>
     <div className="main-layout__search">
       <SearchForm search={props.search} />

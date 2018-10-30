@@ -36,8 +36,7 @@ module.exports = function getPlugins(isProduction, distPath) {
       syntax: 'scss'
     }),
     new MiniCssExtractPlugin({
-      filename: isProduction ? '[name].[hash].css' : '[name].css',
-      chunkFilename: isProduction ? '[id].[hash].css' : '[id].css'
+      filename: isProduction ? '[name].[contenthash].css' : '[name].css' // @see: https://survivejs.com/webpack/optimizing/adding-hashes-to-filenames/
     }),
     new webpack.EnvironmentPlugin({
       NODE_ENV: process.env.NODE_ENV || 'development',
