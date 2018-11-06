@@ -1,20 +1,24 @@
 // @flow
 
-import React from 'react';
+import React, { Component } from 'react';
 import type { Book } from '../../redux/books/types';
 import './BookCard.scss';
 
 export type Props = {
   book: Book,
-  onClick: (event: SyntheticMouseEvent<HTMLDivElement>) => void
+  onClick: (book: Book) => void
 };
 
-const BookCard = (props: Props) => (
-  <div className="book-card" onClick={props.onClick}>
-    {props.book.name}
-  </div>
-);
+export default class BookCard extends Component<Props> {
+  handleClick = () => {
+    this.props.onClick(this.props.book);
+  };
 
-BookCard.displayName = 'BookCard';
-
-export default BookCard;
+  render() {
+    return (
+      <div className="book-card" onClick={this.handleClick}>
+        {this.props.book.name}
+      </div>
+    );
+  }
+}

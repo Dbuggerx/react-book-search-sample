@@ -7,7 +7,7 @@ import BookCard from '../BookCard';
 export type Props = {
   books: Book[],
   loadingBooks: boolean,
-  onBookClick: (event: SyntheticMouseEvent<HTMLDivElement>) => void
+  onBookClick: (book: Book) => void
 };
 
 const BookList = (props: Props) => {

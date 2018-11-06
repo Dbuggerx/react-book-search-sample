@@ -39,8 +39,8 @@ export class Home extends Component<StateProps & ActionProps> {
     this.props.actions.getBookPage(page, this.props.category, this.props.genre, this.props.query);
   };
 
-  handleBookClick = () => {
-    console.log('TODO!!!');
+  handleBookClick = (book: Book) => {
+    console.log('TODO!', book);
   };
 
   render() {
