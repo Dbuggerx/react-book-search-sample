@@ -6,19 +6,8 @@
   "configurations": [
     {
       "type": "node",
-      "request": "launch",
-      "name": "Launch Program",
-      "program": "${workspaceFolder}/server-dist/server.bundle.js"
-    },
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "Launch via NPM",
-      "runtimeExecutable": "npm",
-      "runtimeArgs": [
-        "run-script",
-        "start-server"
-      ],
+      "request": "attach",
+      "name": "Attach",
       "port": 9229
     }
   ]

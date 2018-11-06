@@ -7,7 +7,7 @@ import type { Action, PagedBooksReceivedAction } from './types';
 import type { Action as SsrAction } from '../ssr/types';
 import type { State } from '../store';
 
-function getBookPageEpic(
+function bookPageEpic(
   action$: Observable<Action>,
   state$: Observable<State>,
   { ajax }: { ajax: AjaxCreationMethod }
@@ -52,4 +52,4 @@ function setBooksSsrReady(action$: Observable<*>): Observable<SsrAction> {
   );
 }
 
-export default combineEpics(getBookPageEpic, setBooksSsrReady);
+export default combineEpics(bookPageEpic, setBooksSsrReady);

@@ -9,7 +9,7 @@ describe('books epics', () => {
 
     testScheduler.run(({ hot, cold, expectObservable }) => {
       const action$ = hot('-a', {
-        a: { type: 'react-book-search/books/GET_BOOK_PAGE' }
+        a: { type: 'react-book-search/books/GET_BOOK_PAGE', payload: { test: true } }
       });
       const state$ = null;
       const dependencies = {
