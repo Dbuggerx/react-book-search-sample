@@ -7,9 +7,6 @@ function getBookPage(
   genre?: string,
   query?: string
 ): GetBookPageAction {
-  // eslint-disable-next-line no-debugger
-  debugger;
-  console.log('getBookPage');
   return {
     type: 'react-book-search/books/GET_BOOK_PAGE',
     payload: {

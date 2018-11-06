@@ -6,10 +6,15 @@ import type { Observable } from 'rxjs';
 import typeof { ajax as AjaxCreationMethod } from 'rxjs/ajax';
 import { epics } from './dummy';
 
-export const epic$ = new BehaviorSubject(combineEpics(epics));
+export default () => {
+  const epic$ = new BehaviorSubject(combineEpics(epics));
 
-export const rootEpic = (
-  action$: Observable<any>,
-  state$: Observable<any>,
-  { ajax }: { ajax: AjaxCreationMethod }
-) => epic$.pipe(mergeMap(epic => epic(action$, state$, { ajax })));
+  return {
+    rootEpic: (
+      action$: Observable<any>,
+      state$: Observable<any>,
+      { ajax }: { ajax: AjaxCreationMethod }
+    ) => epic$.pipe(mergeMap(epic => epic(action$, state$, { ajax }))),
+    epicSubject$: epic$
+  };
+};

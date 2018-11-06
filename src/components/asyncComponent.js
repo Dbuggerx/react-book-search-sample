@@ -1,9 +1,9 @@
 // @flow
 import React, { Component } from 'react';
 import type { ComponentType } from 'react';
+import type { BehaviorSubject } from 'rxjs';
 import type { State as StoreState } from '../redux/store';
 import type { RouteModule } from '../routes/types';
-import { epic$ } from '../redux/combined-epics';
 import type { ModuleInfo } from '../redux/append-reducer';
 
 type State = {
@@ -12,7 +12,8 @@ type State = {
 
 // @see: https://github.com/AnomalyInnovations/serverless-stack-demo-client/blob/code-splitting-in-create-react-app/src/components/AsyncComponent.js
 export default function asyncComponent(
-  appendAsyncReducer: (newModuleInfo: ModuleInfo) => void,
+  appendAsyncReducer?: (newModuleInfo: ModuleInfo) => void,
+  epicSubject$?: BehaviorSubject<any>,
   importComponent: () => RouteModule | Promise<RouteModule>,
   loadedChunkNames: ?(string[]),
   chunkName: $Keys<StoreState>
@@ -40,13 +41,15 @@ export default function asyncComponent(
 
     static setupModuleState(mod: RouteModule) {
       console.log('Appending reducer for:', chunkName);
-      appendAsyncReducer({
-        name: chunkName,
-        reducer: mod.reducer
-      });
+      if (appendAsyncReducer)
+        appendAsyncReducer({
+          name: chunkName,
+          reducer: mod.reducer
+        });
 
       console.log('Appending epic for:', chunkName);
-      epic$.next(mod.epic);
+
+      if (epicSubject$) epicSubject$.next(mod.epic);
     }
 
     async componentDidMount() {

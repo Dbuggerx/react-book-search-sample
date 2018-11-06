@@ -1,36 +1,28 @@
 // @flow
-import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import React from 'react';
+import { Route, Switch } from 'react-router-dom';
 import { hot } from 'react-hot-loader';
-import type { ComponentType } from 'react';
-import asyncComponent from './components/asyncComponent';
+import type { BehaviorSubject } from 'rxjs';
+import getRoutes from './routes';
 import type { ModuleInfo } from './redux/append-reducer';
 
 type Props = {
-  loadedChunkNames?: (string[]),
-  appendAsyncReducer: (newModuleInfo: ModuleInfo) => void
+  loadedChunkNames?: string[],
+  appendAsyncReducer?: (newModuleInfo: ModuleInfo) => void,
+  epicSubject$?: BehaviorSubject<any>
 };
 
-class App extends Component<Props> {
-  AsyncHome: ComponentType<*>;
+const App = (props: Props) => (
+  <Switch>
+    {getRoutes(props.loadedChunkNames, props.appendAsyncReducer, props.epicSubject$).map(
+      (route, key) => {
+        const { loadData, ...routeProps } = route;
+        return <Route key={key} {...routeProps} />;
+      }
+    )}
+  </Switch>
+);
 
-  constructor(props: Props) {
-    super(props);
-
-    this.AsyncHome = asyncComponent(
-      this.props.appendAsyncReducer,
-      () => (process.env.SERVER
-          ? require('./routes/home') // eslint-disable-line
-        : import(/* webpackChunkName: "books" */ './routes/home')),
-      props.loadedChunkNames,
-      'books'
-    );
-  }
-
-  render() {
-    const Home = this.AsyncHome;
-    return <Route exact path="/" render={props => <Home {...props} />} />;
-  }
-}
+App.displayName = 'App';
 
 export default (hot(module)(App): typeof App);
