@@ -15,6 +15,7 @@ body,
     'main-layout-books main-layout-info'
     'main-layout-pagination main-layout-info';
   height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
 
   &__search {
     grid-area: main-layout-search;
@@ -38,5 +39,6 @@ body,
 
   &__info {
     grid-area: main-layout-info;
+    padding: 15px;
   }
 }
