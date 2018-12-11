@@ -40,9 +40,13 @@ export default function createReduxStore(rootEpic: *) {
     dependencies: { ajax }
   });
 
-  const store = createStore(
+  // I just had to use this comment type syntax, otherwise I'd get syntax error issues
+  const store = createStore/* ::<InitialState, *, *> */(
     combineReducers(initialReducers),
-    getServerPreloadedState() || {},
+    getServerPreloadedState() || {
+      dummy: null,
+      ssr: {}
+    },
     applyMiddleware(epicMiddleware, ...middlewares)
   );
 

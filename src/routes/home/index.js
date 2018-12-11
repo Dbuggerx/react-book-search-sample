@@ -1,6 +1,4 @@
 // @flow
-
-// $FlowFixMe: No types available for StrictMode yet
 import React, { Component, StrictMode } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';

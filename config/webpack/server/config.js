@@ -107,19 +107,7 @@ module.exports = {
         test: /\.s?css$/,
         use: [
           {
-            loader: 'css-loader/locals',
-            options: {
-              sourceMap: !isProductionMode,
-              modules: true,
-              localIdentName: '[name]__[local]___[hash:base64:5]'
-            }
-          },
-          {
-            loader: 'sass-loader',
-            options: {
-              sourceMap: !isProductionMode,
-              includePaths: ['node_modules']
-            }
+            loader: 'null-loader'
           }
         ]
       },

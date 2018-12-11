@@ -24,8 +24,8 @@
   },
   "settings": {
     "react": {
-      "version": "16.6.0",
-      "flowVersion": "0.84.0"
+      "version": "16.6.3",
+      "flowVersion": "0.88.0"
     }
   },
   "rules": {

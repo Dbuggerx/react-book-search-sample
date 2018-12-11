@@ -63,15 +63,15 @@ module.exports = function getLoaders(isProductionMode) {
       test: /\.s?css$/,
       use: isProductionMode
         ? [
-          MiniCssExtractPlugin.loader,
           {
-            loader: 'css-loader',
+            loader: MiniCssExtractPlugin.loader,
             options: {
               sourceMap: !isProductionMode,
               modules: false,
               localIdentName: '[name]__[local]___[hash:base64:5]'
             }
           },
+          'css-loader',
           {
             loader: 'postcss-loader',
             options: {
