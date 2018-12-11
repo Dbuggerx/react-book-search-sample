@@ -6,9 +6,6 @@ import api from './api';
 const app = express();
 const port = 3001;
 
-// Main API endpoint
-app.use('/api', api);
-
 // Serve static files
 app.use(
   express.static('dist', {
@@ -16,6 +13,9 @@ app.use(
     maxAge: '1d'
   })
 );
+
+// Main API endpoint
+app.use('/api', api);
 
 // This is fired every time the server side receives a request
 app.use(ssr);

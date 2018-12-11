@@ -74,9 +74,12 @@ export default async function handleRender(req, res, next) {
     appendReducer(store, newModuleInfo);
   };
 
-  const routeMatch = getRoutes(loadedChunkNames, appendAsyncReducer, epicConfig.epicSubject$).find(
-    route => matchPath(req.path, route)
-  );
+  const routeMatch = getRoutes(loadedChunkNames, appendAsyncReducer, epicConfig.epicSubject$)
+    .map(route => ({
+      ...route,
+      reactRouterMatch: matchPath(req.path, route)
+    }))
+    .find(r => r.reactRouterMatch);
 
   if (!routeMatch) {
     res.end();
@@ -86,7 +89,8 @@ export default async function handleRender(req, res, next) {
   const reactRouterStaticContext = {};
 
   try {
-    if (routeMatch.loadData) routeMatch.loadData(store.dispatch);
+    if (routeMatch.loadData)
+      routeMatch.loadData(store.dispatch, routeMatch.reactRouterMatch.params);
     const renderedHtml = await waitForInitialData(
       store,
       req.url,

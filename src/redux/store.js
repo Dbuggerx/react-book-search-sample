@@ -5,6 +5,7 @@ import { createEpicMiddleware } from 'redux-observable';
 import { ajax } from 'rxjs/ajax';
 import initialReducers from './initial-reducers';
 import type { BookState } from './books/types';
+import type { BookDetailState } from './bookDetail/types';
 
 // @see: https://blog.callstack.io/type-checking-react-and-redux-thunk-with-flow-part-2-206ce5f6e705
 // @see: https://flow.org/en/docs/types/utilities/#toc-objmap
@@ -13,7 +14,8 @@ type InitialState = $ObjMap<typeof initialReducers, ExtractReturnType>;
 
 export type State = {|
   ...InitialState,
-  ...BookState
+  ...BookState,
+  ...BookDetailState
 |};
 
 function getServerPreloadedState(): InitialState | null {

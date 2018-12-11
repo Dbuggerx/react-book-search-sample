@@ -42,7 +42,7 @@ type BookResult = {
 };
 
 export function getBookById(id: string): Book {
-  return bookData.filter(book => book.id === id);
+  return bookData.find(book => book.id === id);
 }
 
 export function* getRelatedBooks(bookId: string, qty: number): Iterable<Book> {

@@ -3,12 +3,15 @@ import React, { Component } from 'react';
 import type { ComponentType } from 'react';
 import type { BehaviorSubject } from 'rxjs';
 import type { State as StoreState } from '../redux/store';
-import type { RouteModule } from '../routes/types';
+import type { HomeRouteModule } from '../routes/home/types';
+import type { DetailRouteModule } from '../routes/bookDetail/types';
 import type { ModuleInfo } from '../redux/append-reducer';
 
 type State = {
   component: ?ComponentType<*>
 };
+
+type RouteModule = HomeRouteModule | DetailRouteModule;
 
 // @see: https://github.com/AnomalyInnovations/serverless-stack-demo-client/blob/code-splitting-in-create-react-app/src/components/AsyncComponent.js
 export default function asyncComponent(
