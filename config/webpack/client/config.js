@@ -40,17 +40,22 @@ module.exports = {
     splitChunks: {
       chunks: 'all',
       cacheGroups: {
-        styles: {
-          name: 'styles',
-          test: /\.css$/,
-          chunks: 'all',
-          enforce: true
-        }
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all'
+        },
+        // styles: {
+        //   name: 'styles',
+        //   test: /\.s?css$/,
+        //   chunks: 'all',
+        //   enforce: true
+        // }
       }
     }
   },
   module: {
-    rules: loaders(isProductionMode)
+    rules: loaders(isProductionMode, path.resolve(sourcePath))
   },
   resolve: {
     extensions: ['.js'],

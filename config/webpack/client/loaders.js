@@ -1,24 +1,13 @@
 /* eslint-disable import/no-extraneous-dependencies, global-require */
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-module.exports = function getLoaders(isProductionMode) {
+module.exports = function getLoaders(isProductionMode, srcPath) {
   return [
-    {
-      test: /\.html$/,
-      exclude: /node_modules/,
-      use: [
-        {
-          loader: 'html-loader',
-          options: {
-            minimize: true
-          }
-        }
-      ]
-    },
     {
       enforce: 'pre',
       test: /\.(js|jsx)$/,
       exclude: /node_modules/,
+      include: [srcPath],
       use: {
         loader: 'eslint-loader',
         options: {
@@ -30,6 +19,7 @@ module.exports = function getLoaders(isProductionMode) {
     {
       test: /\.(js|jsx)$/,
       exclude: /node_modules/,
+      include: [srcPath],
       use: {
         loader: 'babel-loader',
         options: {
@@ -61,6 +51,7 @@ module.exports = function getLoaders(isProductionMode) {
     },
     {
       test: /\.s?css$/,
+      include: [srcPath],
       use: isProductionMode
         ? [
           {
@@ -120,6 +111,7 @@ module.exports = function getLoaders(isProductionMode) {
     },
     {
       test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+      include: [srcPath],
       use: [
         {
           loader: 'svg-url-loader',
@@ -131,6 +123,7 @@ module.exports = function getLoaders(isProductionMode) {
     },
     {
       test: /\.(png|jpg|jpeg|gif)$/,
+      include: [srcPath],
       use: [
         {
           loader: 'url-loader',
@@ -142,6 +135,7 @@ module.exports = function getLoaders(isProductionMode) {
     },
     {
       test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
+      include: [srcPath],
       use: [
         {
           loader: 'file-loader',
