@@ -15,7 +15,7 @@ export type Book = {
   introduction: string,
   likes: number,
   name: string,
-  published: Date
+  published: string
 };
 
 export type SearchParams = {|

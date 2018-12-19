@@ -33,6 +33,8 @@
     "@babel/preset-env": "^7.2.0",
     "@babel/preset-flow": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
+    "@storybook/addon-actions": "^4.1.2",
+    "@storybook/react": "^4.1.2",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^23.6.0",
@@ -88,6 +90,7 @@
     "build": "cross-env NODE_ENV=\"'production'\" webpack --config config/webpack/webpack.config.js",
     "prewebpack-bundle-analyzer": "cross-env NODE_ENV=\"'production'\" webpack --profile --json --config config/webpack/client/config.js > ./stats.json",
     "webpack-bundle-analyzer": "webpack-bundle-analyzer ./stats.json ./dist",
-    "serve": "npm run build && node ./server-dist/server.bundle.js"
+    "serve": "npm run build && node ./server-dist/server.bundle.js",
+    "storybook": "start-storybook -p 9001 -c .storybook"
   }
 }
