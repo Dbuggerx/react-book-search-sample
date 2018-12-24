@@ -1,8 +1,8 @@
 /* eslint-disable react/display-name */
 // @flow
 import React from 'react';
-import type { Route } from 'react-router-dom';
-import type { Component } from 'react';
+import { typeof Route } from 'react-router-dom';
+import type { ComponentType } from 'react';
 import type { DispatchAPI } from 'redux';
 import type { BehaviorSubject } from 'rxjs';
 import asyncComponent from '../components/asyncComponent';
@@ -10,7 +10,7 @@ import type { ModuleInfo } from '../redux/append-reducer';
 import type { GetBookPageAction } from '../redux/books/types';
 import type { GetBookDetailAction } from '../redux/bookDetail/types';
 
-type ExtractPropType = <T>(Component<T>) => T;
+type ExtractPropType = <T>(ComponentType<T>) => T;
 type RouteMatch = $Call<ExtractPropType, Route>;
 type RouteDefinition = {
   ...RouteMatch,

@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react';
 import { Provider } from 'react-redux';
 import { renderToString } from 'react-dom/server';
@@ -71,7 +73,11 @@ function waitForInitialData(store, url, reactRouterStaticContext, loadedChunkNam
   });
 }
 
-export default async function handleRender(req, res, next) {
+export default async function handleRender(
+  req: express$Request,
+  res: express$Response,
+  next: express$NextFunction
+) {
   const epicConfig = configureEpic();
   const store = createReduxStore(epicConfig.rootEpic);
   const loadedChunkNames = [];
@@ -95,7 +101,10 @@ export default async function handleRender(req, res, next) {
 
   try {
     if (routeMatch.loadData)
-      routeMatch.loadData(store.dispatch, routeMatch.reactRouterMatch.params);
+      routeMatch.loadData(
+        store.dispatch,
+        routeMatch.reactRouterMatch ? routeMatch.reactRouterMatch.params : null
+      );
     const renderedHtml = await waitForInitialData(
       store,
       req.url,
