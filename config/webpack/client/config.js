@@ -8,7 +8,7 @@ const distPath = path.join(__dirname, '../../../dist');
 
 // replace localhost with 0.0.0.0 if you want to access
 // your app from wifi or a virtual machine
-const host = process.env.HOST || '0.0.0.0';
+const host = '0.0.0.0';
 const port = process.env.PORT || 5000;
 
 const stats = {
@@ -74,6 +74,7 @@ module.exports = {
     inline: !isProductionMode,
     hot: !isProductionMode,
     open: false,
-    stats
+    stats,
+    hotOnly: true
   }
 };

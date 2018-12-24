@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { hot } from 'react-hot-loader';
+import { hot } from 'react-hot-loader/root';
 import type { BehaviorSubject } from 'rxjs';
 import getRoutes from './routes';
 import type { ModuleInfo } from './redux/append-reducer';
@@ -25,4 +25,4 @@ const App = (props: Props) => (
 
 App.displayName = 'App';
 
-export default (hot(module)(App): typeof App);
+export default hot(App);

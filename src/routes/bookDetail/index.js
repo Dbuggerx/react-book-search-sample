@@ -3,7 +3,6 @@ import React, { Component, StrictMode } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import type { Dispatch as ReduxDispatch } from 'redux';
-import { hot } from 'react-hot-loader';
 import type { ContextRouter } from 'react-router';
 import { selectors, actions } from '../../redux/bookDetail';
 import type { BookDetail, Action } from '../../redux/bookDetail/types';
@@ -54,9 +53,6 @@ function mapDispatchToProps(dispatch: ReduxDispatch<Action>) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(hot(module)(Detail));
-/* To make HMR work properly
- * @see: https://github.com/gaearon/react-hot-loader/issues/959#issuecomment-385680569
- */
+)(Detail);
 
 export { default as reducer, epic } from '../../redux/bookDetail';
