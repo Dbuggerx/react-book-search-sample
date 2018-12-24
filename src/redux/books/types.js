@@ -40,7 +40,7 @@ export type PagedBooksReceivedAction = {|
 
 export type Action = GetBookPageAction | PagedBooksReceivedAction;
 
-export type State = {|
+export type State = {
   +loading: boolean,
   +books: Book[],
   +currentPage: number,
@@ -48,8 +48,8 @@ export type State = {|
   +category?: string,
   +genre?: string,
   +query?: string
-|};
+};
 
 export type BookState = {|
-  books?: State
+  home?: State
 |};

@@ -5,14 +5,14 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import createReduxStore from './redux/store';
 import App from './App';
-import appendReducer from './redux/append-reducer';
+import { appendReducerBrowser } from './redux/append-reducer';
 import type { ModuleInfo } from './redux/append-reducer';
 import configureEpic from './redux/combined-epics';
 
 const epicConfig = configureEpic();
 const store = createReduxStore(epicConfig.rootEpic);
 function appendAsyncReducer(newModuleInfo: ModuleInfo) {
-  if (store) appendReducer(store, newModuleInfo);
+  if (store) appendReducerBrowser(store, newModuleInfo);
 }
 
 function BrowserApp() {

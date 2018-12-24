@@ -26,11 +26,6 @@ function getServerPreloadedState(): InitialState | null {
   return preloadedState;
 }
 
-// Add XMLHttpRequest support on the server
-if (process.env.SERVER)
-  // $FlowFixMe
-  global.XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest; // eslint-disable-line
-
 export default function createReduxStore(rootEpic: *) {
   const middlewares = [];
   if (process.env.NODE_ENV === 'development') {

@@ -8,9 +8,18 @@ import fs from 'fs';
 import path from 'path';
 import createReduxStore from '../redux/store';
 import App from '../App';
-import appendReducer from '../redux/append-reducer';
+import { appendReducerServer } from '../redux/append-reducer';
 import getRoutes from '../routes';
 import configureEpic from '../redux/combined-epics';
+
+// Add XMLHttpRequest support on the server
+global.XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest; // eslint-disable-line
+
+function parseDistFolder() {
+  return JSON.parse(fs.readFileSync(path.join(__dirname, '../dist/manifest.json'), 'utf8'));
+}
+
+const distFiles = parseDistFolder();
 
 async function renderFullPage(html, preloadedState, asyncChunksScriptTags) {
   // See the following for security issues around embedding JSON in HTML:
@@ -27,13 +36,9 @@ async function renderFullPage(html, preloadedState, asyncChunksScriptTags) {
 }
 
 async function getAsyncChunksScriptTags(loadedChunkNames) {
-  const manifest = JSON.parse(
-    await promisify(fs.readFile)(path.join(__dirname, '../dist/manifest.json'), 'utf8')
-  );
-
   const fileContents = await Promise.all(
     loadedChunkNames
-      .map(chunkName => manifest[`${chunkName}.js`])
+      .map(chunkName => distFiles[`${chunkName}.js`])
       .map(fileName => promisify(fs.readFile)(path.join(__dirname, `../dist/${fileName}`), 'utf8'))
   );
   return fileContents.map(content => `<script>${content}</script>`).join('');
@@ -71,7 +76,7 @@ export default async function handleRender(req, res, next) {
   const store = createReduxStore(epicConfig.rootEpic);
   const loadedChunkNames = [];
   const appendAsyncReducer = newModuleInfo => {
-    appendReducer(store, newModuleInfo);
+    appendReducerServer(store, newModuleInfo);
   };
 
   const routeMatch = getRoutes(loadedChunkNames, appendAsyncReducer, epicConfig.epicSubject$)

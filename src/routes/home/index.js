@@ -60,9 +60,9 @@ export class Home extends Component<StateProps & ActionProps> {
 
 function mapStateToProps(state: State): StateProps {
   const books = selectors(state);
-  const loading = state.books ? state.books.loading : false;
+  const loading = state.home ? state.home.loading : false;
 
-  return { ...state.books, books, loadingBooks: loading };
+  return { ...state.home, books, loadingBooks: loading };
 }
 
 function mapDispatchToProps(dispatch: ReduxDispatch<Action>) {
@@ -76,7 +76,7 @@ export default connect(
   mapDispatchToProps
 )(hot(module)(Home));
 /* To make HMR work properly
-* @see: https://github.com/gaearon/react-hot-loader/issues/959#issuecomment-385680569
-*/
+ * @see: https://github.com/gaearon/react-hot-loader/issues/959#issuecomment-385680569
+ */
 
 export { default as reducer, epic } from '../../redux/books';

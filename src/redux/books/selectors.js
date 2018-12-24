@@ -9,6 +9,6 @@ import type { Book } from './types';
 */
 
 export default createSelector<State, *, Book[], Book[]>(
-  (state: State) => (state.books ? state.books.books : []),
+  (state: State) => (state.home ? state.home.books : []),
   books => books
 );

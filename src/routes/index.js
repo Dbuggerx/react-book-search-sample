@@ -25,16 +25,16 @@ export default function getRoutes(
   return ([
     {
       exact: true,
-      path: '/',
+      path: '/home',
       render: props => {
         const AsyncHome = asyncComponent(
           appendAsyncReducer,
           epicSubject$,
           () => (process.env.SERVER
               ? require('./home') // eslint-disable-line
-            : import(/* webpackChunkName: "books" */ './home')),
+            : import(/* webpackChunkName: "home" */ './home')),
           loadedChunkNames,
-          'books'
+          'home'
         );
         return <AsyncHome {...props} />;
       },
@@ -44,7 +44,7 @@ export default function getRoutes(
           const mod = require('./home');
           if (appendAsyncReducer)
             appendAsyncReducer({
-              name: 'books',
+              name: 'home',
               reducer: mod.reducer
             });
 

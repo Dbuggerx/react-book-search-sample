@@ -57,7 +57,6 @@ export default function asyncComponent(
 
     async componentDidMount() {
       const modulePromise = importComponent();
-      if (!(modulePromise instanceof Promise)) throw Error('Promise expected!');
 
       const mod = await modulePromise;
       this.constructor.setupModuleState(mod);

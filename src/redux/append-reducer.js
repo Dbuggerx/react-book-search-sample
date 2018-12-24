@@ -10,9 +10,17 @@ export type ModuleInfo = {
   reducer: {}
 };
 
-const asyncReducers = {};
+export function appendReducerServer(store: *, newModuleInfo: ModuleInfo) {
+  store.replaceReducer(
+    combineReducers({
+      ...initialReducers,
+      [newModuleInfo.name]: newModuleInfo.reducer
+    })
+  );
+}
 
-export default (store: *, newModuleInfo: ModuleInfo) => {
+const asyncReducers = {};
+export function appendReducerBrowser(store: *, newModuleInfo: ModuleInfo) {
   asyncReducers[newModuleInfo.name] = newModuleInfo.reducer;
 
   store.replaceReducer(
@@ -21,4 +29,4 @@ export default (store: *, newModuleInfo: ModuleInfo) => {
       ...asyncReducers
     })
   );
-};
+}
