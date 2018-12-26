@@ -1,0 +1,12 @@
+{
+  "extends": ["tslint:latest", "tslint-react", "tslint-config-airbnb"],
+  "rules": {
+    // override tslint-react rules here
+    "jsx-wrap-multiline": false,
+    "no-submodule-imports": false,
+    "object-literal-sort-keys": false,
+    "trailing-comma": false,
+    "ter-arrow-parens": false,
+    "curly": false
+  }
+}

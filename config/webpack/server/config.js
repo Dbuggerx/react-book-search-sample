@@ -19,7 +19,7 @@ module.exports = {
     __dirname: false
   },
   context: sourcePath,
-  entry: './server/index.js',
+  entry: './server/index.ts',
   output: {
     path: distPath,
     filename: 'server.bundle.js'
@@ -38,7 +38,10 @@ module.exports = {
     })
   ],
   devtool: isProductionMode ? 'none' : 'inline-source-map',
-
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js'],
+    modules: [path.resolve(__dirname, '../../../node_modules'), sourcePath]
+  },
   module: {
     rules: [
       {
@@ -53,20 +56,20 @@ module.exports = {
           }
         ]
       },
+      // {
+      //   enforce: 'pre',
+      //   test: /\.(ts|tsx)$/,
+      //   exclude: /node_modules/,
+      //   use: {
+      //     loader: 'eslint-loader',
+      //     options: {
+      //       configFile: 'config/linters/.eslintrc.json',
+      //       failOnError: true
+      //     }
+      //   }
+      // },
       {
-        enforce: 'pre',
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'eslint-loader',
-          options: {
-            configFile: 'config/linters/.eslintrc.json',
-            failOnError: true
-          }
-        }
-      },
-      {
-        test: /\.(js|jsx)$/,
+        test: /\.(ts|tsx)$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
@@ -98,7 +101,7 @@ module.exports = {
                 }
               ],
               '@babel/preset-react',
-              '@babel/preset-flow'
+              '@babel/preset-typescript'
             ]
           }
         }

@@ -26,7 +26,7 @@ const stats = {
 module.exports = {
   mode: isProductionMode ? 'production' : 'development',
   entry: {
-    main: './browser.js'
+    main: './browser.tsx'
   },
   output: {
     path: distPath,
@@ -44,7 +44,7 @@ module.exports = {
           test: /[\\/]node_modules[\\/]/,
           name: 'vendors',
           chunks: 'all'
-        },
+        }
         // styles: {
         //   name: 'styles',
         //   test: /\.s?css$/,
@@ -58,7 +58,7 @@ module.exports = {
     rules: loaders(isProductionMode, path.resolve(sourcePath))
   },
   resolve: {
-    extensions: ['.js'],
+    extensions: ['.ts', '.tsx', '.js'],
     modules: [path.resolve(__dirname, '../../../node_modules'), sourcePath]
   },
   plugins: plugins(isProductionMode, distPath),

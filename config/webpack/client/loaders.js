@@ -17,7 +17,7 @@ module.exports = function getLoaders(isProductionMode, srcPath) {
       }
     },
     {
-      test: /\.(js|jsx)$/,
+      test: /\.(ts|tsx)$/,
       exclude: /node_modules/,
       include: [srcPath],
       use: {
@@ -39,7 +39,9 @@ module.exports = function getLoaders(isProductionMode, srcPath) {
               }
             ],
             '@babel/preset-react',
-            '@babel/preset-flow'
+            [
+              '@babel/preset-typescript'
+            ]
           ],
           env: {
             development: {
@@ -49,6 +51,11 @@ module.exports = function getLoaders(isProductionMode, srcPath) {
         }
       }
     },
+    // {
+    //   test: /\.js$/,
+    //   use: ['source-map-loader'],
+    //   enforce: 'pre'
+    // },
     {
       test: /\.s?css$/,
       include: [srcPath],
