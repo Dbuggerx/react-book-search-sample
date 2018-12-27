@@ -2,21 +2,14 @@
 {
   "editor.tabSize": 2,
   "editor.detectIndentation": false,
-  "window.zoomLevel": 1,
   "editor.minimap.enabled": true,
   "editor.renderIndentGuides": true,
-  "prettier.eslintIntegration": true,
+  "prettier.tslintIntegration": true,
   "prettier.singleQuote": true,
   "stylelint.enable": true,
   "stylelint.config": { "extends": "./config/linters/.stylelintrc.json" },
   "css.validate": false,
   "scss.validate": false,
-  "eslint.enable": true,
-  "eslint.options": {
-    "configFile": "./config/linters/.eslintrc.json"
-  },
   "editor.codeLens": true,
-  "flow.useNPMPackagedFlow": true,
-  "flow.enabled": true,
-  "flow.stopFlowOnExit": true
+  "typescript.referencesCodeLens.enabled": true
 }
