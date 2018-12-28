@@ -1,4 +1,4 @@
-import { Book, PagedBooksReceivedAction, GetBookPageAction } from './types';
+import { Book, GetBookPageAction, PagedBooksReceivedAction } from './types';
 
 function getBookPage(
   page: number,

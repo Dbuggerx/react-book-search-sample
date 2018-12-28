@@ -1,10 +1,9 @@
 import React, { Component, StrictMode } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { Dispatch as ReduxDispatch } from 'redux';
 import { RouteComponentProps } from 'react-router';
-import { selectors, actions } from '../../redux/bookDetail';
-import { BookDetail, Action } from '../../redux/bookDetail/types';
+import { bindActionCreators, Dispatch as ReduxDispatch } from 'redux';
+import { actions, selectors } from '../../redux/bookDetail';
+import { Action, BookDetail } from '../../redux/bookDetail/types';
 import { State } from '../../redux/store';
 
 type StateProps = {

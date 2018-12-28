@@ -1,8 +1,8 @@
-import bookData from './bookData.json';
 import { Book, SearchParams } from '../redux/books/types';
+import bookData from './bookData.json';
 
 function paramsHaveValues(params: SearchParams) {
-  return (params.category || params.genre || params.query);
+  return params.category || params.genre || params.query;
 }
 
 function normalizeString(str: string) {
@@ -14,16 +14,23 @@ function bookPropEqualsVal(bookProp: string, val: string) {
 }
 
 function bookPropContainsVal(bookProp: string, val: string) {
-  return val ? normalizeString(bookProp).indexOf(normalizeString(val)) !== -1 : true;
+  return val
+    ? normalizeString(bookProp).indexOf(normalizeString(val)) !== -1
+    : true;
 }
 
 function filterBookResults(params: SearchParams): Book[] {
   return bookData.filter(
-    (book: Book) => (params.category ? bookPropEqualsVal(book.genre.category, params.category) : true)
-      && (params.genre ? bookPropEqualsVal(book.genre.name, params.genre) : true)
-      && (params.query
-        ? bookPropContainsVal(book.author.name, params.query)
-          || bookPropContainsVal(book.name, params.query)
+    (book: Book) =>
+      (params.category
+        ? bookPropEqualsVal(book.genre.category, params.category)
+        : true) &&
+      (params.genre
+        ? bookPropEqualsVal(book.genre.name, params.genre)
+        : true) &&
+      (params.query
+        ? bookPropContainsVal(book.author.name, params.query) ||
+          bookPropContainsVal(book.name, params.query)
         : true)
   );
 }
@@ -35,23 +42,24 @@ function calcAvailablePages(books: Book[]) {
 }
 
 type BookResult = {
-  totalPages: number,
-  books: Book[]
+  totalPages: number;
+  books: Book[];
 };
 
-export function getBookById(id: string): Book {
+export function getBookById(id: string): Book | undefined {
   return bookData.find((book: Book) => book.id === id);
 }
 
 export function* getRelatedBooks(bookId: string, qty: number): Iterable<Book> {
   const currentBook = getBookById(bookId);
+  if (!currentBook) return;
   const results = [];
   for (let i = 0; i < bookData.length; i++) {
     const book = bookData[i];
     if (
-      bookPropEqualsVal(book.genre.category, currentBook.genre.category)
-      && bookPropEqualsVal(book.genre.name, currentBook.genre.name)
-      && !bookPropEqualsVal(book.id, currentBook.id)
+      bookPropEqualsVal(book.genre.category, currentBook.genre.category) &&
+      bookPropEqualsVal(book.genre.name, currentBook.genre.name) &&
+      !bookPropEqualsVal(book.id, currentBook.id)
     )
       yield book;
     if (results.length >= qty) break; // Enough results found, no need to continue

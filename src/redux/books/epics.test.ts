@@ -13,11 +13,11 @@ describe('books epics', () => {
       });
       const state$ = null;
       const dependencies = {
-        ajax: () => cold('--a', {
+        ajax: () => cold<{}>('--a', {
           a: {
             response: ['bookObj1', 'bookObj2'],
             xhr: {
-              getResponseHeader(name) {
+              getResponseHeader(name: string) {
                 return name === 'x-total-count' ? 123 : -1;
               }
             }
@@ -25,7 +25,7 @@ describe('books epics', () => {
         })
       };
 
-      const output$ = epics(action$, state$, dependencies);
+      const output$ = epics((action$ as any), (state$ as any), (dependencies as any));
 
       expectObservable(output$).toBe('---a', {
         a: {

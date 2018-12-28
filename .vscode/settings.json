@@ -4,7 +4,7 @@
   "editor.detectIndentation": false,
   "editor.minimap.enabled": true,
   "editor.renderIndentGuides": true,
-  "prettier.tslintIntegration": true,
+  "prettier.tslintIntegration": false,
   "prettier.singleQuote": true,
   "stylelint.enable": true,
   "stylelint.config": { "extends": "./config/linters/.stylelintrc.json" },

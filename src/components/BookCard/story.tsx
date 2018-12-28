@@ -1,8 +1,7 @@
-/* eslint-disable import/no-extraneous-dependencies */
-
-import React from 'react';
-import { storiesOf } from '@storybook/react';
+// tslint:disable: no-implicit-dependencies
 import { action } from '@storybook/addon-actions';
+import { storiesOf } from '@storybook/react';
+import React from 'react';
 import BookCard from './index';
 
 const book = {
