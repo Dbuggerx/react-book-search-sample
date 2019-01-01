@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
-import { ComponentType } from 'react';
+import React, { Component, ComponentType } from 'react';
 import { BehaviorSubject } from 'rxjs';
-import { State as StoreState } from '../redux/store';
-import { HomeRouteModule } from '../routes/home/types';
-import { DetailRouteModule } from '../routes/bookDetail/types';
 import { ModuleInfo } from '../redux/append-reducer';
+import { State as StoreState } from '../redux/store';
+import { DetailRouteModule } from '../routes/bookDetail/types';
+import { HomeRouteModule } from '../routes/home/types';
 
 type State = {
   component: ComponentType<any> | null;
@@ -21,26 +20,6 @@ export default function asyncComponent(
   chunkName?: keyof StoreState | undefined
 ) {
   class AsyncComponent extends Component<any, State> {
-    constructor(props: any) {
-      super(props);
-
-      this.state = {
-        component: null
-      };
-
-      if (process.env.SERVER && loadedChunkNames && chunkName && importComponent) {
-        if (loadedChunkNames) loadedChunkNames.push(chunkName);
-
-        const mod = importComponent();
-        if (mod instanceof Promise) throw Error('Promise not expected!');
-
-        AsyncComponent.setupModuleState(mod);
-        this.state = {
-          component: mod.default
-        };
-      }
-    }
-
     static setupModuleState(mod: RouteModule) {
       console.log('Appending reducer for:', chunkName);
       if (appendAsyncReducer && chunkName)
@@ -52,6 +31,30 @@ export default function asyncComponent(
       console.log('Appending epic for:', chunkName);
 
       if (epicSubject$) epicSubject$.next(mod.epic);
+    }
+    constructor(props: any) {
+      super(props);
+
+      this.state = {
+        component: null
+      };
+
+      if (
+        process.env.SERVER &&
+        loadedChunkNames &&
+        chunkName &&
+        importComponent
+      ) {
+        if (loadedChunkNames) loadedChunkNames.push(chunkName);
+
+        const mod = importComponent();
+        if (mod instanceof Promise) throw Error('Promise not expected!');
+
+        AsyncComponent.setupModuleState(mod);
+        this.state = {
+          component: mod.default
+        };
+      }
     }
 
     async componentDidMount() {

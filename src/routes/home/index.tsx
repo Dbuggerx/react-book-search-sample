@@ -1,24 +1,23 @@
 import React, { Component, StrictMode } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { Dispatch as ReduxDispatch } from 'redux';
+import { bindActionCreators, Dispatch as ReduxDispatch } from 'redux';
 import MainLayout from '../../components/MainLayout';
-import { selectors, actions } from '../../redux/books';
-import { Book, Action } from '../../redux/books/types';
+import { actions, selectors } from '../../redux/books';
+import { Book } from '../../redux/books/types';
 import { State } from '../../redux/store';
 
 type StateProps = {
-  currentPage?: number,
-  pageCount?: number,
-  category?: string,
-  genre?: string,
-  query?: string,
-  books: Book[],
-  loadingBooks: boolean
+  currentPage?: number;
+  pageCount?: number;
+  category?: string;
+  genre?: string;
+  query?: string;
+  books: Book[];
+  loadingBooks: boolean;
 };
 
 type ActionProps = {
-  actions: typeof actions
+  actions: typeof actions;
 };
 
 export class Home extends Component<StateProps & ActionProps> {
@@ -28,16 +27,21 @@ export class Home extends Component<StateProps & ActionProps> {
 
   search = (category: string, genre: string, query: string) => {
     this.props.actions.getBookPage(1, category, genre, query);
-  };
+  }
 
   showPage = (page: number) => {
     if (page < 1 || page > (this.props.pageCount || 0)) return;
-    this.props.actions.getBookPage(page, this.props.category, this.props.genre, this.props.query);
-  };
+    this.props.actions.getBookPage(
+      page,
+      this.props.category,
+      this.props.genre,
+      this.props.query
+    );
+  }
 
   handleBookClick = (book: Book) => {
     // console.log('TODO!', book);
-  };
+  }
 
   render() {
     return (

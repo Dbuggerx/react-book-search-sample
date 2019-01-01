@@ -4,17 +4,19 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = function getLoaders(isProductionMode, srcPath) {
   return [
     {
+      test: /\.(ts|tsx)$/,
       enforce: 'pre',
-      test: /\.(js|jsx)$/,
       exclude: /node_modules/,
       include: [srcPath],
-      use: {
-        loader: 'eslint-loader',
-        options: {
-          configFile: 'config/linters/.eslintrc.json',
-          failOnError: true
+      use: [
+        {
+          loader: 'tslint-loader',
+          options: {
+            configFile: 'config/linters/tslint.json',
+            failOnHint: true
+          }
         }
-      }
+      ]
     },
     {
       test: /\.(ts|tsx)$/,
@@ -49,11 +51,6 @@ module.exports = function getLoaders(isProductionMode, srcPath) {
         }
       }
     },
-    // {
-    //   test: /\.js$/,
-    //   use: ['source-map-loader'],
-    //   enforce: 'pre'
-    // },
     {
       test: /\.s?css$/,
       include: [srcPath],

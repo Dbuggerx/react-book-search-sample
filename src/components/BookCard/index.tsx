@@ -3,14 +3,14 @@ import { Book } from '../../redux/books/types';
 import './BookCard.scss';
 
 export type Props = {
-  book: Book,
-  onClick: (book: Book) => void
+  book: Book;
+  onClick: (book: Book) => void;
 };
 
 export default class BookCard extends Component<Props> {
   handleClick = () => {
     this.props.onClick(this.props.book);
-  };
+  }
 
   render() {
     return (

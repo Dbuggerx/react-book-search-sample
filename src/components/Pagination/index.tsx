@@ -10,11 +10,11 @@ export type Props = {
 class Pagination extends Component<Props> {
   previousPage = () => {
     this.props.showPage(this.props.currentPage - 1);
-  };
+  }
 
   nextPage = () => {
     this.props.showPage(this.props.currentPage + 1);
-  };
+  }
 
   render() {
     return (

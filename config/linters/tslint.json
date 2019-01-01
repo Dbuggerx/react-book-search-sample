@@ -1,6 +1,6 @@
 {
   "extends": [
-    "tslint:latest",
+    "tslint:recommended",
     "tslint-config-prettier",
     "tslint-react",
     "tslint-config-airbnb"
@@ -15,6 +15,8 @@
     "curly": false,
     "member-access": false,
     "interface-over-type-literal": false,
-    "import-name": false
+    "import-name": false,
+    "jsx-no-multiline-js": false,
+    "variable-name": false
   }
 }

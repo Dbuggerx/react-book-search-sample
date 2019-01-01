@@ -56,18 +56,22 @@ module.exports = {
           }
         ]
       },
-      // {
-      //   enforce: 'pre',
-      //   test: /\.(ts|tsx)$/,
-      //   exclude: /node_modules/,
-      //   use: {
-      //     loader: 'eslint-loader',
-      //     options: {
-      //       configFile: 'config/linters/.eslintrc.json',
-      //       failOnError: true
-      //     }
-      //   }
-      // },
+      {
+        test: /\.(ts|tsx)$/,
+        enforce: 'pre',
+        exclude: /node_modules/,
+        include: [sourcePath],
+        use: [
+          {
+            loader: 'tslint-loader',
+            options: {
+              configFile: './config/linters/tslint.json',
+              failOnHint: true,
+              fix: true
+            }
+          }
+        ]
+      },
       {
         test: /\.(ts|tsx)$/,
         exclude: /node_modules/,

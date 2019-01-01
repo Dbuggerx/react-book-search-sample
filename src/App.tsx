@@ -1,9 +1,9 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
 import { hot } from 'react-hot-loader/root';
+import { Route, Switch } from 'react-router-dom';
 import rxjs from 'rxjs';
-import getRoutes from './routes';
 import { ModuleInfo } from './redux/append-reducer';
+import getRoutes from './routes';
 
 type Props = {
   loadedChunkNames?: string[];

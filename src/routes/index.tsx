@@ -1,13 +1,11 @@
-/* eslint-disable react/display-name */
 import React from 'react';
 import { RouteProps } from 'react-router-dom';
-import { ComponentType } from 'react';
 import { Dispatch } from 'redux';
 import { BehaviorSubject } from 'rxjs';
 import asyncComponent from '../components/asyncComponent';
 import { ModuleInfo } from '../redux/append-reducer';
-import { GetBookPageAction } from '../redux/books/types';
 import { GetBookDetailAction } from '../redux/bookDetail/types';
+import { GetBookPageAction } from '../redux/books/types';
 
 type RouteDefinition = RouteProps & {
   loadData?: (dispatch: Dispatch, routeParams: any) => any
@@ -27,8 +25,8 @@ export default function getRoutes(
           appendAsyncReducer,
           epicSubject$,
           () => (process.env.SERVER
-              ? require('./home') // eslint-disable-line
-            : import(/* webpackChunkName: "home" */ './home')),
+              ? require('./home')
+            : import('./home')),
           loadedChunkNames,
           'home'
         );
@@ -36,7 +34,6 @@ export default function getRoutes(
       },
       loadData: (dispatch: Dispatch<GetBookPageAction>) => {
         if (process.env.SERVER) {
-          // eslint-disable-next-line global-require
           const mod = require('./home');
           if (appendAsyncReducer)
             appendAsyncReducer({
@@ -46,7 +43,6 @@ export default function getRoutes(
 
           if (epicSubject$) epicSubject$.next(mod.epic);
 
-          // eslint-disable-next-line global-require
           const { actions } = require('../redux/books');
           dispatch(actions.getBookPage(1));
         }
@@ -60,8 +56,8 @@ export default function getRoutes(
           appendAsyncReducer,
           epicSubject$,
           () => (process.env.SERVER
-              ? require('./bookDetail') // eslint-disable-line
-            : import(/* webpackChunkName: "bookDetail" */ './bookDetail')),
+              ? require('./bookDetail')
+            : import('./bookDetail')),
           loadedChunkNames,
           'bookDetail'
         );
@@ -69,7 +65,6 @@ export default function getRoutes(
       },
       loadData: (dispatch: Dispatch<GetBookDetailAction>, routeParams) => {
         if (process.env.SERVER && routeParams.bookId) {
-          // eslint-disable-next-line global-require
           const mod = require('./bookDetail');
           if (appendAsyncReducer)
             appendAsyncReducer({
@@ -77,7 +72,6 @@ export default function getRoutes(
               reducer: mod.reducer
             });
           if (epicSubject$) epicSubject$.next(mod.epic);
-          // eslint-disable-next-line global-require
           const { actions } = require('../redux/bookDetail');
           dispatch(actions.getBookDetail(routeParams.bookId));
         }

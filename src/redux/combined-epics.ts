@@ -1,8 +1,7 @@
-import { BehaviorSubject } from 'rxjs';
-import { mergeMap } from 'rxjs/operators';
 import { combineEpics } from 'redux-observable';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { AjaxCreationMethod } from 'rxjs/internal/observable/dom/AjaxObservable';
+import { mergeMap } from 'rxjs/operators';
 import { epics } from './dummy';
 
 export default () => {
