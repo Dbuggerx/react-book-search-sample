@@ -12,6 +12,11 @@
   "scss.validate": false,
   "editor.codeLens": true,
   "typescript.referencesCodeLens.enabled": true,
-  "tslint.enable": true,
-  "tslint.configFile": "./config/linters/tslint.json"
+  "eslint.enable": true,
+  "eslint.options": {
+    "configFile": "./config/linters/.eslintrc.json"
+  },
+  "prettier.stylelintIntegration": true,
+  "prettier.eslintIntegration": true,
+  "eslint.alwaysShowStatus": true,
 }

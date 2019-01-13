@@ -3,19 +3,17 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = function getLoaders(isProductionMode, srcPath) {
   return [
     {
-      test: /\.(ts|tsx)$/,
       enforce: 'pre',
+      test: /\.(ts|tsx)$/,
       exclude: /node_modules/,
       include: [srcPath],
-      use: [
-        {
-          loader: 'tslint-loader',
-          options: {
-            configFile: 'config/linters/tslint.json',
-            failOnHint: true
-          }
+      use: {
+        loader: 'eslint-loader',
+        options: {
+          configFile: 'config/linters/.eslintrc.json',
+          failOnError: true
         }
-      ]
+      }
     },
     {
       test: /\.(ts|tsx)$/,
@@ -55,60 +53,60 @@ module.exports = function getLoaders(isProductionMode, srcPath) {
       include: [srcPath],
       use: isProductionMode
         ? [
-            {
-              loader: MiniCssExtractPlugin.loader,
-              options: {
-                sourceMap: !isProductionMode,
-                modules: false,
-                localIdentName: '[name]__[local]___[hash:base64:5]'
-              }
-            },
-            'css-loader',
-            {
-              loader: 'postcss-loader',
-              options: {
-                sourceMap: !isProductionMode,
-                plugins() {
-                  return [
-                    require('autoprefixer')({
-                      grid: true
-                    })
-                  ];
-                }
-              }
-            },
-            {
-              loader: 'sass-loader',
-              options: {
-                sourceMap: !isProductionMode,
-                includePaths: ['node_modules']
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              sourceMap: !isProductionMode,
+              modules: false,
+              localIdentName: '[name]__[local]___[hash:base64:5]'
+            }
+          },
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: !isProductionMode,
+              plugins() {
+                return [
+                  require('autoprefixer')({
+                    grid: true
+                  })
+                ];
               }
             }
-          ]
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: !isProductionMode,
+              includePaths: ['node_modules']
+            }
+          }
+        ]
         : [
-            'style-loader',
-            { loader: 'css-loader' },
-            {
-              loader: 'postcss-loader',
-              options: {
-                sourceMap: !isProductionMode,
-                plugins() {
-                  return [
-                    require('autoprefixer')({
-                      grid: true
-                    })
-                  ];
-                }
-              }
-            },
-            {
-              loader: 'sass-loader',
-              options: {
-                sourceMap: !isProductionMode,
-                includePaths: ['node_modules']
+          'style-loader',
+          { loader: 'css-loader' },
+          {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: !isProductionMode,
+              plugins() {
+                return [
+                  require('autoprefixer')({
+                    grid: true
+                  })
+                ];
               }
             }
-          ]
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: !isProductionMode,
+              includePaths: ['node_modules']
+            }
+          }
+        ]
     },
     {
       test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
