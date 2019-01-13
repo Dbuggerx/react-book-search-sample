@@ -11,5 +11,7 @@
   "css.validate": false,
   "scss.validate": false,
   "editor.codeLens": true,
-  "typescript.referencesCodeLens.enabled": true
+  "typescript.referencesCodeLens.enabled": true,
+  "tslint.enable": true,
+  "tslint.configFile": "./config/linters/tslint.json"
 }

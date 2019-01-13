@@ -11,6 +11,7 @@ type State = {
 
 type RouteModule = HomeRouteModule | DetailRouteModule;
 
+// tslint:disable-next-line:max-line-length
 // @see: https://github.com/AnomalyInnovations/serverless-stack-demo-client/blob/code-splitting-in-create-react-app/src/components/AsyncComponent.js
 export default function asyncComponent(
   appendAsyncReducer?: (newModuleInfo: ModuleInfo) => void,
@@ -21,6 +22,7 @@ export default function asyncComponent(
 ) {
   class AsyncComponent extends Component<any, State> {
     static setupModuleState(mod: RouteModule) {
+      // tslint:disable:no-console
       console.log('Appending reducer for:', chunkName);
       if (appendAsyncReducer && chunkName)
         appendAsyncReducer({

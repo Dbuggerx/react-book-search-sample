@@ -1,4 +1,4 @@
-import HomeComponent, { reducer as HomeReducer, epic as HomeEpic } from './index';
+import HomeComponent, { epic as HomeEpic, reducer as HomeReducer } from './index';
 
 export type HomeRouteModule = {
   default: typeof HomeComponent,

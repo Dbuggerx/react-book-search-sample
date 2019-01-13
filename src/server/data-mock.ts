@@ -54,8 +54,7 @@ export function* getRelatedBooks(bookId: string, qty: number): Iterable<Book> {
   const currentBook = getBookById(bookId);
   if (!currentBook) return;
   const results = [];
-  for (let i = 0; i < bookData.length; i++) {
-    const book = bookData[i];
+  for (const book of bookData) {
     if (
       bookPropEqualsVal(book.genre.category, currentBook.genre.category) &&
       bookPropEqualsVal(book.genre.name, currentBook.genre.name) &&

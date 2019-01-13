@@ -4,8 +4,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import createReduxStore from './redux/store';
 import App from './App';
-import { appendReducerBrowser } from './redux/append-reducer';
-import { ModuleInfo } from './redux/append-reducer';
+import { appendReducerBrowser, ModuleInfo } from './redux/append-reducer';
 import configureEpic from './redux/combined-epics';
 
 const epicConfig = configureEpic();
@@ -18,7 +17,10 @@ function BrowserApp() {
   return (
     <Provider store={store}>
       <Router>
-        <App appendAsyncReducer={appendAsyncReducer} epicSubject$={epicConfig.epicSubject$} />
+        <App
+          appendAsyncReducer={appendAsyncReducer}
+          epicSubject$={epicConfig.epicSubject$}
+        />
       </Router>
     </Provider>
   );

@@ -40,7 +40,8 @@ export class Home extends Component<StateProps & ActionProps> {
   }
 
   handleBookClick = (book: Book) => {
-    // console.log('TODO!', book);
+    // tslint:disable-next-line:no-console
+    console.log('TODO!', book);
   }
 
   render() {
