@@ -60,8 +60,8 @@ module.exports = {
       {
         enforce: 'pre',
         test: /\.(ts|tsx)$/,
-        exclude: /node_modules/,
-        include: [sourcePath],
+        // exclude: /node_modules/,
+        // include: [sourcePath],
         use: {
           loader: 'eslint-loader',
           options: {

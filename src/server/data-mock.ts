@@ -54,6 +54,7 @@ export function* getRelatedBooks(bookId: string, qty: number): Iterable<Book> {
   const currentBook = getBookById(bookId);
   if (!currentBook) return;
   const results = [];
+  // eslint-disable-next-line no-restricted-syntax
   for (const book of bookData) {
     if (
       bookPropEqualsVal(book.genre.category, currentBook.genre.category) &&

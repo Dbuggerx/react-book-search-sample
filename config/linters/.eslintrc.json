@@ -1,12 +1,12 @@
 {
-  "plugins": ["typescript", "react", "jest"],
+  "plugins": ["react", "jest"],
   "extends": ["airbnb-base", "plugin:react/recommended"],
   "env": {
     "es6": true,
     "browser": true,
     "jest/globals": true
   },
-  "parser": "pluggable-babel-eslint",
+  "parser": "typescript-eslint-parser",
   "parserOptions": {
     "ecmaVersion": 2018,
     "sourceType": "module",
@@ -50,6 +50,9 @@
     "jest/no-focused-tests": "error",
     "jest/no-identical-title": "error",
     "jest/valid-expect": "error",
-    "typescript/class-name-casing": "error"
+    "no-undef": "off",
+    "no-unused-vars": "off",
+    "implicit-arrow-linebreak": "off",
+    "operator-linebreak": "off"
   }
 }

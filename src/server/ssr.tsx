@@ -1,4 +1,4 @@
-import express from 'express';
+import { Request, Response, NextFunction } from 'express';
 import fs from 'fs';
 import path from 'path';
 import React from 'react';
@@ -6,7 +6,7 @@ import { renderToString } from 'react-dom/server';
 import { Provider } from 'react-redux';
 import { StaticRouter } from 'react-router';
 import { matchPath } from 'react-router-dom';
-import redux from 'redux';
+import { Store } from 'redux';
 import { promisify } from 'util';
 // @ts-ignore
 import { XMLHttpRequest } from 'xmlhttprequest';
@@ -36,10 +36,8 @@ async function renderFullPage(
   // See the following for security issues around embedding JSON in HTML:
   // http://redux.js.org/docs/recipes/ServerRendering.html#security-considerations
   const preloadedStateScript = `<script>
-    window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(
-      /</g,
-      '\\u003c'
-    )}
+    window.__PRELOADED_STATE__ = 
+    ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}
   </script>`;
 
   const data = await promisify(fs.readFile)(
@@ -56,12 +54,10 @@ async function getAsyncChunksScriptTags(loadedChunkNames: string[]) {
   const fileContents = await Promise.all(
     loadedChunkNames
       .map(chunkName => distFiles[`${chunkName}.js`])
-      .map(fileName =>
-        promisify(fs.readFile)(
-          path.join(__dirname, `../dist/${fileName}`),
-          'utf8'
-        )
-      )
+      .map(fileName => promisify(fs.readFile)(
+        path.join(__dirname, `../dist/${fileName}`),
+        'utf8'
+      ))
   );
   return fileContents.map(content => `<script>${content}</script>`).join('');
 }
@@ -79,7 +75,7 @@ async function handleSsrReady(
 }
 
 function waitForInitialData(
-  store: redux.Store,
+  store: Store,
   url: string,
   reactRouterStaticContext: {},
   loadedChunkNames: string[]
@@ -105,9 +101,9 @@ function waitForInitialData(
 }
 
 export default async function handleRender(
-  req: express.Request,
-  res: express.Response,
-  next: express.NextFunction
+  req: Request,
+  res: Response,
+  next: NextFunction
 ) {
   const epicConfig = configureEpic();
   const store = createReduxStore(epicConfig.rootEpic);

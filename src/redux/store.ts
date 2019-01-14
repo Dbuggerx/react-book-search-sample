@@ -15,9 +15,11 @@ export type State = InitialState & BookState & BookDetailState;
 
 function getServerPreloadedState(): InitialState | null {
   // Grab the state from a global variable injected into the server-generated HTML
+  // eslint-disable-next-line no-underscore-dangle
   const preloadedState = typeof window === 'undefined' ? null : (window as any).__PRELOADED_STATE__;
   // Allow the passed state to be garbage-collected
   if (typeof window !== 'undefined')
+  // eslint-disable-next-line no-underscore-dangle
     delete (window as any).__PRELOADED_STATE__;
 
   return preloadedState;
@@ -26,7 +28,7 @@ function getServerPreloadedState(): InitialState | null {
 export default function createReduxStore(rootEpic: any) {
   const middlewares = [];
   if (process.env.NODE_ENV === 'development') {
-    // tslint:disable-next-line: no-implicit-dependencies
+    // eslint-disable-next-line import/no-extraneous-dependencies, global-require
     const { logger } = require('redux-logger');
     middlewares.push(logger);
   }

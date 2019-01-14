@@ -14,9 +14,10 @@
   "typescript.referencesCodeLens.enabled": true,
   "eslint.enable": true,
   "eslint.options": {
-    "configFile": "./config/linters/.eslintrc.json"
+    "configFile": "./config/linters/.eslintrc.json",
   },
+  "eslint.validate": ["javascript", "typescript", "typescriptreact"],
   "prettier.stylelintIntegration": true,
-  "prettier.eslintIntegration": true,
   "eslint.alwaysShowStatus": true,
+  "prettier.eslintIntegration": true
 }

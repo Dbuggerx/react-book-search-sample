@@ -8,7 +8,7 @@ import { GetBookDetailAction } from '../redux/bookDetail/types';
 import { GetBookPageAction } from '../redux/books/types';
 
 type RouteDefinition = RouteProps & {
-  loadData?: (dispatch: Dispatch, routeParams: any) => any
+  loadData?: (dispatch: Dispatch, routeParams: any) => any;
 };
 
 export default function getRoutes(
@@ -24,9 +24,7 @@ export default function getRoutes(
         const AsyncHome = asyncComponent(
           appendAsyncReducer,
           epicSubject$,
-          () => (process.env.SERVER
-              ? require('./home')
-            : import('./home')),
+          () => (process.env.SERVER ? require('./home') : import('./home')),
           loadedChunkNames,
           'home'
         );
@@ -55,9 +53,10 @@ export default function getRoutes(
         const AsyncHome = asyncComponent(
           appendAsyncReducer,
           epicSubject$,
-          () => (process.env.SERVER
+          () =>
+            process.env.SERVER
               ? require('./bookDetail')
-            : import('./bookDetail')),
+              : import('./bookDetail'),
           loadedChunkNames,
           'bookDetail'
         );
