@@ -3,20 +3,21 @@ import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
 import { bindActionCreators, Dispatch as ReduxDispatch } from 'redux';
 import { actions, selectors } from '../../redux/bookDetail';
-import { Action, BookDetail } from '../../redux/bookDetail/types';
+import { BookDetail } from '../../redux/bookDetail/types';
 import { State } from '../../redux/store';
+import { RouteParams as BookDetailRoutParams } from './types';
 
 type StateProps = {
-  bookDetail: BookDetail | null,
-  loading: boolean
+  bookDetail: BookDetail | null;
+  loading: boolean;
 };
 
 type ActionProps = {
-  actions: typeof actions
+  actions: typeof actions;
 };
 
 type OwnProps = {
-  bookId: string | null
+  bookId: string | null;
 };
 
 export class Detail extends Component<StateProps & ActionProps & OwnProps> {
@@ -36,10 +37,17 @@ export class Detail extends Component<StateProps & ActionProps & OwnProps> {
   }
 }
 
-function mapStateToProps(state: State, routeProps: RouteComponentProps): StateProps & OwnProps {
+function mapStateToProps(
+  state: State,
+  routeProps: RouteComponentProps
+): StateProps & OwnProps {
   const bookDetail = selectors(state) || null;
   const loading = state.bookDetail ? state.bookDetail.loading : false;
-  return { bookDetail, loading, bookId: (routeProps.match.params as any).bookId };
+  return {
+    bookDetail,
+    loading,
+    bookId: (routeProps.match.params as BookDetailRoutParams).bookId
+  };
 }
 
 function mapDispatchToProps(dispatch: ReduxDispatch) {

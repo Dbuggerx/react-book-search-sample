@@ -1,6 +1,6 @@
 import React, { Component, StrictMode } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators, Dispatch as ReduxDispatch } from 'redux';
+import { bindActionCreators, Dispatch as ReduxDispatch, AnyAction } from 'redux';
 import MainLayout from '../../components/MainLayout';
 import { actions, selectors } from '../../redux/books';
 import { Book } from '../../redux/books/types';
@@ -68,7 +68,7 @@ function mapStateToProps(state: State): StateProps {
   return { ...state.home, books, loadingBooks: loading };
 }
 
-function mapDispatchToProps(dispatch: ReduxDispatch<any>) {
+function mapDispatchToProps(dispatch: ReduxDispatch<AnyAction>) {
   return {
     actions: bindActionCreators({ ...actions }, dispatch)
   };

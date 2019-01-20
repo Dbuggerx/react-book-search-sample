@@ -1,13 +1,13 @@
 import React, { ChangeEvent, Component } from 'react';
 
 type State = {
-  category: string,
-  genre: string,
-  query: string
+  category: string;
+  genre: string;
+  query: string;
 };
 
 export type Props = {
-  search: (category: string, genre: string, query: string) => void
+  search: (category: string, genre: string, query: string) => void;
 };
 
 class SearchForm extends Component<Props, State> {
@@ -24,16 +24,15 @@ class SearchForm extends Component<Props, State> {
     const { target } = event;
     const { value, name } = target;
 
-    // tslint:disable-next-line: max-line-length
     // @see: https://stackoverflow.com/questions/53039935/typescript-reactjs-how-to-dynamically-set-state/53040447#53040447
     this.setState({
       [name]: value
     } as Pick<State, keyof State>);
-  }
+  };
 
   doSearch = () => {
     this.props.search(this.state.category, this.state.genre, this.state.query);
-  }
+  };
 
   render() {
     return (

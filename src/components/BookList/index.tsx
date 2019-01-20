@@ -3,9 +3,9 @@ import { Book } from '../../redux/books/types';
 import BookCard from '../BookCard';
 
 export type Props = {
-  books: Book[],
-  loadingBooks: boolean,
-  onBookClick: (book: Book) => void
+  books: Book[];
+  loadingBooks: boolean;
+  onBookClick: (book: Book) => void;
 };
 
 const BookList = (props: Props) => {

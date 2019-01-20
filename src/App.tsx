@@ -8,17 +8,18 @@ import getRoutes from './routes';
 type Props = {
   loadedChunkNames?: string[];
   appendAsyncReducer?: (newModuleInfo: ModuleInfo) => void;
-  epicSubject$?: rxjs.BehaviorSubject<any>;
+  epicSubject$?: rxjs.BehaviorSubject<unknown>;
 };
 
 const App = (props: Props) => (
   <Switch>
-    {getRoutes(props.loadedChunkNames, props.appendAsyncReducer, props.epicSubject$).map(
-      (route, key: number) => {
-        const { loadData, ...routeProps } = route;
-        return <Route key={key} {...routeProps} />;
-      }
-    )}
+    {getRoutes(
+      props.loadedChunkNames,
+      props.appendAsyncReducer,
+      props.epicSubject$
+    ).map((route, key: number) => (
+      <Route key={key} {...route} />
+    ))}
   </Switch>
 );
 

@@ -20,6 +20,7 @@ export function appendReducerServer(store: Store, newModuleInfo: ModuleInfo) {
 
 const asyncReducers = {};
 export function appendReducerBrowser(store: Store, newModuleInfo: ModuleInfo) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (asyncReducers as any)[newModuleInfo.name] = newModuleInfo.reducer;
 
   store.replaceReducer(

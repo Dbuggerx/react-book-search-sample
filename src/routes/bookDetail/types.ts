@@ -1,7 +1,11 @@
 import Container, { reducer, epic } from './index';
 
 export type DetailRouteModule = {
-  default: typeof Container,
-  reducer: typeof reducer,
-  epic: typeof epic
+  default: typeof Container;
+  reducer: typeof reducer;
+  epic: typeof epic;
+};
+
+export type RouteParams = {
+  bookId: string;
 };

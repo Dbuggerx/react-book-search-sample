@@ -2,19 +2,19 @@ import React, { Component } from 'react';
 import './Pagination.scss';
 
 export type Props = {
-  currentPage: number,
-  pageCount: number,
-  showPage: (page: number) => void
+  currentPage: number;
+  pageCount: number;
+  showPage: (page: number) => void;
 };
 
 class Pagination extends Component<Props> {
   previousPage = () => {
     this.props.showPage(this.props.currentPage - 1);
-  }
+  };
 
   nextPage = () => {
     this.props.showPage(this.props.currentPage + 1);
-  }
+  };
 
   render() {
     return (
@@ -26,7 +26,5 @@ class Pagination extends Component<Props> {
     );
   }
 }
-
-(Pagination as any).displayName = 'Pagination';
 
 export default Pagination;

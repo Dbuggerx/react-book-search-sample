@@ -6,6 +6,7 @@ import { DetailRouteModule } from '../routes/bookDetail/types';
 import { HomeRouteModule } from '../routes/home/types';
 
 type State = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   component: ComponentType<any> | null;
 };
 
@@ -15,14 +16,14 @@ type RouteModule = HomeRouteModule | DetailRouteModule;
 // @see: https://github.com/AnomalyInnovations/serverless-stack-demo-client/blob/code-splitting-in-create-react-app/src/components/AsyncComponent.js
 export default function asyncComponent(
   appendAsyncReducer?: (newModuleInfo: ModuleInfo) => void,
-  epicSubject$?: BehaviorSubject<any>,
+  epicSubject$?: BehaviorSubject<unknown>,
   importComponent?: () => RouteModule | Promise<RouteModule>,
   loadedChunkNames?: string[],
   chunkName?: keyof StoreState | undefined
 ) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   class AsyncComponent extends Component<any, State> {
     static setupModuleState(mod: RouteModule) {
-      // tslint:disable:no-console
       console.log('Appending reducer for:', chunkName);
       if (appendAsyncReducer && chunkName)
         appendAsyncReducer({
@@ -34,7 +35,8 @@ export default function asyncComponent(
 
       if (epicSubject$) epicSubject$.next(mod.epic);
     }
-    constructor(props: any) {
+
+    constructor(props: unknown) {
       super(props);
 
       this.state = {

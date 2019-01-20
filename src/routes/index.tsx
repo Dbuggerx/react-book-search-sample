@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-var-requires, global-require, react/display-name */
+
 import React from 'react';
 import { RouteProps } from 'react-router-dom';
 import { Dispatch } from 'redux';
@@ -8,19 +10,20 @@ import { GetBookDetailAction } from '../redux/bookDetail/types';
 import { GetBookPageAction } from '../redux/books/types';
 
 type RouteDefinition = RouteProps & {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   loadData?: (dispatch: Dispatch, routeParams: any) => any;
 };
 
 export default function getRoutes(
   loadedChunkNames?: string[],
   appendAsyncReducer?: (newModuleInfo: ModuleInfo) => void,
-  epicSubject$?: BehaviorSubject<any>
+  epicSubject$?: BehaviorSubject<unknown>
 ): RouteDefinition[] {
   return [
     {
       exact: true,
       path: '/home',
-      render: (props: any) => {
+      render: props => {
         const AsyncHome = asyncComponent(
           appendAsyncReducer,
           epicSubject$,
@@ -53,10 +56,9 @@ export default function getRoutes(
         const AsyncHome = asyncComponent(
           appendAsyncReducer,
           epicSubject$,
-          () =>
-            process.env.SERVER
-              ? require('./bookDetail')
-              : import('./bookDetail'),
+          () => (process.env.SERVER
+            ? require('./bookDetail')
+            : import('./bookDetail')),
           loadedChunkNames,
           'bookDetail'
         );

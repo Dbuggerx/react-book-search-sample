@@ -1,12 +1,12 @@
 {
-  "plugins": ["react", "jest"],
-  "extends": ["airbnb-base", "plugin:react/recommended"],
+  "plugins": ["react", "jest", "@typescript-eslint"],
+  "extends": ["airbnb-base", "plugin:react/recommended", "plugin:@typescript-eslint/recommended"],
   "env": {
     "es6": true,
     "browser": true,
     "jest/globals": true
   },
-  "parser": "typescript-eslint-parser",
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": 2018,
     "sourceType": "module",
@@ -15,8 +15,7 @@
       "generators": true,
       "impliedStrict": true,
       "jsx": true
-    },
-    "plugins": ["typescript"]
+    }
   },
   "settings": {
     "react": {
@@ -50,9 +49,12 @@
     "jest/no-focused-tests": "error",
     "jest/no-identical-title": "error",
     "jest/valid-expect": "error",
-    "no-undef": "off",
-    "no-unused-vars": "off",
     "implicit-arrow-linebreak": "off",
-    "operator-linebreak": "off"
+    "operator-linebreak": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/indent": ["error", 2],
+    "@typescript-eslint/prefer-interface": "off",
+    "@typescript-eslint/explicit-member-accessibility": "off",
+    "@typescript-eslint/no-object-literal-type-assertion": "off"
   }
 }

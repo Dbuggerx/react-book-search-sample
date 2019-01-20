@@ -17,8 +17,10 @@ import createReduxStore from '../redux/store';
 import getRoutes from '../routes';
 
 // Add XMLHttpRequest support on the server
-const g = global as any;
-g.XMLHttpRequest = XMLHttpRequest;
+declare const global: {
+  XMLHttpRequest: unknown;
+};
+global.XMLHttpRequest = XMLHttpRequest;
 
 function parseDistFolder() {
   return JSON.parse(
