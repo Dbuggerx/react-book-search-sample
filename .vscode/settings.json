@@ -19,5 +19,6 @@
   "eslint.validate": ["javascript", "typescript", "typescriptreact"],
   "prettier.stylelintIntegration": true,
   "eslint.alwaysShowStatus": true,
-  "prettier.eslintIntegration": true
+  "prettier.eslintIntegration": true,
+  "jest.pathToJest": "yarn test" 
 }

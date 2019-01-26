@@ -2,15 +2,14 @@ import { combineEpics } from 'redux-observable';
 import { Observable } from 'rxjs';
 import { AjaxCreationMethod } from 'rxjs/internal/observable/dom/AjaxObservable';
 import { filter, map, mergeMap } from 'rxjs/operators';
-import { Action as SsrAction } from '../ssr/types';
 import { State } from '../store';
-import { Action, BookDetailReceivedAction, GetBookDetailAction } from './types';
+import { Action, GetBookDetailAction, BookDetailReceivedAction } from './types';
 
 function bookDetailEpic(
   action$: Observable<Action>,
   state$: Observable<State>,
   { ajax }: { ajax: AjaxCreationMethod },
-): Observable<any> {
+): Observable<BookDetailReceivedAction> {
   return action$.pipe(
     filter(
       (value: Action) => value.type === 'react-book-search/bookDetail/GET_BOOK_DETAIL'
@@ -23,15 +22,15 @@ function bookDetailEpic(
         payload: {
           bookDetail: result.response,
         },
-      })),
+      }) as BookDetailReceivedAction),
     ))
   );
 }
 
-function setSsrReady(action$: Observable<any>): Observable<any> {
+function setSsrReady(action$: Observable<Action>) {
   return action$.pipe(
     filter(
-      (value: Action) => Boolean(process.env.SERVER)
+      value => Boolean(process.env.SERVER)
         && value.type
           === 'react-book-search/bookDetail/BOOK_DETAIL_RECEIVED',
     ),

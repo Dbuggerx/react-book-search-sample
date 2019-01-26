@@ -1,82 +1,17 @@
-/* eslint-disable @typescript-eslint/no-var-requires, global-require, react/display-name */
-
-import React from 'react';
-import { RouteProps } from 'react-router-dom';
-import { Dispatch } from 'redux';
+import { Epic } from 'redux-observable';
 import { BehaviorSubject } from 'rxjs';
-import asyncComponent from '../components/asyncComponent';
 import { ModuleInfo } from '../redux/append-reducer';
-import { GetBookDetailAction } from '../redux/bookDetail/types';
-import { GetBookPageAction } from '../redux/books/types';
-
-type RouteDefinition = RouteProps & {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  loadData?: (dispatch: Dispatch, routeParams: any) => any;
-};
+import { RouteDefinition } from './types';
+import getHomeRoute from './home/routeDefinition';
+import getBookDetailRoute from './bookDetail/routeDefinition';
 
 export default function getRoutes(
   loadedChunkNames?: string[],
   appendAsyncReducer?: (newModuleInfo: ModuleInfo) => void,
-  epicSubject$?: BehaviorSubject<unknown>
+  epicSubject$?: BehaviorSubject<Epic>
 ): RouteDefinition[] {
   return [
-    {
-      exact: true,
-      path: '/home',
-      render: props => {
-        const AsyncHome = asyncComponent(
-          appendAsyncReducer,
-          epicSubject$,
-          () => (process.env.SERVER ? require('./home') : import('./home')),
-          loadedChunkNames,
-          'home'
-        );
-        return <AsyncHome {...props} />;
-      },
-      loadData: (dispatch: Dispatch<GetBookPageAction>) => {
-        if (process.env.SERVER) {
-          const mod = require('./home');
-          if (appendAsyncReducer)
-            appendAsyncReducer({
-              name: 'home',
-              reducer: mod.reducer
-            });
-
-          if (epicSubject$) epicSubject$.next(mod.epic);
-
-          const { actions } = require('../redux/books');
-          dispatch(actions.getBookPage(1));
-        }
-      }
-    },
-    {
-      exact: true,
-      path: '/book/:bookId',
-      render: props => {
-        const AsyncHome = asyncComponent(
-          appendAsyncReducer,
-          epicSubject$,
-          () => (process.env.SERVER
-            ? require('./bookDetail')
-            : import('./bookDetail')),
-          loadedChunkNames,
-          'bookDetail'
-        );
-        return <AsyncHome {...props} />;
-      },
-      loadData: (dispatch: Dispatch<GetBookDetailAction>, routeParams) => {
-        if (process.env.SERVER && routeParams.bookId) {
-          const mod = require('./bookDetail');
-          if (appendAsyncReducer)
-            appendAsyncReducer({
-              name: 'bookDetail',
-              reducer: mod.reducer
-            });
-          if (epicSubject$) epicSubject$.next(mod.epic);
-          const { actions } = require('../redux/bookDetail');
-          dispatch(actions.getBookDetail(routeParams.bookId));
-        }
-      }
-    }
+    getHomeRoute(loadedChunkNames, appendAsyncReducer, epicSubject$),
+    getBookDetailRoute(loadedChunkNames, appendAsyncReducer, epicSubject$)
   ];
 }

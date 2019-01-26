@@ -9,23 +9,31 @@ describe('books epics', () => {
 
     testScheduler.run(({ hot, cold, expectObservable }) => {
       const action$ = hot('-a', {
-        a: { type: 'react-book-search/books/GET_BOOK_PAGE', payload: { test: true } }
+        a: {
+          type: 'react-book-search/books/GET_BOOK_PAGE',
+          payload: { test: true }
+        }
       });
       const state$ = null;
       const dependencies = {
-        ajax: () => cold<{}>('--a', {
-          a: {
-            response: ['bookObj1', 'bookObj2'],
-            xhr: {
-              getResponseHeader(name: string) {
-                return name === 'x-total-count' ? 123 : -1;
+        ajax: () =>
+          cold<{}>('--a', {
+            a: {
+              response: ['bookObj1', 'bookObj2'],
+              xhr: {
+                getResponseHeader(name: string) {
+                  return name === 'x-total-count' ? 123 : -1;
+                }
               }
             }
-          }
-        })
+          })
       };
 
-      const output$ = epics((action$ as any), (state$ as any), (dependencies as any));
+      const output$ = epics(
+        action$,
+        state$,
+        dependencies
+      );
 
       expectObservable(output$).toBe('---a', {
         a: {

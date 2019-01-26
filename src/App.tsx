@@ -1,14 +1,15 @@
 import React from 'react';
 import { hot } from 'react-hot-loader/root';
 import { Route, Switch } from 'react-router-dom';
-import rxjs from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
+import { Epic } from 'redux-observable';
 import { ModuleInfo } from './redux/append-reducer';
 import getRoutes from './routes';
 
 type Props = {
   loadedChunkNames?: string[];
   appendAsyncReducer?: (newModuleInfo: ModuleInfo) => void;
-  epicSubject$?: rxjs.BehaviorSubject<unknown>;
+  epicSubject$?: BehaviorSubject<Epic>;
 };
 
 const App = (props: Props) => (

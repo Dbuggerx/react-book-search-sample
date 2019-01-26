@@ -1,6 +1,5 @@
 import { createSelector } from 'reselect';
 import { State } from '../store';
-import { Book } from './types';
 
 /*
   This is too simple to need reselect.

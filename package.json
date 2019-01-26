@@ -85,15 +85,18 @@
     "webpack-node-externals": "^1.7.2"
   },
   "scripts": {
+    "typecheck": "tsc --resolveJsonModule",
     "test": "cross-env NODE_ENV='test' jest --config config/jest/config.json",
     "prestart-server": "webpack --config config/webpack/server/config.js",
     "start-server": "node server-dist/server.bundle.js",
+    "prestart": "yarn typecheck",
     "start": "yarn start-server & webpack-dev-server --config config/webpack/client/config.js",
-    "prebuild": "tsc --resolveJsonModule",
+    "prebuild": "yarn typecheck",
     "build": "cross-env NODE_ENV=\"'production'\" webpack --config config/webpack/webpack.config.js",
     "prewebpack-bundle-analyzer": "cross-env NODE_ENV=\"'production'\" webpack --profile --json --config config/webpack/client/config.js > ./stats.json",
     "webpack-bundle-analyzer": "webpack-bundle-analyzer ./stats.json ./dist",
     "serve": "yarn build && node ./server-dist/server.bundle.js",
-    "storybook": "start-storybook -p 9001 -c .storybook"
+    "storybook": "start-storybook -p 9001 -c .storybook",
+    "lint": "eslint -c ./config/linters/.eslintrc.json --ext tsx,ts src"
   }
 }

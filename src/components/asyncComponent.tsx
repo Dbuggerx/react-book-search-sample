@@ -1,4 +1,5 @@
 import React, { Component, ComponentType } from 'react';
+import { Epic } from 'redux-observable';
 import { BehaviorSubject } from 'rxjs';
 import { ModuleInfo } from '../redux/append-reducer';
 import { State as StoreState } from '../redux/store';
@@ -12,11 +13,10 @@ type State = {
 
 type RouteModule = HomeRouteModule | DetailRouteModule;
 
-// tslint:disable-next-line:max-line-length
 // @see: https://github.com/AnomalyInnovations/serverless-stack-demo-client/blob/code-splitting-in-create-react-app/src/components/AsyncComponent.js
 export default function asyncComponent(
   appendAsyncReducer?: (newModuleInfo: ModuleInfo) => void,
-  epicSubject$?: BehaviorSubject<unknown>,
+  epicSubject$?: BehaviorSubject<Epic>,
   importComponent?: () => RouteModule | Promise<RouteModule>,
   loadedChunkNames?: string[],
   chunkName?: keyof StoreState | undefined
@@ -32,7 +32,6 @@ export default function asyncComponent(
         });
 
       console.log('Appending epic for:', chunkName);
-
       if (epicSubject$) epicSubject$.next(mod.epic);
     }
 

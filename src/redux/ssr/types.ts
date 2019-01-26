@@ -1,12 +1,12 @@
 export type SsrRenderAction = {
-  type: 'react-book-search/ssr/RENDER_READY',
+  type: 'react-book-search/ssr/RENDER_READY';
   payload: {
-    ready: boolean
-  }
+    ready: boolean;
+  };
 };
 
 export type Action = SsrRenderAction;
 
 export type State = Readonly<{
-  ready?: boolean
+  ready?: boolean;
 }>;
