@@ -1,4 +1,5 @@
-/* eslint-disable import/no-extraneous-dependencies, global-require */
+/* eslint-disable import/no-extraneous-dependencies,
+  global-require, @typescript-eslint/no-var-requires */
 const webpack = require('webpack');
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
@@ -60,8 +61,8 @@ module.exports = {
       {
         enforce: 'pre',
         test: /\.(ts|tsx)$/,
-        // exclude: /node_modules/,
-        // include: [sourcePath],
+        exclude: /node_modules/,
+        include: [sourcePath],
         use: {
           loader: 'eslint-loader',
           options: {
@@ -86,20 +87,10 @@ module.exports = {
               [
                 '@babel/preset-env',
                 {
-                  targets: {
-                    browsers: [
-                      'last 2 versions',
-                      'ios_saf >= 8',
-                      'not IE <= 10',
-                      'chrome >= 49',
-                      'firefox >= 49',
-                      '> 1%'
-                    ]
-                  },
                   debug: false,
                   loose: true,
                   modules: false,
-                  useBuiltIns: 'entry'
+                  useBuiltIns: 'usage'
                 }
               ],
               '@babel/preset-react',
