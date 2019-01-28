@@ -1,6 +1,10 @@
 import React, { Component, StrictMode } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators, Dispatch as ReduxDispatch, AnyAction } from 'redux';
+import {
+  bindActionCreators,
+  Dispatch as ReduxDispatch,
+  AnyAction
+} from 'redux';
 import MainLayout from '../../components/MainLayout';
 import { actions, selectors } from '../../redux/books';
 import { Book } from '../../redux/books/types';
@@ -14,6 +18,7 @@ type StateProps = {
   query?: string;
   books: Book[];
   loadingBooks: boolean;
+  error?: string;
 };
 
 type ActionProps = {
@@ -27,7 +32,7 @@ export class Home extends Component<StateProps & ActionProps> {
 
   search = (category: string, genre: string, query: string) => {
     this.props.actions.getBookPage(1, category, genre, query);
-  }
+  };
 
   showPage = (page: number) => {
     if (page < 1 || page > (this.props.pageCount || 0)) return;
@@ -37,16 +42,21 @@ export class Home extends Component<StateProps & ActionProps> {
       this.props.genre,
       this.props.query
     );
-  }
+  };
 
   handleBookClick = (book: Book) => {
     console.log('TODO!', book);
-  }
+  };
+
+  handleBookLike = (book: Book) => {
+    this.props.actions.likeBook(book.id, !book.liked);
+  };
 
   render() {
     return (
       <StrictMode>
         <MainLayout
+          error={this.props.error}
           books={this.props.books}
           currentPage={this.props.currentPage || 0}
           loadingBooks={this.props.loadingBooks}
@@ -54,6 +64,7 @@ export class Home extends Component<StateProps & ActionProps> {
           search={this.search}
           showPage={this.showPage}
           onBookClick={this.handleBookClick}
+          onBookLike={this.handleBookLike}
         />
       </StrictMode>
     );
@@ -63,8 +74,9 @@ export class Home extends Component<StateProps & ActionProps> {
 function mapStateToProps(state: State): StateProps {
   const books = selectors(state);
   const loading = state.home ? state.home.loading : false;
+  const error = state.home ? state.home.error : undefined;
 
-  return { ...state.home, books, loadingBooks: loading };
+  return { ...state.home, books, loadingBooks: loading, error };
 }
 
 function mapDispatchToProps(dispatch: ReduxDispatch<AnyAction>) {

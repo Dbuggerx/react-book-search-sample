@@ -1,4 +1,10 @@
-import { Book, GetBookPageAction, PagedBooksReceivedAction } from './types';
+import {
+  Book,
+  GetBookPageAction,
+  PagedBooksReceivedAction,
+  LikeBookAction,
+  BookRefreshedAction
+} from './types';
 
 function getBookPage(
   page: number,
@@ -17,7 +23,11 @@ function getBookPage(
   };
 }
 
-function booksReturned(books: Book[], page: number, pageCount: number): PagedBooksReceivedAction {
+function booksReturned(
+  books: Book[],
+  page: number,
+  pageCount: number
+): PagedBooksReceivedAction {
   return {
     type: 'react-book-search/books/PAGED_BOOKS_RECEIVED',
     payload: {
@@ -27,7 +37,28 @@ function booksReturned(books: Book[], page: number, pageCount: number): PagedBoo
   };
 }
 
+function likeBook(bookId: string, liked: boolean): LikeBookAction {
+  return {
+    type: 'react-book-search/books/LIKE_BOOK',
+    payload: {
+      bookId,
+      liked
+    }
+  };
+}
+
+function bookRefreshed(book: Book): BookRefreshedAction {
+  return {
+    type: 'react-book-search/books/BOOK_REFRESHED',
+    payload: {
+      book
+    }
+  };
+}
+
 export default {
   getBookPage,
-  booksReturned
+  booksReturned,
+  likeBook,
+  bookRefreshed
 };

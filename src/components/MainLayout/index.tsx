@@ -4,15 +4,23 @@ import Pagination, { Props as PaginationProps } from '../Pagination';
 import SearchForm, { Props as SearchFormProps } from '../SearchForm';
 import './MainLayout.scss';
 
-type Props = BookListProps & SearchFormProps & PaginationProps;
+type StatusProps = {
+  loadingBooks: boolean;
+  error?: string;
+}
+type Props = StatusProps & BookListProps & SearchFormProps & PaginationProps;
 
 const MainLayout = (props: Props) => (
   <div className="main-layout">
+    <div className="main-layout__status">
+      {props.loadingBooks && <h2>Loading...</h2>}
+      {props.error && <h2>{props.error}</h2>}
+    </div>
     <div className="main-layout__books">
       <BookList
         books={props.books}
-        loadingBooks={props.loadingBooks}
         onBookClick={props.onBookClick}
+        onBookLike={props.onBookLike}
       />
     </div>
     <div className="main-layout__search">

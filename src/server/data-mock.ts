@@ -1,5 +1,11 @@
 import { Book, SearchParams } from '../redux/books/types';
-import bookData from './bookData.json';
+import rawBookData from './bookData.json';
+
+// Randomize the images
+const bookData = rawBookData.map(b => ({
+  ...b,
+  cover: `${b.cover}?${Math.random() * 10}`
+}));
 
 function paramsHaveValues(params: SearchParams) {
   return params.category || params.genre || params.query;

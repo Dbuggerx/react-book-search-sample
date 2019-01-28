@@ -11,8 +11,6 @@ apiRouter.get('/books', (req, res) => {
     query: Array.isArray(req.query.query) ? req.query.query[0] : req.query.query
   });
 
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('access-control-expose-headers', 'x-total-count');
   res.header('X-total-count', result.totalPages.toString());
   res.json(result.books);
 });
@@ -24,8 +22,12 @@ apiRouter.param('bookId', (req, res, next, id: string) => {
 });
 
 apiRouter.get('/books/:bookId', (req, res) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('access-control-expose-headers', 'x-total-count');
+  res.json(res.locals.book);
+});
+
+apiRouter.patch('/books/:bookId', (req, res) => {
+  res.locals.book.liked = req.body.liked;
+  res.locals.book.likes += req.body.liked ? 1 : -1;
   res.json(res.locals.book);
 });
 

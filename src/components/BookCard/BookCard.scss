@@ -1,24 +1,5 @@
 .book-card {
-  $border-color: #f60;
-
-  background: red;
-  box-shadow: 0 6px 10px -5px darken($border-color, 30%);
-  border-radius: 4px;
-  border: solid 1px $border-color;
-  overflow: hidden;
-  transition: all 0.15s ease-out;
-  cursor: pointer;
-  font-size: 0.8em;
-  margin: 15px 5px;
-  width: 22%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  &:hover,
-  &:focus {
-    transform: scale(1.01);
-    box-shadow: 0 0 12px 3px rgba(darken($border-color, 30%), 0.75);
-    z-index: 2;
+  &__like-button {
+    margin-left: auto;
   }
 }

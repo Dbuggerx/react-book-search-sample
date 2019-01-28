@@ -51,6 +51,7 @@
     "jest/valid-expect": "error",
     "implicit-arrow-linebreak": "off",
     "operator-linebreak": "off",
+    "object-curly-newline": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/indent": ["error", 2],
     "@typescript-eslint/prefer-interface": "off",

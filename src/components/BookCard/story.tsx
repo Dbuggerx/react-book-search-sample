@@ -17,8 +17,16 @@ const book = {
   published: '2003-09-18T01:59:14.918Z'
 };
 
-storiesOf('BookCard', module).add('default', () => (
-  <BookCard book={book} onClick={action('card-click')}>
-    Hello Button
-  </BookCard>
-));
+storiesOf('BookCard', module)
+  .add('default', () => (
+    <div className="md-grid">
+      <BookCard book={book} onViewDetails={action('onViewDetails')} onLike={action('onLike')}>
+      </BookCard>
+    </div>
+  ))
+  .add('liked book', () => (
+    <div className="md-grid">
+      <BookCard book={{...book, liked: true}} onViewDetails={action('onViewDetails')} onLike={action('onLike')}>
+      </BookCard>
+    </div>
+  ));

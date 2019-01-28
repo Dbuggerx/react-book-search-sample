@@ -14,6 +14,7 @@ export type Book = {
   likes: number;
   name: string;
   published: string;
+  liked?: boolean;
 };
 
 export type SearchParams = {
@@ -36,7 +37,34 @@ export type PagedBooksReceivedAction = {
   };
 };
 
-export type Action = GetBookPageAction | PagedBooksReceivedAction;
+export type LikeBookAction = {
+  type: 'react-book-search/books/LIKE_BOOK';
+  payload: {
+    bookId: string;
+    liked: boolean;
+  };
+};
+
+export type BookRefreshedAction = {
+  type: 'react-book-search/books/BOOK_REFRESHED';
+  payload: {
+    book: Book;
+  };
+};
+
+export type BookServerErrorAction = {
+  type: 'react-book-search/books/SERVER_ERROR';
+  payload: {
+    error: string;
+  };
+};
+
+export type Action =
+  | GetBookPageAction
+  | PagedBooksReceivedAction
+  | LikeBookAction
+  | BookRefreshedAction
+  | BookServerErrorAction;
 
 export type State = Readonly<{
   loading: boolean;
@@ -46,6 +74,7 @@ export type State = Readonly<{
   category?: string;
   genre?: string;
   query?: string;
+  error?: string;
 }>;
 
 export type BookState = {

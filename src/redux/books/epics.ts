@@ -1,15 +1,30 @@
 import { combineEpics, ofType } from 'redux-observable';
-import { Observable } from 'rxjs';
-import { AjaxCreationMethod } from 'rxjs/internal/observable/dom/AjaxObservable';
-import { filter, map, mergeMap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { AjaxCreationMethod, AjaxError } from 'rxjs/internal/observable/dom/AjaxObservable';
+import { filter, map, mergeMap, catchError } from 'rxjs/operators';
 import { State } from '../store';
-import { Action, PagedBooksReceivedAction } from './types';
+import {
+  Action,
+  PagedBooksReceivedAction,
+  LikeBookAction,
+  BookRefreshedAction,
+  BookServerErrorAction
+} from './types';
+
+function handleError(error: AjaxError) {
+  return of<BookServerErrorAction>({
+    type: 'react-book-search/books/SERVER_ERROR',
+    payload: {
+      error: error.message
+    }
+  });
+}
 
 function bookPageEpic(
   action$: Observable<Action>,
   state$: Observable<State>,
   { ajax }: { ajax: AjaxCreationMethod }
-): Observable<PagedBooksReceivedAction> {
+): Observable<PagedBooksReceivedAction | BookServerErrorAction> {
   return action$.pipe(
     ofType('react-book-search/books/GET_BOOK_PAGE'),
     mergeMap(value => {
@@ -23,16 +38,20 @@ function bookPageEpic(
       return ajax({
         url: `http://localhost:3001/api/books?${queryParams}`
       }).pipe(
-        map(result => ({
-          type: 'react-book-search/books/PAGED_BOOKS_RECEIVED',
-          payload: {
-            books: result.response,
-            pageCount: parseInt(
-              result.xhr.getResponseHeader('x-total-count') || '',
-              10
-            )
-          }
-        }) as PagedBooksReceivedAction)
+        map(
+          result =>
+            ({
+              type: 'react-book-search/books/PAGED_BOOKS_RECEIVED',
+              payload: {
+                books: result.response,
+                pageCount: parseInt(
+                  result.xhr.getResponseHeader('x-total-count') || '',
+                  10
+                )
+              }
+            } as PagedBooksReceivedAction)
+        ),
+        catchError(handleError)
       );
     })
   );
@@ -50,8 +69,36 @@ function setBooksSsrReady(action$: Observable<Action>) {
       payload: {
         ready: true
       }
-    }))
+    })),
+    catchError(handleError)
   );
 }
 
-export default combineEpics(bookPageEpic, setBooksSsrReady);
+function likeBookEpic(
+  action$: Observable<LikeBookAction>,
+  state$: Observable<State>,
+  { ajax }: { ajax: AjaxCreationMethod }
+): Observable<BookRefreshedAction | BookServerErrorAction> {
+  return action$.pipe(
+    ofType('react-book-search/books/LIKE_BOOK'),
+    mergeMap(value =>
+      ajax.patch(`http://localhost:3001/api/books/${value.payload.bookId}`, {
+        liked: value.payload.liked
+      }, {
+        'Content-Type': 'application/json'
+      }).pipe(
+        map(
+          result =>
+            ({
+              type: 'react-book-search/books/BOOK_REFRESHED',
+              payload: {
+                book: result.response
+              }
+            } as BookRefreshedAction)
+        ),
+        catchError(handleError)
+      ))
+  );
+}
+
+export default combineEpics(bookPageEpic, setBooksSsrReady, likeBookEpic);

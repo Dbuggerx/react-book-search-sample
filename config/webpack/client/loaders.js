@@ -136,12 +136,12 @@ module.exports = function getLoaders(isProductionMode, srcPath) {
     },
     {
       test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
-      include: [srcPath],
       use: [
         {
           loader: 'file-loader',
           options: {
-            limit: 10000
+            name: '[name].[ext]',
+            outputPath: 'fonts/'
           }
         }
       ]

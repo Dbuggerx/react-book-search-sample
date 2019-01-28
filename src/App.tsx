@@ -5,6 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 import { Epic } from 'redux-observable';
 import { ModuleInfo } from './redux/append-reducer';
 import getRoutes from './routes';
+import './components/_globals.scss';
 
 type Props = {
   loadedChunkNames?: string[];

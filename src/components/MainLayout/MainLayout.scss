@@ -6,30 +6,37 @@ body,
 }
 
 .main-layout {
-  background: white;
   display: grid;
   grid-template-columns: 1fr 25vw;
   grid-template-rows: 130px 1fr 50px;
   grid-template-areas:
-    'main-layout-search main-layout-info'
-    'main-layout-books main-layout-info'
-    'main-layout-pagination main-layout-info';
+    'search info'
+    'books info'
+    'pagination info';
   height: 100%;
   font-family: Arial, Helvetica, sans-serif;
 
   &__search {
-    grid-area: main-layout-search;
+    grid-area: search;
+  }
+
+  &__status {
+    position: fixed;
+    top: 0;
+    z-index: 10;
+    background: gray;
+    width: 100%;
   }
 
   &__books {
-    grid-area: main-layout-books;
+    grid-area: books;
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
   }
 
   &__pagination {
-    grid-area: main-layout-pagination;
+    grid-area: pagination;
     display: flex;
     flex-flow: row nowrap;
     align-content: center;
@@ -38,7 +45,7 @@ body,
   }
 
   &__info {
-    grid-area: main-layout-info;
+    grid-area: info;
     padding: 15px;
   }
 }

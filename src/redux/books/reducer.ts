@@ -7,7 +7,10 @@ const initialState: State = {
   pageCount: 0
 };
 
-export default function booksReducer(state: State = initialState, action: Action): State {
+export default function booksReducer(
+  state: State = initialState,
+  action: Action
+): State {
   switch (action.type) {
     case 'react-book-search/books/GET_BOOK_PAGE':
       return {
@@ -24,6 +27,25 @@ export default function booksReducer(state: State = initialState, action: Action
         loading: false,
         books: action.payload.books,
         pageCount: action.payload.pageCount
+      };
+    case 'react-book-search/books/LIKE_BOOK':
+      return {
+        ...state,
+        loading: true
+      };
+    case 'react-book-search/books/BOOK_REFRESHED':
+      return {
+        ...state,
+        loading: false,
+        books: state.books.map(book => (
+          book.id === action.payload.book.id ? action.payload.book : book
+        ))
+      };
+    case 'react-book-search/books/SERVER_ERROR':
+      return {
+        ...state,
+        loading: false,
+        error: action.payload.error
       };
     default:
       return state;
