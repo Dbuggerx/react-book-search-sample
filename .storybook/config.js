@@ -1,5 +1,5 @@
 import { configure } from '@storybook/react';
-import '../src/components/_globals.scss';
+import '../src/components/mainStyles';
 
 function loadStories() {
   require('../src/components/BookCard/story.tsx');

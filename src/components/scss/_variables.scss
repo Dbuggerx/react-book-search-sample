@@ -1,0 +1,29 @@
+$colors: (
+  greys: (
+    1000: #ddd,
+    2000: #ccc
+  ),
+  text: #333,
+  background: #f1f1f1,
+  action: #f60,
+  border: #dcdcdc
+);
+
+$spaces: (
+  border-radius: 3px,
+  1000: 0.7em,
+  2000: 2em,
+);
+
+@function get($map, $keys...) {
+  @each $key in $keys {
+    @if not map-has-key($map, $key) {
+      @warn "The key '#{$key}' is not in the map '#{$map}'";
+
+      @return null;
+    }
+    $map: map-get($map, $key);
+  }
+
+  @return $map;
+}

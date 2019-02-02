@@ -27,7 +27,9 @@ module.exports = {
     filename: 'server.bundle.js'
   },
   // externals: nodeModules,
-  externals: [nodeExternals()], // in order to ignore all modules in node_modules folder
+  externals: [nodeExternals({
+    whitelist: /roboto/
+  })], // in order to ignore all modules in node_modules folder
   plugins: [
     new CleanWebpackPlugin([distPath], { root: process.cwd() }),
     new webpack.HashedModuleIdsPlugin({
@@ -101,11 +103,7 @@ module.exports = {
       },
       {
         test: /\.s?css$/,
-        use: [
-          {
-            loader: 'null-loader'
-          }
-        ]
+        use: 'null-loader'
       },
       {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
@@ -131,14 +129,7 @@ module.exports = {
       },
       {
         test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              limit: 10000
-            }
-          }
-        ]
+        use: 'null-loader'
       }
     ]
   }

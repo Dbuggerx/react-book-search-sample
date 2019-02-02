@@ -1,5 +1,82 @@
+@import '../scss/variables';
+
 .book-card {
-  &__like-button {
-    margin-left: auto;
+  $card-border: solid 1px get($colors, border);
+
+  font-family: 'Roboto', Arial, Verdana, Tahoma, sans-serif;
+  background-color: lighten(get($colors, border), 10%);
+  border: $card-border;
+  border-radius: get($spaces, border-radius);
+  box-shadow: 0 2px 4px get($colors, greys, 2000);
+  flex-basis: 15em;
+  flex-grow: 0;
+  margin: 0 1em;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+  max-width: 15em;
+  cursor: pointer;
+  margin-bottom: get($spaces, 2000);
+
+  &:hover,
+  &:focus {
+    transform: scale(1.01);
+    box-shadow: 0 0 12px 3px get($colors, greys, 1000);
+    z-index: 2;
+  }
+
+  &__image {
+    height: 250px;
+    max-height: 250px;
+    overflow: hidden;
+  }
+
+  &__header {
+    line-height: 1.5em;
+    padding: get($spaces, 1000);
+    transition: all 0.2s ease-in-out;
+  }
+
+  &__author {
+    font-size: 0.9em;
+  }
+
+  &__title {
+    color: get($colors, action);
+    font-weight: bold;
+    font-size: 1.2em;
+    line-height: 2em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__actions {
+    border-top: $card-border;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    padding: get($spaces, 1000);
+    align-items: center;
+    font-size: 0.8em;
+  }
+
+  &__icon {
+    margin-right: 5px;
+    color: get($colors, action);
+  }
+
+  &__action {
+    cursor: pointer;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+
+    &--no-click {
+      cursor: default;
+    }
+
+    &--align-right {
+      text-align: right;
+    }
   }
 }

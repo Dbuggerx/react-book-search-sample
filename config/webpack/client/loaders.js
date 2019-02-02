@@ -52,7 +52,6 @@ module.exports = function getLoaders(isProductionMode, srcPath) {
     },
     {
       test: /\.s?css$/,
-      include: [srcPath],
       use: isProductionMode
         ? [
           {
@@ -112,7 +111,6 @@ module.exports = function getLoaders(isProductionMode, srcPath) {
     },
     {
       test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-      include: [srcPath],
       use: [
         {
           loader: 'svg-url-loader',

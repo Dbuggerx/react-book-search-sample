@@ -32,7 +32,6 @@ app.use('/api', api);
 app.use(ssr);
 
 app.listen(port, '0.0.0.0', (err: string) => {
-  // tslint:disable: no-console
   if (err) console.error(err);
   else console.info(`Listening at http://localhost:${port}`);
 });
