@@ -62,7 +62,8 @@
 
   &__icon {
     margin-right: 5px;
-    color: get($colors, action);
+    fill: get($colors, action);
+    height: 2em;
   }
 
   &__action {

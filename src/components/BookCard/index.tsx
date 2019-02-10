@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import dayjs from 'dayjs';
 // @ts-ignore
 import relativeTime from 'dayjs/plugin/relativeTime';
+import favoriteIcon from 'material-design-icons/action/svg/production/ic_favorite_24px.svg';
+import favoriteBorderIcon from 'material-design-icons/action/svg/production/ic_favorite_border_24px.svg';
+import calendarIcon from 'material-design-icons/action/svg/production/ic_date_range_24px.svg';
 import { Book } from '../../redux/books/types';
 import './BookCard.scss';
 
@@ -28,6 +31,10 @@ export default class BookCard extends Component<Props> {
   // @ts-ignore
   getRelativeDate = () => dayjs(this.props.book.published).fromNow();
 
+  shouldComponentUpdate(nextProps: Props) {
+    return nextProps.book !== this.props.book;
+  }
+
   render() {
     return (
       <div className="book-card">
@@ -40,18 +47,31 @@ export default class BookCard extends Component<Props> {
         </div>
         <div className="book-card__actions">
           <div className="book-card__action" onClick={this.handleLike}>
-            <i className="material-icons book-card__icon">
-              {this.props.book.liked ? 'favorite' : 'favorite_border'}
-            </i>
+            {this.props.book.liked && (
+              <svg viewBox={favoriteIcon.viewBox} className="book-card__icon">
+                <use xlinkHref={`#${favoriteIcon.id}`} />
+              </svg>
+            )}
+            {!this.props.book.liked && (
+              <svg
+                viewBox={favoriteBorderIcon.viewBox}
+                className="book-card__icon"
+              >
+                <use xlinkHref={`#${favoriteBorderIcon.id}`} />
+              </svg>
+            )}
             {`${this.props.book.likes} ${
               this.props.book.likes > 1 ? 'likes' : 'like'
             }`}
           </div>
           <div className="book-card__action book-card__action--align-right book-card__action--no-click">
-            <i className="material-icons book-card__icon">date_range</i>
-            <div>
-              {this.getRelativeDate()}
-            </div>
+            <svg
+              viewBox={calendarIcon.viewBox}
+              className="book-card__icon"
+            >
+              <use xlinkHref={`#${calendarIcon.id}`} />
+            </svg>
+            <div>{this.getRelativeDate()}</div>
           </div>
         </div>
       </div>

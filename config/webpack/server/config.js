@@ -27,9 +27,11 @@ module.exports = {
     filename: 'server.bundle.js'
   },
   // externals: nodeModules,
-  externals: [nodeExternals({
-    whitelist: /roboto/
-  })], // in order to ignore all modules in node_modules folder
+  externals: [
+    nodeExternals({
+      whitelist: /roboto|material/
+    })
+  ], // in order to ignore all modules in node_modules folder
   plugins: [
     new CleanWebpackPlugin([distPath], { root: process.cwd() }),
     new webpack.HashedModuleIdsPlugin({
@@ -109,9 +111,16 @@ module.exports = {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
         use: [
           {
-            loader: 'svg-url-loader',
+            loader: 'svg-sprite-loader'
+          },
+          {
+            loader: 'svgo-loader',
             options: {
-              limit: 10000
+              plugins: [
+                { removeTitle: true },
+                { convertColors: { shorthex: false } },
+                { convertPathData: false }
+              ]
             }
           }
         ]

@@ -1,4 +1,5 @@
-/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable @typescript-eslint/no-var-requires, import/no-extraneous-dependencies */
+const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -6,6 +7,7 @@ const StyleLintPlugin = require('stylelint-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
+const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 
 const devPlugins = [new webpack.HotModuleReplacementPlugin(), new webpack.NamedModulesPlugin()];
 
@@ -20,17 +22,17 @@ const prodPlugins = distPath => [
     minimize: true,
     debug: false
   }),
+  new CopyWebpackPlugin([
+    {
+      from: 'img',
+      to: `${distPath}/img`
+    }
+  ]),
   new ManifestPlugin()
 ];
 
 module.exports = function getPlugins(isProduction, distPath) {
   return (isProduction ? prodPlugins(distPath) : devPlugins).concat([
-    new CopyWebpackPlugin([
-      {
-        from: 'img',
-        to: `${distPath}/img`
-      }
-    ]),
     new StyleLintPlugin({
       configFile: 'config/linters/.stylelintrc.json',
       syntax: 'scss'
@@ -44,7 +46,7 @@ module.exports = function getPlugins(isProduction, distPath) {
     }),
     new HtmlWebpackPlugin({
       title: 'React book search sample - By Danilo Cestari',
-      template: './index.ejs',
+      template: path.join(__dirname, '../../../src/index.ejs'),
       minify: {
         removeComments: true,
         collapseWhitespace: true,
@@ -58,6 +60,7 @@ module.exports = function getPlugins(isProduction, distPath) {
         minifyURLs: true
       },
       inject: true
-    })
+    }),
+    new SpriteLoaderPlugin({ plainSprite: true })
   ]);
 };

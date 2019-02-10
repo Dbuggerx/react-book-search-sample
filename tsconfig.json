@@ -62,6 +62,7 @@
     "skipLibCheck": true
   },
   "include": [
+    "./src/custom.d.ts",
     "./src/browser.tsx",
     "./src/server/index.ts"
   ]

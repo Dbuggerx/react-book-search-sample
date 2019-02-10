@@ -10,6 +10,8 @@ import { Store } from 'redux';
 import { promisify } from 'util';
 // @ts-ignore
 import { XMLHttpRequest } from 'xmlhttprequest';
+// @ts-ignore
+import sprite from 'svg-sprite-loader/runtime/sprite.build';
 import App from '../App';
 import { appendReducerServer, ModuleInfo } from '../redux/append-reducer';
 import configureEpic from '../redux/combined-epics';
@@ -48,7 +50,8 @@ async function renderFullPage(
   );
   return data.replace(
     '<div id="app"></div>',
-    `<div id="app">${html}</div>${preloadedStateScript}${asyncChunksScriptTags}`
+    `${sprite.stringify()}
+    <div id="app">${html}</div>${preloadedStateScript}${asyncChunksScriptTags}`
   );
 }
 
@@ -56,10 +59,11 @@ async function getAsyncChunksScriptTags(loadedChunkNames: string[]) {
   const fileContents = await Promise.all(
     loadedChunkNames
       .map(chunkName => distFiles[`${chunkName}.js`])
-      .map(fileName => promisify(fs.readFile)(
-        path.join(__dirname, `../dist/${fileName}`),
-        'utf8'
-      ))
+      .map(fileName =>
+        promisify(fs.readFile)(
+          path.join(__dirname, `../dist/${fileName}`),
+          'utf8'
+        ))
   );
   return fileContents.map(content => `<script>${content}</script>`).join('');
 }

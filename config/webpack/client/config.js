@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-var-requires, import/no-extraneous-dependencies */
 const path = require('path');
-const loaders = require('./loaders');
-const plugins = require('./plugins');
+const getLoaders = require('./loaders');
+const getPlugins = require('./plugins');
 
 const isProductionMode = (process.env.NODE_ENV || 'development') === 'production';
 const sourcePath = path.join(__dirname, '../../../src');
@@ -55,13 +56,13 @@ module.exports = {
     }
   },
   module: {
-    rules: loaders(isProductionMode, path.resolve(sourcePath))
+    rules: getLoaders(isProductionMode, path.resolve(sourcePath))
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
     modules: [path.resolve(__dirname, '../../../node_modules'), sourcePath]
   },
-  plugins: plugins(isProductionMode, distPath),
+  plugins: getPlugins(isProductionMode, distPath),
   devtool: isProductionMode ? 'none' : 'inline-source-map',
   context: sourcePath,
   target: 'web',
