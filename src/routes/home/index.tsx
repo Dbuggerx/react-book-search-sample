@@ -75,7 +75,6 @@ function mapStateToProps(state: State): StateProps {
   const books = selectors(state);
   const loading = state.home ? state.home.loading : false;
   const error = state.home ? state.home.error : undefined;
-
   return { ...state.home, books, loadingBooks: loading, error };
 }
 

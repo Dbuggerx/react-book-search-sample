@@ -1,7 +1,10 @@
 import { combineEpics, ofType } from 'redux-observable';
 import { Observable, of } from 'rxjs';
-import { AjaxCreationMethod, AjaxError } from 'rxjs/internal/observable/dom/AjaxObservable';
-import { filter, map, mergeMap, catchError } from 'rxjs/operators';
+import {
+  AjaxCreationMethod,
+  AjaxError
+} from 'rxjs/internal/observable/dom/AjaxObservable';
+import { filter, map, mergeMap, catchError, switchMap } from 'rxjs/operators';
 import { State } from '../store';
 import {
   Action,
@@ -81,23 +84,23 @@ function likeBookEpic(
 ): Observable<BookRefreshedAction | BookServerErrorAction> {
   return action$.pipe(
     ofType('react-book-search/books/LIKE_BOOK'),
-    mergeMap(value =>
-      ajax.patch(`http://localhost:3001/api/books/${value.payload.bookId}`, {
+    switchMap(value => ajax.patch(
+      `http://localhost:3001/api/books/${value.payload.bookId}`,
+      {
         liked: value.payload.liked
-      }, {
+      },
+      {
         'Content-Type': 'application/json'
-      }).pipe(
-        map(
-          result =>
-            ({
-              type: 'react-book-search/books/BOOK_REFRESHED',
-              payload: {
-                book: result.response
-              }
-            } as BookRefreshedAction)
-        ),
-        catchError(handleError)
-      ))
+      }
+    )),
+    map(result =>
+      ({
+        type: 'react-book-search/books/BOOK_REFRESHED',
+        payload: {
+          book: result.response
+        }
+      } as BookRefreshedAction)),
+    catchError(handleError)
   );
 }
 

@@ -22,7 +22,7 @@ export default function asyncComponent(
   chunkName?: keyof StoreState | undefined
 ) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  class AsyncComponent extends Component<any, State> {
+  return class AsyncComponent extends Component<any, State> {
     static setupModuleState(mod: RouteModule) {
       console.log('Appending reducer for:', chunkName);
       if (appendAsyncReducer && chunkName)
@@ -34,6 +34,8 @@ export default function asyncComponent(
       console.log('Appending epic for:', chunkName);
       if (epicSubject$) epicSubject$.next(mod.epic);
     }
+
+    elementRef = React.createRef<HTMLDivElement>();
 
     constructor(props: unknown) {
       super(props);
@@ -67,16 +69,19 @@ export default function asyncComponent(
       const mod = await modulePromise;
       AsyncComponent.setupModuleState(mod);
 
-      this.setState({
-        component: mod.default
-      });
+      if (this.elementRef.current)
+        this.setState({
+          component: mod.default
+        });
     }
 
     render() {
       const C = this.state.component;
-      return C ? <C {...this.props} /> : <div>Loading...</div>;
+      return C ? (
+        <C {...this.props} ref={this.elementRef} />
+      ) : (
+        <div ref={this.elementRef}>Loading...</div>
+      );
     }
-  }
-
-  return AsyncComponent;
+  };
 }

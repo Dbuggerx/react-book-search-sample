@@ -19,8 +19,8 @@ const App = (props: Props) => (
       props.loadedChunkNames,
       props.appendAsyncReducer,
       props.epicSubject$
-    ).map((route, key: number) => (
-      <Route key={key} {...route} />
+    ).map((route, index: number) => (
+      <Route key={index} {...route} />
     ))}
   </Switch>
 );
