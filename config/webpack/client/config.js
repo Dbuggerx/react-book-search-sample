@@ -73,9 +73,9 @@ module.exports = {
     host,
     compress: isProductionMode,
     inline: !isProductionMode,
-    hot: !isProductionMode,
     open: false,
     stats,
+    hot: !isProductionMode,
     hotOnly: true
   }
 };

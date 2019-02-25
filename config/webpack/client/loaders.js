@@ -18,12 +18,18 @@ module.exports = function getLoaders(isProductionMode, srcPath) {
       }
     },
     {
+      test: /\.jsx?$/,
+      include: /node_modules/,
+      use: ['react-hot-loader/webpack']
+    },
+    {
       test: /\.(ts|tsx)$/,
       exclude: /node_modules/,
       include: [srcPath],
       use: {
         loader: 'babel-loader',
         options: {
+          cacheDirectory: true,
           plugins: [
             '@babel/plugin-proposal-object-rest-spread',
             '@babel/plugin-syntax-dynamic-import',

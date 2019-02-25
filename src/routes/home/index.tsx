@@ -5,6 +5,7 @@ import {
   Dispatch as ReduxDispatch,
   AnyAction
 } from 'redux';
+import { hot } from 'react-hot-loader/root';
 import MainLayout from '../../components/MainLayout';
 import { actions, selectors } from '../../redux/books';
 import { Book } from '../../redux/books/types';
@@ -84,9 +85,9 @@ function mapDispatchToProps(dispatch: ReduxDispatch<AnyAction>) {
   };
 }
 
-export default connect(
+export default hot(connect(
   mapStateToProps,
   mapDispatchToProps
-)(Home);
+)(Home));
 
 export { default as reducer, epic } from '../../redux/books';

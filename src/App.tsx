@@ -3,6 +3,7 @@ import { hot } from 'react-hot-loader/root';
 import { Route, Switch } from 'react-router-dom';
 import { BehaviorSubject } from 'rxjs';
 import { Epic } from 'redux-observable';
+import { setConfig } from 'react-hot-loader';
 import { ModuleInfo } from './redux/append-reducer';
 import getRoutes from './routes';
 import './components/mainStyles';
@@ -27,4 +28,9 @@ const App = (props: Props) => (
 
 App.displayName = 'App';
 
+setConfig({
+  logLevel: 'debug',
+  ignoreSFC: true,
+  pureRender: true
+});
 export default hot(App);
