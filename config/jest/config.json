@@ -6,7 +6,7 @@
   "collectCoverageFrom": ["**/*.{ts,tsx}", "!**/node_modules/**"],
   "rootDir": "../..",
   "roots": ["<rootDir>/src/"],
-  "testRegex": "(_test|_spec|\\.test|\\.spec)\\.tsx?$",
+  "testRegex": "(test|spec)\\.tsx?$",
   "moduleFileExtensions": ["ts", "tsx", "js", "jsx"],
   "moduleDirectories": ["node_modules"],
   "testURL": "http://localhost",

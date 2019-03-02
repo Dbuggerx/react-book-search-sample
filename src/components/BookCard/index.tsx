@@ -27,7 +27,6 @@ const BookCard = (props: Props) => {
 
   const [relativeDate, setRelativeDate] = useState('');
   useEffect(() => {
-    // @ts-ignore
     setRelativeDate(dayjs(props.book.published).fromNow());
   }, [props.book.published]);
 
@@ -41,7 +40,11 @@ const BookCard = (props: Props) => {
         <div className="book-card__author">{props.book.author.name}</div>
       </div>
       <div className="book-card__actions">
-        <div className="book-card__action" onClick={handleLike}>
+        <div
+          className="book-card__action"
+          onClick={handleLike}
+          data-testid="like-button"
+        >
           {props.book.liked && (
             <svg viewBox={favoriteIcon.viewBox} className="book-card__icon">
               <use xlinkHref={`#${favoriteIcon.id}`} />
@@ -61,7 +64,7 @@ const BookCard = (props: Props) => {
           <svg viewBox={calendarIcon.viewBox} className="book-card__icon">
             <use xlinkHref={`#${calendarIcon.id}`} />
           </svg>
-          <div>{relativeDate}</div>
+          <div data-testid="relative-date">{relativeDate}</div>
         </div>
       </div>
     </div>
