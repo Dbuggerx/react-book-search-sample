@@ -2,3 +2,4 @@
 /dist
 /server-dist
 stats.json
+coverage/
