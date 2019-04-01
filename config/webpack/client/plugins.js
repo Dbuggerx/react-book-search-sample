@@ -12,7 +12,7 @@ const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 const devPlugins = [new webpack.HotModuleReplacementPlugin(), new webpack.NamedModulesPlugin()];
 
 const prodPlugins = distPath => [
-  new CleanWebpackPlugin([distPath], { root: process.cwd() }),
+  new CleanWebpackPlugin(),
   new webpack.HashedModuleIdsPlugin({
     hashFunction: 'sha256',
     hashDigest: 'hex',

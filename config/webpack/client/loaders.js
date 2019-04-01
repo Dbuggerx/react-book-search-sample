@@ -42,7 +42,8 @@ module.exports = function getLoaders(isProductionMode, srcPath) {
               {
                 debug: false,
                 modules: false,
-                useBuiltIns: 'usage'
+                useBuiltIns: 'usage',
+                corejs: '3'
               }
             ],
             '@babel/preset-react',

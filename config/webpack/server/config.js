@@ -33,7 +33,7 @@ module.exports = {
     })
   ], // in order to ignore all modules in node_modules folder
   plugins: [
-    new CleanWebpackPlugin([distPath], { root: process.cwd() }),
+    new CleanWebpackPlugin(),
     new webpack.HashedModuleIdsPlugin({
       hashFunction: 'sha256',
       hashDigest: 'hex',
@@ -94,7 +94,8 @@ module.exports = {
                   debug: false,
                   loose: true,
                   modules: false,
-                  useBuiltIns: 'usage'
+                  useBuiltIns: 'usage',
+                  corejs: '3'
                 }
               ],
               '@babel/preset-react',
