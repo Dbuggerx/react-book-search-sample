@@ -11,7 +11,7 @@ describe('books epics', () => {
       const action$ = hot('-a', {
         a: {
           type: 'react-book-search/books/GET_BOOK_PAGE',
-          payload: { test: true }
+          payload: { a: 1, b: 2 }
         }
       });
       const state$ = null;
@@ -29,16 +29,40 @@ describe('books epics', () => {
           })
       };
 
-      const output$ = epics(
-        action$,
-        state$,
-        dependencies
-      );
+      const output$ = epics(action$, state$, dependencies);
 
       expectObservable(output$).toBe('---a', {
         a: {
           type: 'react-book-search/books/PAGED_BOOKS_RECEIVED',
           payload: { books: ['bookObj1', 'bookObj2'], pageCount: 123 }
+        }
+      });
+    });
+  });
+
+  test('it chains "GET_BOOK_PAGE" to "SERVER_ERROR"', () => {
+    const testScheduler = new TestScheduler((actual, expected) => {
+      expect(actual).toEqual(expected);
+    });
+
+    testScheduler.run(({ hot, cold, expectObservable }) => {
+      const action$ = hot('-a', {
+        a: {
+          type: 'react-book-search/books/GET_BOOK_PAGE',
+          payload: { test: true }
+        }
+      });
+      const state$ = null;
+      const dependencies = {
+        ajax: () => cold<{}>('--#', null, new Error('boom!'))
+      };
+
+      const output$ = epics(action$, state$, dependencies);
+
+      expectObservable(output$).toBe('---a', {
+        a: {
+          type: 'react-book-search/books/SERVER_ERROR',
+          payload: { error: 'boom!' }
         }
       });
     });

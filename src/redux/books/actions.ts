@@ -3,7 +3,8 @@ import {
   GetBookPageAction,
   PagedBooksReceivedAction,
   LikeBookAction,
-  BookRefreshedAction
+  BookRefreshedAction,
+  BookServerErrorAction
 } from './types';
 
 function getBookPage(
@@ -56,9 +57,19 @@ function bookRefreshed(book: Book): BookRefreshedAction {
   };
 }
 
+function serverError(err: Error): BookServerErrorAction {
+  return {
+    type: 'react-book-search/books/SERVER_ERROR',
+    payload: {
+      error: err.message
+    }
+  };
+}
+
 export default {
   getBookPage,
   booksReturned,
   likeBook,
-  bookRefreshed
+  bookRefreshed,
+  serverError
 };

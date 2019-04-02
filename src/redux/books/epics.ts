@@ -13,14 +13,10 @@ import {
   BookRefreshedAction,
   BookServerErrorAction
 } from './types';
+import actions from './actions';
 
 function handleError(error: AjaxError) {
-  return of<BookServerErrorAction>({
-    type: 'react-book-search/books/SERVER_ERROR',
-    payload: {
-      error: error.message
-    }
-  });
+  return of<BookServerErrorAction>(actions.serverError(error));
 }
 
 function bookPageEpic(
@@ -60,7 +56,7 @@ function bookPageEpic(
   );
 }
 
-function setBooksSsrReady(action$: Observable<Action>) {
+function ssrReadyEpic(action$: Observable<Action>) {
   return action$.pipe(
     filter(
       (value: Action) =>
@@ -93,15 +89,17 @@ function likeBookEpic(
         'Content-Type': 'application/json'
       }
     )),
-    map(result =>
-      ({
-        type: 'react-book-search/books/BOOK_REFRESHED',
-        payload: {
-          book: result.response
-        }
-      } as BookRefreshedAction)),
+    map(
+      result =>
+        ({
+          type: 'react-book-search/books/BOOK_REFRESHED',
+          payload: {
+            book: result.response
+          }
+        } as BookRefreshedAction)
+    ),
     catchError(handleError)
   );
 }
 
-export default combineEpics(bookPageEpic, setBooksSsrReady, likeBookEpic);
+export default combineEpics(bookPageEpic, ssrReadyEpic, likeBookEpic);
