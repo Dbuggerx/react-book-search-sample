@@ -137,8 +137,8 @@ export default async function handleRender(
   const reactRouterStaticContext = {};
 
   try {
-    if (routeMatch.loadData)
-      routeMatch.loadData(
+    if (routeMatch.loadSSRData)
+      routeMatch.loadSSRData(
         store.dispatch,
         routeMatch.reactRouterMatch ? routeMatch.reactRouterMatch.params : null
       );

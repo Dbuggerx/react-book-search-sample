@@ -29,7 +29,7 @@ export default function getRouteDefinition(
       );
       return <AsyncHome {...props} />;
     },
-    loadData: (dispatch: Dispatch<GetBookDetailAction>, routeParams) => {
+    loadSSRData: (dispatch: Dispatch<GetBookDetailAction>, routeParams) => {
       if (process.env.SERVER && routeParams.bookId) {
         const mod = require('./index');
         if (appendAsyncReducer)

@@ -17,7 +17,7 @@ describe('books epics', () => {
       const state$ = null;
       const dependencies = {
         ajax: () =>
-          cold<{}>('--a', {
+          cold<{}>('--a|', {
             a: {
               response: ['bookObj1', 'bookObj2'],
               xhr: {
@@ -31,7 +31,7 @@ describe('books epics', () => {
 
       const output$ = epics(action$, state$, dependencies);
 
-      expectObservable(output$).toBe('---a', {
+      expectObservable(output$).toBe('--- 500ms a', {
         a: {
           type: 'react-book-search/books/PAGED_BOOKS_RECEIVED',
           payload: { books: ['bookObj1', 'bookObj2'], pageCount: 123 }
@@ -59,7 +59,7 @@ describe('books epics', () => {
 
       const output$ = epics(action$, state$, dependencies);
 
-      expectObservable(output$).toBe('---a', {
+      expectObservable(output$).toBe('--- 500ms a', {
         a: {
           type: 'react-book-search/books/SERVER_ERROR',
           payload: { error: 'boom!' }

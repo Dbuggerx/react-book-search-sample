@@ -4,7 +4,7 @@ import {
   AjaxCreationMethod,
   AjaxError
 } from 'rxjs/internal/observable/dom/AjaxObservable';
-import { filter, map, mergeMap, catchError, switchMap } from 'rxjs/operators';
+import { filter, map, mergeMap, catchError, switchMap, debounceTime } from 'rxjs/operators';
 import { State } from '../store';
 import {
   Action,
@@ -19,13 +19,14 @@ function handleError(error: AjaxError) {
   return of<BookServerErrorAction>(actions.serverError(error));
 }
 
-function bookPageEpic(
+function getBookPageEpic(
   action$: Observable<Action>,
   state$: Observable<State>,
   { ajax }: { ajax: AjaxCreationMethod }
 ): Observable<PagedBooksReceivedAction | BookServerErrorAction> {
   return action$.pipe(
     ofType('react-book-search/books/GET_BOOK_PAGE'),
+    debounceTime(500),
     mergeMap(value => {
       const queryParams = Object.entries(value.payload).reduce(
         (agg, cur) =>
@@ -59,9 +60,9 @@ function bookPageEpic(
 function ssrReadyEpic(action$: Observable<Action>) {
   return action$.pipe(
     filter(
-      (value: Action) =>
+      (action: Action) =>
         Boolean(process.env.SERVER) &&
-        value.type === 'react-book-search/books/PAGED_BOOKS_RECEIVED'
+        action.type === 'react-book-search/books/PAGED_BOOKS_RECEIVED'
     ),
     map(() => ({
       type: 'react-book-search/ssr/RENDER_READY',
@@ -80,10 +81,11 @@ function likeBookEpic(
 ): Observable<BookRefreshedAction | BookServerErrorAction> {
   return action$.pipe(
     ofType('react-book-search/books/LIKE_BOOK'),
-    switchMap(value => ajax.patch(
-      `http://localhost:3001/api/books/${value.payload.bookId}`,
+    debounceTime(500),
+    switchMap(action => ajax.patch(
+      `http://localhost:3001/api/books/${action.payload.bookId}`,
       {
-        liked: value.payload.liked
+        liked: action.payload.liked
       },
       {
         'Content-Type': 'application/json'
@@ -102,4 +104,4 @@ function likeBookEpic(
   );
 }
 
-export default combineEpics(bookPageEpic, ssrReadyEpic, likeBookEpic);
+export default combineEpics(getBookPageEpic, ssrReadyEpic, likeBookEpic);
