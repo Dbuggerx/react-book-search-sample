@@ -7,7 +7,7 @@ import './MainLayout.scss';
 type StatusProps = {
   loadingBooks: boolean;
   error?: string;
-}
+};
 type Props = StatusProps & BookListProps & SearchFormProps & PaginationProps;
 
 const MainLayout = (props: Props) => (
@@ -24,7 +24,12 @@ const MainLayout = (props: Props) => (
       />
     </div>
     <div className="main-layout__search">
-      <SearchForm search={props.search} />
+      <SearchForm
+        search={props.search}
+        category={props.category}
+        genre={props.genre}
+        query={props.query}
+      />
     </div>
     <div className="main-layout__pagination">
       <Pagination

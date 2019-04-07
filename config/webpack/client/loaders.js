@@ -61,60 +61,60 @@ module.exports = function getLoaders(isProductionMode, srcPath) {
       test: /\.s?css$/,
       use: isProductionMode
         ? [
-            {
-              loader: MiniCssExtractPlugin.loader,
-              options: {
-                sourceMap: !isProductionMode,
-                modules: false,
-                localIdentName: '[name]__[local]___[hash:base64:5]'
-              }
-            },
-            'css-loader',
-            {
-              loader: 'postcss-loader',
-              options: {
-                sourceMap: !isProductionMode,
-                plugins() {
-                  return [
-                    require('autoprefixer')({
-                      grid: true
-                    })
-                  ];
-                }
-              }
-            },
-            {
-              loader: 'sass-loader',
-              options: {
-                sourceMap: !isProductionMode,
-                includePaths: ['node_modules']
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              sourceMap: !isProductionMode,
+              modules: false,
+              localIdentName: '[name]__[local]___[hash:base64:5]'
+            }
+          },
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: !isProductionMode,
+              plugins() {
+                return [
+                  require('autoprefixer')({
+                    grid: true
+                  })
+                ];
               }
             }
-          ]
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: !isProductionMode,
+              includePaths: ['node_modules']
+            }
+          }
+        ]
         : [
-            'style-loader',
-            { loader: 'css-loader' },
-            {
-              loader: 'postcss-loader',
-              options: {
-                sourceMap: !isProductionMode,
-                plugins() {
-                  return [
-                    require('autoprefixer')({
-                      grid: true
-                    })
-                  ];
-                }
-              }
-            },
-            {
-              loader: 'sass-loader',
-              options: {
-                sourceMap: !isProductionMode,
-                includePaths: ['node_modules']
+          'style-loader',
+          { loader: 'css-loader' },
+          {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: !isProductionMode,
+              plugins() {
+                return [
+                  require('autoprefixer')({
+                    grid: true
+                  })
+                ];
               }
             }
-          ]
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: !isProductionMode,
+              includePaths: ['node_modules']
+            }
+          }
+        ]
     },
     {
       test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,

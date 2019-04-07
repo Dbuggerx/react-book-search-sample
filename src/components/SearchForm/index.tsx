@@ -8,6 +8,9 @@ type State = {
 
 export type Props = {
   search: (category: string, genre: string, query: string) => void;
+  category?: string;
+  genre?: string;
+  query?: string;
 };
 
 class SearchForm extends Component<Props, State> {
@@ -37,15 +40,18 @@ class SearchForm extends Component<Props, State> {
   render() {
     return (
       <div>
-        {Object.entries(this.state).map(kvp => (
-          <div key={kvp[0]}>{`${kvp.toLocaleString()}`}</div>
-        ))}
+        <ul>
+          <li>Category: {this.props.category}</li>
+          <li>Genre: {this.props.genre}</li>
+          <li>Query: {this.props.query}</li>
+        </ul>
 
         <input
           name="category"
           type="text"
           value={this.state.category}
           onChange={this.handleSearchChange}
+          data-testid="categ-input"
         />
 
         <input
@@ -53,6 +59,7 @@ class SearchForm extends Component<Props, State> {
           type="text"
           value={this.state.genre}
           onChange={this.handleSearchChange}
+          data-testid="genre-input"
         />
 
         <input
@@ -60,9 +67,12 @@ class SearchForm extends Component<Props, State> {
           type="text"
           value={this.state.query}
           onChange={this.handleSearchChange}
+          data-testid="query-input"
         />
 
-        <button onClick={this.doSearch}>Search</button>
+        <button onClick={this.doSearch} data-testid="search-button">
+          Search
+        </button>
       </div>
     );
   }

@@ -33,6 +33,8 @@ describe('BookCard', () => {
     handleLike = jest.fn();
   });
 
+  afterEach(cleanup);
+
   test('calls the "onLike" prop', () => {
     const wrapper = render(
       <BookCard

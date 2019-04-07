@@ -19,9 +19,9 @@ class Pagination extends Component<Props> {
   render() {
     return (
       <div>
-        <button onClick={this.previousPage}> 👈 </button>
+        <button data-testid="goto-prev-page" onClick={this.previousPage}> 👈 </button>
         Showing page {this.props.currentPage} of {this.props.pageCount}
-        <button onClick={this.nextPage}> 👉 </button>
+        <button data-testid="goto-next-page" onClick={this.nextPage}> 👉 </button>
       </div>
     );
   }

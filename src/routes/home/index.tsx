@@ -6,6 +6,7 @@ import {
   AnyAction
 } from 'redux';
 import { hot } from 'react-hot-loader/root';
+import { RouteChildrenProps } from 'react-router';
 import MainLayout from '../../components/MainLayout';
 import { actions, selectors } from '../../redux/books';
 import { Book } from '../../redux/books/types';
@@ -26,12 +27,14 @@ type ActionProps = {
   actions: typeof actions;
 };
 
-export class Home extends Component<StateProps & ActionProps> {
+export class Home extends Component<
+  StateProps & ActionProps & RouteChildrenProps
+> {
   componentDidMount() {
     if (this.props.books.length === 0) this.props.actions.getBookPage(1);
   }
 
-  search = (category: string, genre: string, query: string) => {
+  handleSearch = (category: string, genre: string, query: string) => {
     this.props.actions.getBookPage(1, category, genre, query);
   };
 
@@ -46,7 +49,7 @@ export class Home extends Component<StateProps & ActionProps> {
   };
 
   handleBookClick = (book: Book) => {
-    console.log('TODO!', book);
+    this.props.history.push(`/book/${book.id}`);
   };
 
   handleBookLike = (book: Book) => {
@@ -62,7 +65,10 @@ export class Home extends Component<StateProps & ActionProps> {
           currentPage={this.props.currentPage || 0}
           loadingBooks={this.props.loadingBooks}
           pageCount={this.props.pageCount || 0}
-          search={this.search}
+          search={this.handleSearch}
+          category={this.props.category}
+          genre={this.props.genre}
+          query={this.props.query}
           showPage={this.showPage}
           onBookClick={this.handleBookClick}
           onBookLike={this.handleBookLike}
@@ -85,9 +91,11 @@ function mapDispatchToProps(dispatch: ReduxDispatch<AnyAction>) {
   };
 }
 
-export default hot(connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Home));
+export default hot(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Home)
+);
 
 export { default as reducer, epic } from '../../redux/books';

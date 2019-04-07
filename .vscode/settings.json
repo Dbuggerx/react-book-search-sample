@@ -20,5 +20,7 @@
   "prettier.stylelintIntegration": true,
   "eslint.alwaysShowStatus": true,
   "prettier.eslintIntegration": true,
-  "jest.pathToJest": "yarn test" 
+  "jest.pathToJest": "",
+  "jest.pathToConfig": "config/jest/config.json",
+  "jest.restartJestOnSnapshotUpdate": true
 }

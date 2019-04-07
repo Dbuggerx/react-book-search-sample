@@ -22,7 +22,10 @@ type OwnProps = {
 
 export class Detail extends Component<StateProps & ActionProps & OwnProps> {
   componentDidMount() {
-    if (!this.props.bookDetail && this.props.bookId)
+    if (
+      this.props.bookId &&
+      (!this.props.bookDetail || this.props.bookDetail.id !== this.props.bookId)
+    )
       this.props.actions.getBookDetail(this.props.bookId);
   }
 
@@ -31,7 +34,7 @@ export class Detail extends Component<StateProps & ActionProps & OwnProps> {
       <div>Loading details...</div>
     ) : (
       <StrictMode>
-        <div>{this.props.bookDetail && this.props.bookDetail.description}</div>
+        <div>{this.props.bookDetail && this.props.bookDetail.name}</div>
       </StrictMode>
     );
   }
