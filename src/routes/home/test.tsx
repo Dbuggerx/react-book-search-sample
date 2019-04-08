@@ -10,10 +10,11 @@ import 'jest-dom/extend-expect';
 import configureStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
 import { MemoryRouter, Route } from 'react-router';
+import { createEpicMiddleware } from 'redux-observable';
+import { of } from 'rxjs';
+import booksEpic from '../../redux/books/epics';
 import Home from './index';
 import { State } from '../../redux/store';
-
-const mockStore = configureStore([]);
 
 function getDateForDaysAgo(daysAgo: number) {
   const d = new Date();
@@ -34,118 +35,244 @@ const bookMock = {
   published: getDateForDaysAgo(30).toISOString()
 };
 
+function getMockedStore(ajaxMock) {
+  const epicMiddleware = createEpicMiddleware({
+    dependencies: { ajax: ajaxMock }
+  });
+  const mockStore = configureStore([epicMiddleware]);
+  const mockedStore = mockStore({
+    home: {
+      loading: false,
+      books: [bookMock],
+      currentPage: 3,
+      pageCount: 6,
+      category: 'test categ',
+      genre: 'test genre',
+      query: 'test query',
+      error: null
+    }
+  } as State);
+
+  epicMiddleware.run(booksEpic);
+  return mockedStore;
+}
+
+function renderHomeWithStore(store) {
+  cleanup();
+  return render(
+    <MemoryRouter initialEntries={['/']}>
+      <Provider store={store}>
+        <Route path="/" exact component={Home} />
+        <Route
+          path="/book/:bookId"
+          exact
+          render={({ match }) => `book ${match.params.bookId} details`}
+        />
+      </Provider>
+    </MemoryRouter>
+  );
+}
+
 describe('Home route', () => {
   let store;
   let wrapper: RenderResult;
+  let ajaxMock;
 
   beforeEach(() => {
-    store = mockStore({
-      home: {
-        loading: false,
-        books: [bookMock],
-        currentPage: 3,
-        pageCount: 6,
-        category: 'test categ',
-        genre: 'test genre',
-        query: 'test query',
-        error: null
-      }
-    } as State);
-
-    wrapper = render(
-      <MemoryRouter initialEntries={['/']}>
-        <Provider store={store}>
-          <Route path="/" exact component={Home} />
-          <Route
-            path="/book/:bookId"
-            exact
-            render={({ match }) => `book ${match.params.bookId} details`}
-          />
-        </Provider>
-      </MemoryRouter>
-    );
+    ajaxMock = jest.fn();
+    store = getMockedStore(ajaxMock);
+    wrapper = renderHomeWithStore(store);
   });
-
-  afterEach(cleanup);
 
   describe('Pagination', () => {
-    test('dispatches GET_BOOK_PAGE on "next page button" click', () => {
+    beforeEach(() => {
+      ajaxMock.mockReturnValue(
+        of({
+          response: 'books!',
+          xhr: {
+            getResponseHeader: jest
+              .fn()
+              .mockImplementation(header =>
+                (header === 'x-total-count' ? 123 : null))
+          }
+        })
+      );
+    });
+
+    test('dispatches [GET_BOOK_PAGE, PAGED_BOOKS_RECEIVED] on "next page button" click', done => {
       fireEvent.click(wrapper.getByTestId('goto-next-page'));
 
-      expect(store.getActions()).toEqual([
-        {
-          payload: {
-            category: 'test categ',
-            genre: 'test genre',
-            page: 4,
-            query: 'test query'
+      setTimeout(() => {
+        expect(store.getActions()).toEqual([
+          {
+            payload: {
+              category: 'test categ',
+              genre: 'test genre',
+              page: 4,
+              query: 'test query'
+            },
+            type: 'react-book-search/books/GET_BOOK_PAGE'
           },
-          type: 'react-book-search/books/GET_BOOK_PAGE'
-        }
-      ]);
+          {
+            payload: {
+              books: 'books!',
+              pageCount: 123
+            },
+            type: 'react-book-search/books/PAGED_BOOKS_RECEIVED'
+          }
+        ]);
+
+        expect(ajaxMock).toHaveBeenCalledTimes(1);
+        expect(ajaxMock.mock.calls[0][0].url).toEqual(
+          expect.stringMatching(
+            /\/api\/books\?page=4&category=test categ&genre=test genre&query=test query$/
+          )
+        );
+        done();
+      }, 510);
     });
 
-    test('dispatches GET_BOOK_PAGE on "prev page button" click', () => {
+    test('dispatches [GET_BOOK_PAGE, PAGED_BOOKS_RECEIVED] on "prev page button" click', done => {
       fireEvent.click(wrapper.getByTestId('goto-prev-page'));
 
-      expect(store.getActions()).toEqual([
-        {
-          payload: {
-            category: 'test categ',
-            genre: 'test genre',
-            page: 2,
-            query: 'test query'
+      setTimeout(() => {
+        expect(store.getActions()).toEqual([
+          {
+            payload: {
+              category: 'test categ',
+              genre: 'test genre',
+              page: 2,
+              query: 'test query'
+            },
+            type: 'react-book-search/books/GET_BOOK_PAGE'
           },
-          type: 'react-book-search/books/GET_BOOK_PAGE'
-        }
-      ]);
-    });
-  });
+          {
+            payload: {
+              books: 'books!',
+              pageCount: 123
+            },
+            type: 'react-book-search/books/PAGED_BOOKS_RECEIVED'
+          }
+        ]);
 
-  describe('Search', () => {
-    test('dispatches GET_BOOK_PAGE with search params on "search button" click', () => {
-      fireEvent.change(wrapper.getByTestId('categ-input'), {
-        target: { value: 'aaa' }
-      });
-      fireEvent.change(wrapper.getByTestId('genre-input'), {
-        target: { value: 'bbb' }
-      });
-      fireEvent.change(wrapper.getByTestId('query-input'), {
-        target: { value: 'ccc' }
-      });
-      fireEvent.click(wrapper.getByTestId('search-button'));
-
-      expect(store.getActions()).toEqual([
-        {
-          payload: {
-            category: 'aaa',
-            genre: 'bbb',
-            page: 1,
-            query: 'ccc'
-          },
-          type: 'react-book-search/books/GET_BOOK_PAGE'
-        }
-      ]);
-    });
-  });
-
-  describe('Books', () => {
-    test('shows details on card click', () => {
-      fireEvent.click(wrapper.container.querySelector('.book-card__image'));
-      expect(wrapper.container.textContent).toEqual('book 123 details');
+        expect(ajaxMock).toHaveBeenCalledTimes(1);
+        expect(ajaxMock.mock.calls[0][0].url).toEqual(
+          expect.stringMatching(
+            /\/api\/books\?page=2&category=test categ&genre=test genre&query=test query$/
+          )
+        );
+        done();
+      }, 510);
     });
 
-    test('dispatches LIKE_BOOK on "like button" click', () => {
-      fireEvent.click(wrapper.getByTestId('like-button'));
-      expect(store.getActions()).toEqual([
-        {
-          payload: {
-            bookId: '123',
-            liked: true
-          },
-          type: 'react-book-search/books/LIKE_BOOK'
-        }
-      ]);
+    describe('Search', () => {
+      beforeEach(() => {
+        ajaxMock.mockReturnValue(
+          of({
+            response: 'books search result!',
+            xhr: {
+              getResponseHeader: jest
+                .fn()
+                .mockImplementation(header =>
+                  (header === 'x-total-count' ? 10 : null))
+            }
+          })
+        );
+      });
+
+      test('dispatches [GET_BOOK_PAGE, PAGED_BOOKS_RECEIVED] with search params on "search button" click', done => {
+        fireEvent.change(wrapper.getByTestId('categ-input'), {
+          target: { value: 'aaa' }
+        });
+        fireEvent.change(wrapper.getByTestId('genre-input'), {
+          target: { value: 'bbb' }
+        });
+        fireEvent.change(wrapper.getByTestId('query-input'), {
+          target: { value: 'ccc' }
+        });
+        fireEvent.click(wrapper.getByTestId('search-button'));
+
+        setTimeout(() => {
+          expect(store.getActions()).toEqual([
+            {
+              payload: {
+                category: 'aaa',
+                genre: 'bbb',
+                page: 1,
+                query: 'ccc'
+              },
+              type: 'react-book-search/books/GET_BOOK_PAGE'
+            },
+            {
+              payload: {
+                books: 'books search result!',
+                pageCount: 10
+              },
+              type: 'react-book-search/books/PAGED_BOOKS_RECEIVED'
+            }
+          ]);
+
+          expect(ajaxMock).toHaveBeenCalledTimes(1);
+          expect(ajaxMock.mock.calls[0][0].url).toEqual(
+            expect.stringMatching(
+              /\/api\/books\?page=1&category=aaa&genre=bbb&query=ccc$/
+            )
+          );
+          done();
+        }, 510);
+      });
+    });
+
+    describe('Books', () => {
+      test('shows details on card click', () => {
+        fireEvent.click(wrapper.container.querySelector('.book-card__image'));
+        expect(wrapper.container.textContent).toEqual('book 123 details');
+      });
+
+      test('dispatches [LIKE_BOOK, BOOK_REFRESHED] on "like button" click', done => {
+        // Reconfigure the mocks and render again
+        const ajaxPatchMock = jest
+          .fn()
+          .mockReturnValue(of({ response: 'updated book!' }));
+        ajaxMock = {
+          patch: ajaxPatchMock
+        };
+        store = getMockedStore(ajaxMock);
+        wrapper = renderHomeWithStore(store);
+
+        // Act
+        fireEvent.click(wrapper.getByTestId('like-button'));
+
+        // Assert
+        setTimeout(() => {
+          expect(store.getActions()).toEqual([
+            {
+              payload: {
+                bookId: '123',
+                liked: true
+              },
+              type: 'react-book-search/books/LIKE_BOOK'
+            },
+            {
+              payload: {
+                book: 'updated book!'
+              },
+              type: 'react-book-search/books/BOOK_REFRESHED'
+            }
+          ]);
+
+          expect(ajaxPatchMock).toHaveBeenCalledTimes(1);
+          expect(ajaxPatchMock.mock.calls[0][0]).toEqual(
+            expect.stringMatching(/\/api\/books\/123$/)
+          );
+          expect(ajaxPatchMock.mock.calls[0][1]).toEqual({ liked: true });
+          expect(ajaxPatchMock.mock.calls[0][2]).toEqual({
+            'Content-Type': 'application/json'
+          });
+
+          done();
+        }, 510);
+      });
     });
   });
 });
