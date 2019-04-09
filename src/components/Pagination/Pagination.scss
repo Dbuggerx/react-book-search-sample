@@ -1,3 +1,40 @@
+@import '../scss/variables';
+@import '../scss/placeholders';
+
+/* @define pagination */
 .pagination {
-  font-size: 0.8em;
+  font-size: 0.9em;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  width: 40%;
+  margin: auto;
+
+  @media #{map-get($breakpoints, medium)} {
+    width: 70%;
+  }
+
+  @media #{map-get($breakpoints, small)} {
+    width: 100%;
+  }
+
+  &__prev-button,
+  &__next-button {
+    @extend %button;
+
+    width: 2em;
+
+    @media #{map-get($breakpoints, medium)} {
+      width: 3em;
+    }
+
+    @media #{map-get($breakpoints, small)} {
+      width: 3.5em;
+    }
+  }
+
+  &__next-button {
+    transform: scale(-1, 1);
+  }
 }

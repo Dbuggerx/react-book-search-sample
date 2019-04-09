@@ -12,7 +12,22 @@ $colors: (
 $spaces: (
   border-radius: 3px,
   1000: 0.7em,
-  2000: 2em,
+  2000: 2em
+);
+
+$breakpoints: (
+  medium: only screen and
+  (
+    max-width: 768px
+  ),
+  small: only screen and
+  (
+    max-width: 500px
+  ),
+  small-not-ie: all and
+  (
+    -ms-high-contrast: none
+  )
 );
 
 @function get($map, $keys...) {

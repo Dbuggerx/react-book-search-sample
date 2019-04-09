@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { useCallback } from 'react';
+import navigateIcon from 'material-design-icons/navigation/svg/production/ic_chevron_left_24px.svg';
 import './Pagination.scss';
 
 export type Props = {
@@ -7,24 +8,32 @@ export type Props = {
   showPage: (page: number) => void;
 };
 
-class Pagination extends Component<Props> {
-  previousPage = () => {
-    this.props.showPage(this.props.currentPage - 1);
-  };
+const Pagination = (props: Props) => {
+  const handlePrevPage = useCallback(() => {
+    props.showPage(props.currentPage - 1);
+  }, [props.showPage, props.currentPage]);
 
-  nextPage = () => {
-    this.props.showPage(this.props.currentPage + 1);
-  };
+  const handleNextPage = useCallback(() => {
+    props.showPage(props.currentPage + 1);
+  }, [props.showPage, props.currentPage]);
 
-  render() {
-    return (
-      <div>
-        <button data-testid="goto-prev-page" onClick={this.previousPage}> 👈 </button>
-        Showing page {this.props.currentPage} of {this.props.pageCount}
-        <button data-testid="goto-next-page" onClick={this.nextPage}> 👉 </button>
-      </div>
-    );
-  }
-}
+  return (
+    <nav className="pagination">
+      <button className="pagination__prev-button" data-testid="goto-prev-page" onClick={handlePrevPage}>
+        <svg viewBox={navigateIcon.viewBox}>
+          <use xlinkHref={`#${navigateIcon.id}`} />
+        </svg>
+      </button>
+      Showing page {props.currentPage} of {props.pageCount}
+      <button className="pagination__next-button" data-testid="goto-next-page" onClick={handleNextPage}>
+        <svg viewBox={navigateIcon.viewBox}>
+          <use xlinkHref={`#${navigateIcon.id}`} />
+        </svg>
+      </button>
+    </nav>
+  );
+};
 
-export default Pagination;
+Pagination.displayName = 'Pagination';
+
+export default React.memo(Pagination);
