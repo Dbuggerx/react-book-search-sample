@@ -1,0 +1,62 @@
+@import '../scss/variables';
+@import '../scss/placeholders';
+
+//* @define dropdown
+.dropdown {
+  box-sizing: padding-box;
+  vertical-align: middle;
+
+  &__container {
+    position: relative;
+    text-align: center;
+  }
+
+  &__button {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    position: relative;
+    background: get($colors, greys, 1000);
+    padding: get($spaces, 500) get($spaces, 1000);
+  }
+
+  &__arrow-icon {
+    @extend %svg-icon;
+
+    height: 2em;
+    width: 2em;
+  }
+
+  &__menu {
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    display: none;
+    margin: 0;
+    overflow: show;
+    padding: 0;
+    position: absolute;
+    right: 0;
+    width: inherit;
+    z-index: 99999;
+    max-height: 250px;
+    overflow-y: scroll;
+  }
+
+  &__menu-item {
+    list-style: none;
+
+    &:hover {
+      background: get($colors, greys, 2000);
+    }
+
+    &:last-child {
+      border: 0;
+    }
+  }
+
+  &__menu-item--display {
+    display: block;
+  }
+}
