@@ -24,3 +24,8 @@
     }
   }
 }
+
+%input-color {
+  background-color: get($colors, input, bg);
+  color: get($colors, input, fg);
+}

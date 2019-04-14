@@ -4,9 +4,13 @@ $colors: (
     2000: #ccc
   ),
   text: #333,
-  background: #f1f1f1,
   action: #f60,
-  border: #dcdcdc
+  action-text: #fffee1,
+  border: #dcdcdc,
+  input: (
+    bg: #f1f1f1,
+    fg: black
+  )
 );
 
 $spaces: (
@@ -29,6 +33,10 @@ $breakpoints: (
   (
     -ms-high-contrast: none
   )
+);
+
+$times: (
+  500: 0.3s
 );
 
 @function get($map, $keys...) {

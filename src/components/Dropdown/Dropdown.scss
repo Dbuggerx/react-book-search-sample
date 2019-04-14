@@ -3,52 +3,52 @@
 
 //* @define dropdown
 .dropdown {
+  $transition: transform get($times, 500) ease-in;
+
   box-sizing: padding-box;
   vertical-align: middle;
-
-  &__container {
-    position: relative;
-    text-align: center;
-  }
+  position: relative;
+  width: 100%;
 
   &__button {
+    @extend %input-color;
+
+    border: solid 1px get($colors, greys, 2000);
+    padding: get($spaces, 500) get($spaces, 1000);
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
     justify-content: space-between;
     cursor: pointer;
-    position: relative;
-    background: get($colors, greys, 1000);
-    padding: get($spaces, 500) get($spaces, 1000);
-  }
-
-  &__arrow-icon {
-    @extend %svg-icon;
-
-    height: 2em;
-    width: 2em;
   }
 
   &__menu {
-    transition: all 0.2s ease-in-out;
-    cursor: pointer;
-    display: none;
-    margin: 0;
-    overflow: show;
+    @extend %input-color;
+
+    border: solid 1px get($colors, greys, 2000);
+    border-top: 0;
     padding: 0;
+    cursor: pointer;
+    margin: 0;
     position: absolute;
     right: 0;
     width: inherit;
-    z-index: 99999;
-    max-height: 250px;
-    overflow-y: scroll;
+    z-index: 2;
+    max-height: 10em;
+    overflow-y: auto;
+    box-sizing: border-box;
+    transform-origin: top center;
+    transform: scaleY(0);
+    transition: $transition;
   }
 
   &__menu-item {
     list-style: none;
+    padding: get($spaces, 500) get($spaces, 1000);
 
     &:hover {
-      background: get($colors, greys, 2000);
+      background: get($colors, action);
+      color: get($colors, action-text);
     }
 
     &:last-child {
@@ -56,7 +56,23 @@
     }
   }
 
-  &__menu-item--display {
-    display: block;
+  &__arrow-icon {
+    @extend %svg-icon;
+
+    height: 2em;
+    width: 2em;
+    margin-left: auto;
+    transition: $transition;
+  }
+
+  &--opened {
+    .dropdown__menu {
+      display: block;
+      transform: scaleY(1);
+    }
+
+    .dropdown__arrow-icon {
+      transform: rotate(180deg);
+    }
   }
 }

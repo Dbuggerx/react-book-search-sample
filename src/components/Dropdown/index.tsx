@@ -5,36 +5,45 @@ import './Dropdown.scss';
 export type Props<T> = {
   items: T[];
   renderItem: (item: T) => { id: number; el: React.ReactNode };
+  onSelect: (item: T) => void;
 };
 
-const Dropdown: <T>(p: Props<T>) => React.ReactElement<Props<T>> = props => {
+const Dropdown = <T extends {}>(props: Props<T>) => {
   const [isOpened, setIsOpened] = useState(false);
-  const [selectedItem, setSelectedItem] = useState();
+  const [selectedItem, setSelectedItem] = useState<T>();
 
-  const handleToggle = useCallback(() => {
+  const handleToggle = () => {
     setIsOpened(!isOpened);
-  }, []);
+  };
+
+  const handleSelect = (item: T) => {
+    setSelectedItem(item);
+    setIsOpened(false);
+    props.onSelect(item);
+  };
 
   return (
-    <div className="dropdown">
-      <div className="dropdown__container">
-        <div className="dropdown__button" onClick={handleToggle}>
-          Test
-          <svg className="dropdown__arrow-icon" viewBox={arrowIcon.viewBox}>
-            <use xlinkHref={`#${arrowIcon.id}`} />
-          </svg>
-        </div>
-        <ul className="dropdown__menu">
-          {props.items.map(item => {
-            const renderedItem = props.renderItem(item);
-            return (
-              <li key={renderedItem.id} className="dropdown__menu-item">
-                {renderedItem.el}
-              </li>
-            );
-          })}
-        </ul>
+    <div className={`dropdown ${isOpened && 'dropdown--opened'}`}>
+      <div className="dropdown__button" onClick={handleToggle}>
+        {selectedItem && props.renderItem(selectedItem).el}
+        <svg className="dropdown__arrow-icon" viewBox={arrowIcon.viewBox}>
+          <use xlinkHref={`#${arrowIcon.id}`} />
+        </svg>
       </div>
+      <ul className="dropdown__menu">
+        {props.items.map(item => {
+          const renderedItem = props.renderItem(item);
+          return (
+            <li
+              key={renderedItem.id}
+              onClick={() => handleSelect(item)}
+              className="dropdown__menu-item"
+            >
+              {renderedItem.el}
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 };

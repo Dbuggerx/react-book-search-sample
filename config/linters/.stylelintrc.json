@@ -14,7 +14,7 @@
       "preset": "bem",
       "componentName": "(([a-z0-9]+(?!-$)-?)+)",
       "componentSelectors": {
-        "initial": "^\\.{componentName}(?:(?:-{2}(?:[a-z0-9]+(-?[a-z0-9]+)?))|(?:_{2}(?:[a-z0-9]+(-?[a-z0-9]+)?)(?:-{2}(?:[a-z0-9]+(-?[a-z0-9]+)?))?)?)?$"
+        "initial": "^(?:%(?:[a-z]+-?)+)|(?:\\.{componentName}(?:(?:--(?:[a-z]+-?)+)?(?:__(?:[a-z]+-?)+(?:--(?:[a-z]+-?)+)?)?)\\b(?:\\[.+\\])?)+$"
       }
     },
     "plugin/no-unsupported-browser-features": [
