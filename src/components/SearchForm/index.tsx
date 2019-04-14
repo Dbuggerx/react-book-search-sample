@@ -41,9 +41,15 @@ class SearchForm extends Component<Props, State> {
     return (
       <div>
         <ul>
-          <li>Category: {this.props.category}</li>
-          <li>Genre: {this.props.genre}</li>
-          <li>Query: {this.props.query}</li>
+          <li>
+            Category: <span data-testid="current-category">{this.props.category}</span>
+          </li>
+          <li>
+            Genre: <span data-testid="current-genre">{this.props.genre}</span>
+          </li>
+          <li>
+            Query: <span data-testid="current-query">{this.props.query}</span>
+          </li>
         </ul>
 
         <input

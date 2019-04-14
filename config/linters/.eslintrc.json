@@ -32,6 +32,7 @@
     }
   },
   "rules": {
+    "max-len": "off",
     "nonblock-statement-body-position": "off",
     "new-cap": "off",
     "object-curly-spacing": "off",
