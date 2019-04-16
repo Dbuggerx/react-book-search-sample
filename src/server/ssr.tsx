@@ -12,8 +12,9 @@ import { promisify } from 'util';
 import { XMLHttpRequest } from 'xmlhttprequest';
 // @ts-ignore
 import sprite from 'svg-sprite-loader/runtime/sprite.build';
+import { RouteModuleInfo } from '../routes/types';
 import App from '../App';
-import { appendReducerServer, ModuleInfo } from '../redux/append-reducer';
+import { appendReducerServer } from '../redux/append-reducer';
 import configureEpic from '../redux/combined-epics';
 import createReduxStore from '../redux/store';
 import getRoutes from '../routes';
@@ -60,10 +61,7 @@ async function getAsyncChunksScriptTags(loadedChunkNames: string[]) {
     loadedChunkNames
       .map(chunkName => distFiles[`${chunkName}.js`])
       .map(fileName =>
-        promisify(fs.readFile)(
-          path.join(__dirname, `../dist/${fileName}`),
-          'utf8'
-        ))
+        promisify(fs.readFile)(path.join(__dirname, `../dist/${fileName}`), 'utf8'))
   );
   return fileContents.map(content => `<script>${content}</script>`).join('');
 }
@@ -74,9 +72,7 @@ async function handleSsrReady(
   renderedHtml: string
 ) {
   // Write initial async chuncks
-  const asyncChunksScriptTags = await getAsyncChunksScriptTags(
-    loadedChunkNames
-  );
+  const asyncChunksScriptTags = await getAsyncChunksScriptTags(loadedChunkNames);
   return renderFullPage(renderedHtml, state, asyncChunksScriptTags);
 }
 
@@ -114,7 +110,7 @@ export default async function handleRender(
   const epicConfig = configureEpic();
   const store = createReduxStore(epicConfig.rootEpic);
   const loadedChunkNames: string[] = [];
-  const appendAsyncReducer = (newModuleInfo: ModuleInfo) => {
+  const appendAsyncReducer = (newModuleInfo: RouteModuleInfo) => {
     appendReducerServer(store, newModuleInfo);
   };
 

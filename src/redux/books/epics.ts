@@ -5,13 +5,13 @@ import {
   AjaxError
 } from 'rxjs/internal/observable/dom/AjaxObservable';
 import { filter, map, mergeMap, catchError, switchMap, debounceTime } from 'rxjs/operators';
-import { State } from '../store';
 import {
   Action,
   PagedBooksReceivedAction,
   LikeBookAction,
   BookRefreshedAction,
-  BookServerErrorAction
+  BookServerErrorAction,
+  State
 } from './types';
 import actions from './actions';
 

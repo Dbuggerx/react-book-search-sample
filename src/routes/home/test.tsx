@@ -58,9 +58,13 @@ function setupStore(ajaxMock, initialState) {
     return {};
   };
 
+  const home = combineReducers({
+    bookResults: booksReducer
+  });
+
   const store = createStore(
     combineReducers({
-      home: booksReducer,
+      home,
       reducerSpy
     }),
     initialState,
@@ -76,14 +80,16 @@ function setupStore(ajaxMock, initialState) {
 function getMockedStore(ajaxMock) {
   return setupStore(ajaxMock, {
     home: {
-      loading: false,
-      books: [bookMock],
-      currentPage: 3,
-      pageCount: 6,
-      category: 'test categ',
-      genre: 'test genre',
-      query: 'test query',
-      error: null
+      bookResults: {
+        loading: false,
+        books: [bookMock],
+        currentPage: 3,
+        pageCount: 6,
+        category: 'test categ',
+        genre: 'test genre',
+        query: 'test query',
+        error: null
+      }
     }
   } as State);
 }

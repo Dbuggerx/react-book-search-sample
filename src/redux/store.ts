@@ -1,9 +1,9 @@
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 import { createEpicMiddleware, Epic } from 'redux-observable';
 import { ajax } from 'rxjs/ajax';
-import { BookDetailState } from './bookDetail/types';
-import { BookState } from './books/types';
 import initialReducers from './initial-reducers';
+import { RouteState as HomeRouteState } from '../routes/home';
+import { RouteState as DetailRouteState } from '../routes/detail';
 
 // @see: https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-8.html
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -11,8 +11,9 @@ type ReducerReturnType<T> = T extends (...args: any[]) => infer R ? R : any;
 type ReducersState<T> = { [P in keyof T]: ReducerReturnType<T[P]> };
 
 type InitialState = ReducersState<typeof initialReducers>;
+type AsyncState = HomeRouteState & DetailRouteState;
 
-export type State = InitialState & BookState & BookDetailState;
+export type State = InitialState & Partial<AsyncState>;
 
 declare const window: {
   __PRELOADED_STATE__: InitialState;
@@ -24,8 +25,7 @@ function getServerPreloadedState(): InitialState | null {
   const preloadedState =
     typeof window === 'undefined' ? null : window.__PRELOADED_STATE__;
   // Allow the passed state to be garbage-collected
-  if (typeof window !== 'undefined')
-    delete window.__PRELOADED_STATE__;
+  if (typeof window !== 'undefined') delete window.__PRELOADED_STATE__;
 
   return preloadedState;
 }

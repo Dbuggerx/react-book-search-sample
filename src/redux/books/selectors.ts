@@ -7,6 +7,6 @@ import { State } from '../store';
 */
 
 export default createSelector(
-  (state: State) => (state.home ? state.home.books : []),
+  (state: State) => (state.home && state.home.bookResults ? state.home.bookResults.books : []),
   books => books
 );

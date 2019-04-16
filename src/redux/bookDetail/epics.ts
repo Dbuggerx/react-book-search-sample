@@ -2,8 +2,7 @@ import { combineEpics } from 'redux-observable';
 import { Observable } from 'rxjs';
 import { AjaxCreationMethod } from 'rxjs/internal/observable/dom/AjaxObservable';
 import { filter, map, mergeMap } from 'rxjs/operators';
-import { State } from '../store';
-import { Action, GetBookDetailAction, BookDetailReceivedAction } from './types';
+import { Action, GetBookDetailAction, BookDetailReceivedAction, State } from './types';
 
 function bookDetailEpic(
   action$: Observable<Action>,

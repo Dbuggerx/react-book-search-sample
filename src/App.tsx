@@ -4,13 +4,13 @@ import { Route, Switch } from 'react-router-dom';
 import { BehaviorSubject } from 'rxjs';
 import { Epic } from 'redux-observable';
 import { setConfig } from 'react-hot-loader';
-import { ModuleInfo } from './redux/append-reducer';
 import getRoutes from './routes';
 import './components/mainStyles';
+import { RouteModuleInfo } from './routes/types';
 
 type Props = {
   loadedChunkNames?: string[];
-  appendAsyncReducer?: (newModuleInfo: ModuleInfo) => void;
+  appendAsyncReducer?: (newModuleInfo: RouteModuleInfo) => void;
   epicSubject$?: BehaviorSubject<Epic>;
 };
 

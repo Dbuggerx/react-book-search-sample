@@ -1,6 +1,4 @@
-import { Action, BookDetailState } from './types';
-
-type State = BookDetailState['bookDetail'];
+import { Action, State } from './types';
 
 const initialState: State = {
   loading: false,

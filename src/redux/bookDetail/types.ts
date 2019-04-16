@@ -32,9 +32,7 @@ export type BookDetailReceivedAction = {
 
 export type Action = GetBookDetailAction | BookDetailReceivedAction;
 
-export type BookDetailState = Readonly<{
-  bookDetail?: {
-    loading: boolean;
-    bookDetail?: BookDetail | null;
-  };
+export type State = Readonly<{
+  loading: boolean;
+  bookDetail: BookDetail | null;
 }>;

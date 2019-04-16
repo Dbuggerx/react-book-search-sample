@@ -76,7 +76,3 @@ export type State = Readonly<{
   query?: string;
   error?: string;
 }>;
-
-export type BookState = {
-  home?: State;
-};

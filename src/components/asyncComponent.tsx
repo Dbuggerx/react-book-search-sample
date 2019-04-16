@@ -1,38 +1,31 @@
 import React, { Component, ComponentType } from 'react';
 import { Epic } from 'redux-observable';
 import { BehaviorSubject } from 'rxjs';
-import { ModuleInfo } from '../redux/append-reducer';
-import { State as StoreState } from '../redux/store';
-import { DetailRouteModule } from '../routes/bookDetail/types';
-import { HomeRouteModule } from '../routes/home/types';
+import { RouteModuleInfo } from '../routes/types';
 
 type State = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   component: ComponentType<any> | null;
 };
 
-type RouteModule = HomeRouteModule | DetailRouteModule;
+type AsyncModule = { routeModule: RouteModuleInfo; default: ComponentType<unknown> };
 
 // @see: https://github.com/AnomalyInnovations/serverless-stack-demo-client/blob/code-splitting-in-create-react-app/src/components/AsyncComponent.js
 export default function asyncComponent(
-  appendAsyncReducer?: (newModuleInfo: ModuleInfo) => void,
+  appendAsyncReducer?: (newModuleInfo: RouteModuleInfo) => void,
   epicSubject$?: BehaviorSubject<Epic>,
-  importComponent?: () => RouteModule | Promise<RouteModule>,
+  importComponent?: () => AsyncModule | Promise<AsyncModule>,
   loadedChunkNames?: string[],
-  chunkName?: keyof StoreState | undefined
+  chunkName?: RouteModuleInfo['routeName'] | undefined
 ) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return class AsyncComponent extends Component<any, State> {
-    static setupModuleState(mod: RouteModule) {
+    static setupModuleState(mod: AsyncModule) {
       console.log('Appending reducer for:', chunkName);
-      if (appendAsyncReducer && chunkName)
-        appendAsyncReducer({
-          name: chunkName,
-          reducer: mod.reducer
-        });
+      if (appendAsyncReducer && chunkName) appendAsyncReducer(mod.routeModule);
 
       console.log('Appending epic for:', chunkName);
-      if (epicSubject$) epicSubject$.next(mod.epic);
+      if (epicSubject$) epicSubject$.next(mod.routeModule.epic);
     }
 
     elementRef = React.createRef<HTMLDivElement>();
@@ -44,12 +37,7 @@ export default function asyncComponent(
         component: null
       };
 
-      if (
-        process.env.SERVER &&
-        loadedChunkNames &&
-        chunkName &&
-        importComponent
-      ) {
+      if (process.env.SERVER && loadedChunkNames && chunkName && importComponent) {
         if (loadedChunkNames) loadedChunkNames.push(chunkName);
 
         const mod = importComponent();

@@ -1,12 +1,16 @@
 // import { Epic } from 'redux-observable';
-// import booksReducer from '../../redux/books';
-// import searchReducer from '../../redux/searchParams';
+// import reducer from '../../redux/bookDetail';
 
 // export type RouteModule = {
-//   name: 'home';
-//   reducer: typeof booksReducer | typeof searchReducer;
+//   name: 'details';
+//   reducer: typeof reducer;
 //   epic: Epic;
 // };
+
+/* eslint-disable import/prefer-default-export */
+export type RouteParams = {
+  bookId: string;
+};
 
 // export type RouteState = {
 //   [x in RouteModule['name']]: ReturnType<RouteModule['reducer']>

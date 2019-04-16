@@ -2,10 +2,10 @@ import React, { Component, StrictMode } from 'react';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
 import { bindActionCreators, Dispatch as ReduxDispatch } from 'redux';
-import { actions, selectors } from '../../redux/bookDetail';
+import reducer, { actions, selectors, epic } from '../../redux/bookDetail';
 import { BookDetail } from '../../redux/bookDetail/types';
 import { State } from '../../redux/store';
-import { RouteParams as BookDetailRoutParams } from './types';
+import { RouteParams } from './types';
 
 type StateProps = {
   bookDetail: BookDetail | null;
@@ -45,11 +45,11 @@ function mapStateToProps(
   routeProps: RouteComponentProps
 ): StateProps & OwnProps {
   const bookDetail = selectors(state) || null;
-  const loading = state.bookDetail ? state.bookDetail.loading : false;
+  const loading = state.details ? state.details.loading : false;
   return {
     bookDetail,
     loading,
-    bookId: (routeProps.match.params as BookDetailRoutParams).bookId
+    bookId: (routeProps.match.params as RouteParams).bookId
   };
 }
 
@@ -64,4 +64,14 @@ export default connect(
   mapDispatchToProps
 )(Detail);
 
-export { default as reducer, epic } from '../../redux/bookDetail';
+const routeModule = {
+  routeName: 'details',
+  epic,
+  reducer
+};
+
+export type RouteState = {
+  details: ReturnType<typeof routeModule['reducer']>;
+};
+
+export { routeModule };

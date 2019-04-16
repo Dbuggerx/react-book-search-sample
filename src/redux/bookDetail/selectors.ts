@@ -7,6 +7,6 @@ import { State } from '../store';
 */
 
 export default createSelector(
-  (state: State) => (state.bookDetail ? state.bookDetail.bookDetail : null),
+  (state: State) => (state.details ? state.details.bookDetail : null),
   bookDetail => bookDetail
 );

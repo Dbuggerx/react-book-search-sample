@@ -1,17 +1,16 @@
 import { Epic } from 'redux-observable';
 import { BehaviorSubject } from 'rxjs';
-import { ModuleInfo } from '../redux/append-reducer';
-import { RouteDefinition } from './types';
+import { RouteDefinition, RouteModuleInfo } from './types';
 import getHomeRoute from './home/routeDefinition';
-import getBookDetailRoute from './bookDetail/routeDefinition';
+import getDetailRoute from './detail/routeDefinition';
 
 export default function getRoutes(
   loadedChunkNames?: string[],
-  appendAsyncReducer?: (newModuleInfo: ModuleInfo) => void,
+  appendAsyncReducer?: (newModuleInfo: RouteModuleInfo) => void,
   epicSubject$?: BehaviorSubject<Epic>
 ): RouteDefinition[] {
   return [
     getHomeRoute(loadedChunkNames, appendAsyncReducer, epicSubject$),
-    getBookDetailRoute(loadedChunkNames, appendAsyncReducer, epicSubject$)
+    getDetailRoute(loadedChunkNames, appendAsyncReducer, epicSubject$)
   ];
 }

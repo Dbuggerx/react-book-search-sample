@@ -4,13 +4,12 @@ import { Epic } from 'redux-observable';
 import { BehaviorSubject } from 'rxjs';
 import { Dispatch } from 'redux';
 import asyncComponent from '../../components/asyncComponent';
-import { ModuleInfo } from '../../redux/append-reducer';
 import { GetBookPageAction } from '../../redux/books/types';
-import { RouteDefinition } from '../types';
+import { RouteDefinition, RouteModuleInfo } from '../types';
 
 export default function getRouteDefinition(
   loadedChunkNames?: string[],
-  appendAsyncReducer?: (newModuleInfo: ModuleInfo) => void,
+  appendAsyncReducer?: (newModuleInfo: RouteModuleInfo) => void,
   epicSubject$?: BehaviorSubject<Epic>
 ): RouteDefinition {
   return {
@@ -33,12 +32,9 @@ export default function getRouteDefinition(
       if (process.env.SERVER) {
         const mod = require('./index');
         if (appendAsyncReducer)
-          appendAsyncReducer({
-            name: 'home',
-            reducer: mod.reducer
-          });
+          appendAsyncReducer(mod.routeModule);
 
-        if (epicSubject$) epicSubject$.next(mod.epic);
+        if (epicSubject$) epicSubject$.next(mod.routeModule.epic);
 
         const { actions } = require('../../redux/books');
         dispatch(actions.getBookPage(1));
