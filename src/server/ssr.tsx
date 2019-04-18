@@ -61,7 +61,8 @@ async function getAsyncChunksScriptTags(loadedChunkNames: string[]) {
     loadedChunkNames
       .map(chunkName => distFiles[`${chunkName}.js`])
       .map(fileName =>
-        promisify(fs.readFile)(path.join(__dirname, `../dist/${fileName}`), 'utf8'))
+        promisify(fs.readFile)(path.join(__dirname, `../dist/${fileName}`), 'utf8')
+      )
   );
   return fileContents.map(content => `<script>${content}</script>`).join('');
 }

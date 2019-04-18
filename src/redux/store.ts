@@ -5,8 +5,12 @@ import initialReducers from './initial-reducers';
 import { RouteModule as HomeRouteModule } from '../routes/home/types';
 import { RouteModule as DetailRouteModule } from '../routes/detail/types';
 import { CombinedReducersState, RouteState } from './types';
+import ssrReducer from './ssr/reducer';
 
-type InitialState = CombinedReducersState<typeof initialReducers>;
+type InitialState = CombinedReducersState<typeof initialReducers> &
+Partial<{
+  ssr: ReturnType<typeof ssrReducer>;
+}>;
 type AsyncState = RouteState<HomeRouteModule> & RouteState<DetailRouteModule>;
 
 export type State = InitialState & Partial<AsyncState>;

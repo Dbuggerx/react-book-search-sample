@@ -31,13 +31,13 @@ export default function getRouteDefinition(
     loadSSRData: (dispatch: Dispatch<GetBookPageAction>) => {
       if (process.env.SERVER) {
         const mod = require('./index');
-        if (appendAsyncReducer)
-          appendAsyncReducer(mod.routeModule);
-
+        if (appendAsyncReducer) appendAsyncReducer(mod.routeModule);
         if (epicSubject$) epicSubject$.next(mod.routeModule.epic);
 
-        const { actions } = require('../../redux/books');
-        dispatch(actions.getBookPage(1));
+        const { actions: booksActions } = require('../../redux/books');
+        const { actions: searchActions } = require('../../redux/searchParams');
+        dispatch(booksActions.getBookPage(1));
+        dispatch(searchActions.getCategories());
       }
     }
   };

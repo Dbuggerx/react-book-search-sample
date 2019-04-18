@@ -4,7 +4,7 @@ import {
   AjaxCreationMethod,
   AjaxError
 } from 'rxjs/internal/observable/dom/AjaxObservable';
-import { filter, map, mergeMap, catchError, switchMap, debounceTime } from 'rxjs/operators';
+import { map, mergeMap, catchError, switchMap, debounceTime } from 'rxjs/operators';
 import {
   Action,
   PagedBooksReceivedAction,
@@ -36,7 +36,7 @@ function getBookPageEpic(
         ''
       );
       return ajax({
-        url: `//localhost:3001/api/books?${queryParams}`
+        url: `http://localhost:3001/api/books?${queryParams}`
       }).pipe(
         map(
           result =>
@@ -54,23 +54,6 @@ function getBookPageEpic(
         catchError(handleError)
       );
     })
-  );
-}
-
-function ssrReadyEpic(action$: Observable<Action>) {
-  return action$.pipe(
-    filter(
-      (action: Action) =>
-        Boolean(process.env.SERVER) &&
-        action.type === 'react-book-search/books/PAGED_BOOKS_RECEIVED'
-    ),
-    map(() => ({
-      type: 'react-book-search/ssr/RENDER_READY',
-      payload: {
-        ready: true
-      }
-    })),
-    catchError(handleError)
   );
 }
 
@@ -104,4 +87,4 @@ function likeBookEpic(
   );
 }
 
-export default combineEpics(getBookPageEpic, ssrReadyEpic, likeBookEpic);
+export default combineEpics(getBookPageEpic, likeBookEpic);

@@ -1,4 +1,4 @@
-import { combineEpics, ofType } from 'redux-observable';
+import { ofType } from 'redux-observable';
 import { Observable, of } from 'rxjs';
 import {
   AjaxCreationMethod,
@@ -14,7 +14,7 @@ import {
 } from './types';
 import * as actions from './actions';
 
-function getCategoriesEpic(
+export default function getCategoriesEpic(
   action$: Observable<Action>,
   state$: Observable<State>,
   { ajax }: { ajax: AjaxCreationMethod }
@@ -23,7 +23,7 @@ function getCategoriesEpic(
     ofType('react-book-search/searchParams/GET_CATEGORIES'),
     mergeMap(() =>
       ajax({
-        url: '//localhost:3001/api/searchCategories'
+        url: 'http://localhost:3001/api/searchCategories'
       }).pipe(
         map(
           result =>
@@ -40,4 +40,3 @@ function getCategoriesEpic(
   );
 }
 
-export default combineEpics(getCategoriesEpic);
