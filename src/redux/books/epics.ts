@@ -36,7 +36,7 @@ function getBookPageEpic(
         ''
       );
       return ajax({
-        url: `http://localhost:3001/api/books?${queryParams}`
+        url: `//localhost:3001/api/books?${queryParams}`
       }).pipe(
         map(
           result =>

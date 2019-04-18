@@ -52,9 +52,7 @@ export default function asyncComponent(
 
     async componentDidMount() {
       if (!importComponent) return;
-      const modulePromise = importComponent();
-
-      const mod = await modulePromise;
+      const mod = await importComponent();
       AsyncComponent.setupModuleState(mod);
 
       if (this.elementRef.current)

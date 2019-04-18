@@ -31,4 +31,8 @@ apiRouter.patch('/books/:bookId', (req, res) => {
   res.json(res.locals.book);
 });
 
+apiRouter.get('/searchCategories', (req, res) => {
+  res.json(dataMock.bookCategories);
+});
+
 export default apiRouter;

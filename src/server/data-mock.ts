@@ -1,4 +1,5 @@
 import { Book, SearchParams } from '../redux/books/types';
+import { SearchParam } from '../redux/searchParams/types';
 import rawBookData from './bookData.json';
 
 // Randomize the images
@@ -20,9 +21,7 @@ function bookPropEqualsVal(bookProp: string, val: string) {
 }
 
 function bookPropContainsVal(bookProp: string, val: string) {
-  return val
-    ? normalizeString(bookProp).indexOf(normalizeString(val)) !== -1
-    : true;
+  return val ? normalizeString(bookProp).indexOf(normalizeString(val)) !== -1 : true;
 }
 
 function filterBookResults(params: SearchParams): Book[] {
@@ -31,9 +30,7 @@ function filterBookResults(params: SearchParams): Book[] {
       (params.category
         ? bookPropEqualsVal(book.genre.category, params.category)
         : true) &&
-      (params.genre
-        ? bookPropEqualsVal(book.genre.name, params.genre)
-        : true) &&
+      (params.genre ? bookPropEqualsVal(book.genre.name, params.genre) : true) &&
       (params.query
         ? bookPropContainsVal(book.author.name, params.query) ||
           bookPropContainsVal(book.name, params.query)
@@ -81,40 +78,142 @@ export function getPagedBooksSearch(params: SearchParams): BookResult {
   };
 }
 
-export const bookCategories = ['Fiction', 'Non-Fiction'];
+export const bookCategories: SearchParam[] = [
+  { id: 1, label: 'Fiction' },
+  { id: 2, label: 'Non-Fiction' }
+];
 
-export const bookGenres = [
-  'Arts',
-  'Biographies',
-  'Business',
-  'Calendars',
-  "Children's Books",
-  'Christian Books',
-  'Comics',
-  'Computers',
-  'Cookbooks',
-  'Education',
-  'Engineering',
-  'Fantasy',
-  'Health',
-  'History',
-  'Humor',
-  'Law',
-  'Literature',
-  'Medical Books',
-  'Parenting',
-  'Politics',
-  'Relationships',
-  'Religion',
-  'Romance',
-  'Science Fiction',
-  'Sciences',
-  'Self-Help',
-  'Social Sciences',
-  'Spirituality',
-  'Sports',
-  'Technology',
-  'Teen',
-  'Thriller',
-  'Travel'
+export const bookGenres: SearchParam[] = [
+  {
+    id: 1,
+    label: 'Arts'
+  },
+  {
+    id: 2,
+    label: 'Biographies'
+  },
+  {
+    id: 3,
+    label: 'Business'
+  },
+  {
+    id: 4,
+    label: 'Calendars'
+  },
+  {
+    id: 5,
+    label: "Children's Books"
+  },
+  {
+    id: 6,
+    label: 'Christian Books'
+  },
+  {
+    id: 7,
+    label: 'Comics'
+  },
+  {
+    id: 8,
+    label: 'Computers'
+  },
+  {
+    id: 9,
+    label: 'Cookbooks'
+  },
+  {
+    id: 10,
+    label: 'Education'
+  },
+  {
+    id: 11,
+    label: 'Engineering'
+  },
+  {
+    id: 12,
+    label: 'Fantasy'
+  },
+  {
+    id: 13,
+    label: 'Health'
+  },
+  {
+    id: 14,
+    label: 'History'
+  },
+  {
+    id: 15,
+    label: 'Humor'
+  },
+  {
+    id: 16,
+    label: 'Law'
+  },
+  {
+    id: 17,
+    label: 'Literature'
+  },
+  {
+    id: 18,
+    label: 'Medical Books'
+  },
+  {
+    id: 19,
+    label: 'Parenting'
+  },
+  {
+    id: 20,
+    label: 'Politics'
+  },
+  {
+    id: 21,
+    label: 'Relationships'
+  },
+  {
+    id: 22,
+    label: 'Religion'
+  },
+  {
+    id: 23,
+    label: 'Romance'
+  },
+  {
+    id: 24,
+    label: 'Science Fiction'
+  },
+  {
+    id: 25,
+    label: 'Sciences'
+  },
+  {
+    id: 26,
+    label: 'Self-Help'
+  },
+  {
+    id: 27,
+    label: 'Social Sciences'
+  },
+  {
+    id: 28,
+    label: 'Spirituality'
+  },
+  {
+    id: 29,
+    label: 'Sports'
+  },
+  {
+    id: 30,
+    label: 'Technology'
+  },
+  {
+    id: 31,
+    label: 'Teen'
+  },
+  {
+    id: 32,
+    label: 'Thriller'
+  },
+  {
+    id: 33,
+    label: 'Travel'
+  }
 ];

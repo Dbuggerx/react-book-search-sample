@@ -5,11 +5,9 @@ import 'jest-dom/extend-expect';
 import { Provider } from 'react-redux';
 import { MemoryRouter, Route } from 'react-router';
 import { createEpicMiddleware } from 'redux-observable';
-import { of } from 'rxjs';
+import { of, empty } from 'rxjs';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
-import booksEpic from '../../redux/books/epics';
-import booksReducer from '../../redux/books/reducer';
-import Home from './index';
+import Home, { routeModule } from './index';
 import { State } from '../../redux/store';
 
 function getDateForDaysAgo(daysAgo: number) {
@@ -46,6 +44,7 @@ const bookMock2 = {
   name: 'Book Name2',
   published: getDateForDaysAgo(60).toISOString()
 };
+const categoriesMock = [{ id: 1, label: 'Fiction' }, { id: 2, label: 'Non-Fiction' }];
 
 function setupStore(ajaxMock, initialState) {
   const epicMiddleware = createEpicMiddleware({
@@ -58,19 +57,15 @@ function setupStore(ajaxMock, initialState) {
     return {};
   };
 
-  const home = combineReducers({
-    bookResults: booksReducer
-  });
-
   const store = createStore(
     combineReducers({
-      home,
+      [routeModule.routeName]: routeModule.reducer,
       reducerSpy
     }),
     initialState,
     applyMiddleware(epicMiddleware)
   );
-  epicMiddleware.run(booksEpic);
+  epicMiddleware.run(routeModule.epic);
 
   dispatchSpy.mockClear();
 
@@ -89,13 +84,18 @@ function getMockedStore(ajaxMock) {
         genre: 'test genre',
         query: 'test query',
         error: null
+      },
+      searchParams: {
+        categories: {
+          loading: false,
+          results: []
+        }
       }
     }
   } as State);
 }
 
 function renderHomeWithStore(store) {
-  cleanup();
   return render(
     <MemoryRouter initialEntries={['/']}>
       <Provider store={store}>
@@ -114,26 +114,31 @@ describe('Home route', () => {
   let store;
   let dispatchSpy;
   let wrapper: RenderResult;
-  let ajaxMock;
+  let ajaxMock: jest.Mock;
 
-  beforeEach(() => {
-    ajaxMock = jest.fn();
-    ({ store, dispatchSpy } = getMockedStore(ajaxMock));
-    wrapper = renderHomeWithStore(store);
+  afterEach(() => {
+    cleanup();
+    if (ajaxMock.mockReset) ajaxMock.mockReset();
   });
 
   describe('Pagination', () => {
     beforeEach(() => {
-      ajaxMock.mockReturnValue(
-        of({
-          response: [bookMock2],
-          xhr: {
-            getResponseHeader: jest
-              .fn()
-              .mockImplementation(header => (header === 'x-total-count' ? 123 : null))
-          }
-        })
+      ajaxMock = jest.fn().mockImplementation(req =>
+        (req.url.includes('books')
+          ? of({
+            response: [bookMock2],
+            xhr: {
+              getResponseHeader: jest
+                .fn()
+                .mockImplementation(header => (header === 'x-total-count' ? 123 : null))
+            }
+          })
+          : of({
+            response: categoriesMock
+          }))
       );
+      ({ store, dispatchSpy } = getMockedStore(ajaxMock));
+      wrapper = renderHomeWithStore(store);
     });
 
     test('dispatches [GET_BOOK_PAGE, PAGED_BOOKS_RECEIVED] on "next page button" click', done => {
@@ -147,6 +152,17 @@ describe('Home route', () => {
           'Showing page 4 of 123'
         );
         expect(dispatchSpy.mock.calls).toEqual([
+          [
+            {
+              type: 'react-book-search/searchParams/GET_CATEGORIES'
+            }
+          ],
+          [
+            {
+              type: 'react-book-search/searchParams/CATEGORIES_RECEIVED',
+              payload: categoriesMock
+            }
+          ],
           [
             {
               payload: {
@@ -169,8 +185,13 @@ describe('Home route', () => {
           ]
         ]);
 
-        expect(ajaxMock).toHaveBeenCalledTimes(1);
+        expect(ajaxMock).toHaveBeenCalledTimes(2);
         expect(ajaxMock.mock.calls[0][0].url).toEqual(
+          expect.stringMatching(/\/api\/searchCategories$/)
+        );
+
+        expect(ajaxMock).toHaveBeenCalledTimes(2);
+        expect(ajaxMock.mock.calls[1][0].url).toEqual(
           expect.stringMatching(
             /\/api\/books\?page=4&category=test categ&genre=test genre&query=test query$/
           )
@@ -194,6 +215,17 @@ describe('Home route', () => {
         expect(dispatchSpy.mock.calls).toEqual([
           [
             {
+              type: 'react-book-search/searchParams/GET_CATEGORIES'
+            }
+          ],
+          [
+            {
+              type: 'react-book-search/searchParams/CATEGORIES_RECEIVED',
+              payload: categoriesMock
+            }
+          ],
+          [
+            {
               payload: {
                 category: 'test categ',
                 genre: 'test genre',
@@ -214,8 +246,14 @@ describe('Home route', () => {
           ]
         ]);
 
-        expect(ajaxMock).toHaveBeenCalledTimes(1);
+        expect(ajaxMock).toHaveBeenCalledTimes(2);
+
+        expect(ajaxMock).toHaveBeenCalledTimes(2);
         expect(ajaxMock.mock.calls[0][0].url).toEqual(
+          expect.stringMatching(/\/api\/searchCategories$/)
+        );
+
+        expect(ajaxMock.mock.calls[1][0].url).toEqual(
           expect.stringMatching(
             /\/api\/books\?page=2&category=test categ&genre=test genre&query=test query$/
           )
@@ -227,16 +265,22 @@ describe('Home route', () => {
 
   describe('Search', () => {
     beforeEach(() => {
-      ajaxMock.mockReturnValue(
-        of({
-          response: [bookMock2],
-          xhr: {
-            getResponseHeader: jest
-              .fn()
-              .mockImplementation(header => (header === 'x-total-count' ? 10 : null))
-          }
-        })
+      ajaxMock = jest.fn().mockImplementation(req =>
+        (req.url.includes('books')
+          ? of({
+            response: [bookMock2],
+            xhr: {
+              getResponseHeader: jest
+                .fn()
+                .mockImplementation(header => (header === 'x-total-count' ? 10 : null))
+            }
+          })
+          : of({
+            response: categoriesMock
+          }))
       );
+      ({ store, dispatchSpy } = getMockedStore(ajaxMock));
+      wrapper = renderHomeWithStore(store);
     });
 
     test('dispatches [GET_BOOK_PAGE, PAGED_BOOKS_RECEIVED] with search params on "search button" click', done => {
@@ -263,6 +307,17 @@ describe('Home route', () => {
         expect(dispatchSpy.mock.calls).toEqual([
           [
             {
+              type: 'react-book-search/searchParams/GET_CATEGORIES'
+            }
+          ],
+          [
+            {
+              type: 'react-book-search/searchParams/CATEGORIES_RECEIVED',
+              payload: categoriesMock
+            }
+          ],
+          [
+            {
               payload: {
                 category: 'aaa',
                 genre: 'bbb',
@@ -283,8 +338,11 @@ describe('Home route', () => {
           ]
         ]);
 
-        expect(ajaxMock).toHaveBeenCalledTimes(1);
+        expect(ajaxMock).toHaveBeenCalledTimes(2);
         expect(ajaxMock.mock.calls[0][0].url).toEqual(
+          expect.stringMatching(/\/api\/searchCategories$/)
+        );
+        expect(ajaxMock.mock.calls[1][0].url).toEqual(
           expect.stringMatching(/\/api\/books\?page=1&category=aaa&genre=bbb&query=ccc$/)
         );
         done();
@@ -294,29 +352,33 @@ describe('Home route', () => {
 
   describe('Books', () => {
     test('shows details on card click', () => {
+      ({ store, dispatchSpy } = getMockedStore(jest.fn().mockReturnValue(empty())));
+      wrapper = renderHomeWithStore(store);
+
       fireEvent.click(wrapper.container.querySelector('.book-card'));
       expect(wrapper.container.textContent).toEqual('book 123 details');
     });
 
     test('dispatches [LIKE_BOOK, BOOK_REFRESHED] on "like button" click', done => {
-      expect(wrapper.getByTestId('like-button')).toHaveTextContent('1 like');
-
-      // Reconfigure the mocks and render again
       const updatedBook = {
         ...bookMock,
         likes: 2
       };
 
-      const ajaxPatchMock = jest.fn().mockReturnValue(
+      const ajaxMockObj = () =>
+        of({
+          response: categoriesMock
+        });
+      ajaxMockObj.patch = jest.fn().mockReturnValue(
         of({
           response: updatedBook
         })
       );
-      ajaxMock = {
-        patch: ajaxPatchMock
-      };
-      ({ store, dispatchSpy } = getMockedStore(ajaxMock));
+
+      ({ store, dispatchSpy } = getMockedStore(ajaxMockObj));
       wrapper = renderHomeWithStore(store);
+
+      expect(wrapper.getByTestId('like-button')).toHaveTextContent('1 like');
 
       // Act
       fireEvent.click(wrapper.getByTestId('like-button'));
@@ -326,6 +388,17 @@ describe('Home route', () => {
         expect(wrapper.getByTestId('like-button')).toHaveTextContent('2 likes');
 
         expect(dispatchSpy.mock.calls).toEqual([
+          [
+            {
+              type: 'react-book-search/searchParams/GET_CATEGORIES'
+            }
+          ],
+          [
+            {
+              type: 'react-book-search/searchParams/CATEGORIES_RECEIVED',
+              payload: categoriesMock
+            }
+          ],
           [
             {
               payload: {
@@ -345,14 +418,14 @@ describe('Home route', () => {
           ]
         ]);
 
-        expect(ajaxPatchMock).toHaveBeenCalledTimes(1);
-        expect(ajaxPatchMock.mock.calls[0][0]).toEqual(
+        expect(ajaxMockObj.patch).toHaveBeenCalledTimes(1);
+        expect(ajaxMockObj.patch.mock.calls[0][0]).toEqual(
           expect.stringMatching(/\/api\/books\/123$/)
         );
-        expect(ajaxPatchMock.mock.calls[0][1]).toEqual({
+        expect(ajaxMockObj.patch.mock.calls[0][1]).toEqual({
           liked: true
         });
-        expect(ajaxPatchMock.mock.calls[0][2]).toEqual({
+        expect(ajaxMockObj.patch.mock.calls[0][2]).toEqual({
           'Content-Type': 'application/json'
         });
 

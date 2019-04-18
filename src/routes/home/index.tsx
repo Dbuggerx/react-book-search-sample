@@ -10,10 +10,18 @@ import { hot } from 'react-hot-loader/root';
 import { RouteChildrenProps } from 'react-router';
 import { combineEpics } from 'redux-observable';
 import MainLayout from '../../components/MainLayout';
-import booksReducer, { actions, selectors, epic as booksEpic } from '../../redux/books';
+import booksReducer, {
+  actions as booksActions,
+  selectors,
+  epic as booksEpic
+} from '../../redux/books';
+import searchParamsReducer, {
+  actions as searchActions,
+  epic as searchParamsEpic
+} from '../../redux/searchParams';
 import { Book } from '../../redux/books/types';
 import { State } from '../../redux/store';
-import searchParamsReducer, { epic as searchParamsEpic } from '../../redux/searchParams';
+import { SearchParam } from '../../redux/searchParams/types';
 import { RouteModule } from './types';
 
 type StateProps = {
@@ -25,15 +33,22 @@ type StateProps = {
   books: Book[];
   loadingBooks: boolean;
   error?: string;
+  searchCategories: {
+    results: SearchParam[];
+    loading: boolean;
+    error?: string;
+  };
 };
 
 type ActionProps = {
-  actions: typeof actions;
+  actions: typeof booksActions & typeof searchActions;
 };
 
 export class Home extends Component<StateProps & ActionProps & RouteChildrenProps> {
   componentDidMount() {
     if (this.props.books.length === 0) this.props.actions.getBookPage(1);
+    if (this.props.searchCategories.results.length === 0)
+      this.props.actions.getCategories();
   }
 
   handleSearch = (category: string, genre: string, query: string) => {
@@ -87,12 +102,19 @@ function mapStateToProps(state: State): StateProps {
   const error =
     state.home && state.home.bookResults ? state.home.bookResults.error : undefined;
   const bookResults = state.home && state.home.bookResults;
-  return { ...bookResults, books, loadingBooks: loading, error };
+
+  const searchCategories = state.home
+    ? state.home.searchParams.categories
+    : {
+      loading: false,
+      results: []
+    };
+  return { ...bookResults, books, loadingBooks: loading, error, searchCategories };
 }
 
-function mapDispatchToProps(dispatch: ReduxDispatch<AnyAction>) {
+function mapDispatchToProps(dispatch: ReduxDispatch<AnyAction>): ActionProps {
   return {
-    actions: bindActionCreators({ ...actions }, dispatch)
+    actions: bindActionCreators({ ...booksActions, ...searchActions }, dispatch)
   };
 }
 
