@@ -5,7 +5,7 @@ import { bindActionCreators, Dispatch as ReduxDispatch } from 'redux';
 import reducer, { actions, selectors, epic } from '../../redux/bookDetail';
 import { BookDetail } from '../../redux/bookDetail/types';
 import { State } from '../../redux/store';
-import { RouteParams } from './types';
+import { RouteParams, RouteModule } from './types';
 
 type StateProps = {
   bookDetail: BookDetail | null;
@@ -64,14 +64,8 @@ export default connect(
   mapDispatchToProps
 )(Detail);
 
-const routeModule = {
+export const routeModule: Pick<RouteModule, Exclude<keyof RouteModule, 'state'>> = {
   routeName: 'details',
   epic,
   reducer
 };
-
-export type RouteState = {
-  details: ReturnType<typeof routeModule['reducer']>;
-};
-
-export { routeModule };

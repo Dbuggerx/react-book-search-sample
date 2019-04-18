@@ -22,9 +22,9 @@ export default function getRouteDefinition(
         () =>
           (process.env.SERVER
             ? require('./index')
-            : import(/* webpackChunkName: "bookDetail" */ './index')),
+            : import(/* webpackChunkName: "details" */ './index')),
         loadedChunkNames,
-        'bookDetail'
+        'details'
       );
       return <AsyncHome {...props} />;
     },
@@ -33,7 +33,7 @@ export default function getRouteDefinition(
         const mod = require('./index');
         if (appendAsyncReducer)
           appendAsyncReducer(mod.routeModule);
-        if (epicSubject$) epicSubject$.next(mod.epic);
+        if (epicSubject$) epicSubject$.next(mod.routeModule.epic);
         const { actions } = require('../../redux/bookDetail');
         dispatch(actions.getBookDetail(routeParams.bookId));
       }

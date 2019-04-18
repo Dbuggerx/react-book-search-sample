@@ -1,13 +1,16 @@
-// import { Epic } from 'redux-observable';
-// import booksReducer from '../../redux/books';
-// import searchReducer from '../../redux/searchParams';
+import { Epic } from 'redux-observable';
+import { Reducer } from 'redux';
+import booksReducer from '../../redux/books';
+import searchReducer from '../../redux/searchParams';
 
-// export type RouteModule = {
-//   name: 'home';
-//   reducer: typeof booksReducer | typeof searchReducer;
-//   epic: Epic;
-// };
+type RouteState = {
+  bookResults: ReturnType<typeof booksReducer>;
+  searchParams: ReturnType<typeof searchReducer>;
+};
 
-// export type RouteState = {
-//   [x in RouteModule['name']]: ReturnType<RouteModule['reducer']>
-// };
+export type RouteModule = {
+  routeName: 'home';
+  epic: Epic;
+  reducer: Reducer<RouteState>;
+  state: RouteState;
+};

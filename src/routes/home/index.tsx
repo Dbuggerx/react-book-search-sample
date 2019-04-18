@@ -4,17 +4,17 @@ import {
   bindActionCreators,
   Dispatch as ReduxDispatch,
   AnyAction,
-  combineReducers,
-  Reducer
+  combineReducers
 } from 'redux';
 import { hot } from 'react-hot-loader/root';
 import { RouteChildrenProps } from 'react-router';
-import { combineEpics, Epic } from 'redux-observable';
+import { combineEpics } from 'redux-observable';
 import MainLayout from '../../components/MainLayout';
 import booksReducer, { actions, selectors, epic as booksEpic } from '../../redux/books';
 import { Book } from '../../redux/books/types';
 import { State } from '../../redux/store';
 import searchParamsReducer, { epic as searchParamsEpic } from '../../redux/searchParams';
+import { RouteModule } from './types';
 
 type StateProps = {
   currentPage?: number;
@@ -103,7 +103,7 @@ export default hot(
   )(Home)
 );
 
-const routeModule = {
+export const routeModule: Pick<RouteModule, Exclude<keyof RouteModule, 'state'>> = {
   routeName: 'home',
   epic: combineEpics(booksEpic, searchParamsEpic),
   reducer: combineReducers({
@@ -111,9 +111,3 @@ const routeModule = {
     searchParams: searchParamsReducer
   })
 };
-
-export type RouteState = {
-  home: ReturnType<typeof routeModule['reducer']>;
-};
-
-export { routeModule };

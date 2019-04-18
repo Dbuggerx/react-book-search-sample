@@ -2,16 +2,12 @@ import { applyMiddleware, combineReducers, createStore } from 'redux';
 import { createEpicMiddleware, Epic } from 'redux-observable';
 import { ajax } from 'rxjs/ajax';
 import initialReducers from './initial-reducers';
-import { RouteState as HomeRouteState } from '../routes/home';
-import { RouteState as DetailRouteState } from '../routes/detail';
+import { RouteModule as HomeRouteModule } from '../routes/home/types';
+import { RouteModule as DetailRouteModule } from '../routes/detail/types';
+import { CombinedReducersState, RouteState } from './types';
 
-// @see: https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-8.html
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type ReducerReturnType<T> = T extends (...args: any[]) => infer R ? R : any;
-type ReducersState<T> = { [P in keyof T]: ReducerReturnType<T[P]> };
-
-type InitialState = ReducersState<typeof initialReducers>;
-type AsyncState = HomeRouteState & DetailRouteState;
+type InitialState = CombinedReducersState<typeof initialReducers>;
+type AsyncState = RouteState<HomeRouteModule> & RouteState<DetailRouteModule>;
 
 export type State = InitialState & Partial<AsyncState>;
 

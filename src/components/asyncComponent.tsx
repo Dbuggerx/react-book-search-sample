@@ -65,11 +65,7 @@ export default function asyncComponent(
 
     render() {
       const C = this.state.component;
-      return C ? (
-        <C {...this.props} ref={this.elementRef} />
-      ) : (
-        <div ref={this.elementRef}>Loading...</div>
-      );
+      return <div ref={this.elementRef}>{C ? <C {...this.props} /> : 'Loading...'}</div>;
     }
   };
 }
