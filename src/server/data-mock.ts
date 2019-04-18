@@ -41,7 +41,7 @@ function filterBookResults(params: SearchParams): Book[] {
   );
 }
 
-export const pageSize = 8;
+export const pageSize = 10;
 
 function calcAvailablePages(books: Book[]) {
   return Math.ceil(books.length / pageSize);

@@ -40,28 +40,19 @@ const MainLayout = (props: Props) => (
     </div>
     <div className="main-layout__info">
       <h2>This is still a work in progress</h2>
-      For now, I would ask to please consider the technical aspects involved,
-      like:
+      For now, I would ask to please consider the technical aspects involved, like:
       <ul>
         <li>Server side rendering</li>
         <li>Code Splitting</li>
         <li>NodeJS / Express API</li>
         <li>
-          <a
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href="https://reactjs.org/" target="_blank" rel="noopener noreferrer">
             React
           </a>{' '}
           best practices
         </li>
         <li>
-          <a
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href="https://redux.js.org/" target="_blank" rel="noopener noreferrer">
             Redux
           </a>{' '}
           (static and dynamic imported)
@@ -86,6 +77,16 @@ const MainLayout = (props: Props) => (
           </a>{' '}
           modular architecture
         </li>
+        <li>
+          styles created using{' '}
+          <a href="https://sass-lang.com/" target="_blank" rel="noopener noreferrer">
+            SASS
+          </a>{' '}
+          with the{' '}
+          <a href="http://getbem.com/" target="_blank" rel="noopener noreferrer">
+            BEM methodology
+          </a>
+        </li>
         <li>CSS Grid</li>
         <li>
           <a
@@ -97,11 +98,7 @@ const MainLayout = (props: Props) => (
           </a>
         </li>
         <li>
-          <a
-            href="https://sass-lang.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href="https://sass-lang.com/" target="_blank" rel="noopener noreferrer">
             Sass
           </a>{' '}
           styles

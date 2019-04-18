@@ -294,7 +294,7 @@ describe('Home route', () => {
 
   describe('Books', () => {
     test('shows details on card click', () => {
-      fireEvent.click(wrapper.container.querySelector('.book-card__image'));
+      fireEvent.click(wrapper.container.querySelector('.book-card'));
       expect(wrapper.container.textContent).toEqual('book 123 details');
     });
 

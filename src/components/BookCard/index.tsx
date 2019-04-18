@@ -21,9 +21,13 @@ const BookCard = (props: Props) => {
     props.onViewDetails(props.book);
   }, [props.onViewDetails, props.book]);
 
-  const handleLike = useCallback(() => {
-    props.onLike(props.book);
-  }, [props.onLike, props.book]);
+  const handleLike = useCallback(
+    (event: React.MouseEvent<HTMLElement>) => {
+      event.stopPropagation();
+      props.onLike(props.book);
+    },
+    [props.onLike, props.book]
+  );
 
   const [relativeDate, setRelativeDate] = useState('');
   useEffect(() => {
@@ -31,30 +35,24 @@ const BookCard = (props: Props) => {
   }, [props.book.published]);
 
   return (
-    <div className="book-card">
-      <div className="book-card__image" onClick={handleViewDetails}>
-        <img src={props.book.cover} alt={props.book.name} />
-      </div>
-      <div className="book-card__header" onClick={handleViewDetails}>
+    <div
+      className="book-card"
+      style={{ backgroundImage: `url(${props.book.cover})`, }}
+      onClick={handleViewDetails}
+    >
+      <div className="book-card__header">
         <div className="book-card__title">{props.book.name}</div>
         <div className="book-card__author">{props.book.author.name}</div>
       </div>
       <div className="book-card__actions">
-        <div
-          className="book-card__action"
-          onClick={handleLike}
-          data-testid="like-button"
-        >
+        <div className="book-card__action" onClick={handleLike} data-testid="like-button">
           {props.book.liked && (
             <svg viewBox={favoriteIcon.viewBox} className="book-card__icon">
               <use xlinkHref={`#${favoriteIcon.id}`} />
             </svg>
           )}
           {!props.book.liked && (
-            <svg
-              viewBox={favoriteBorderIcon.viewBox}
-              className="book-card__icon"
-            >
+            <svg viewBox={favoriteBorderIcon.viewBox} className="book-card__icon">
               <use xlinkHref={`#${favoriteBorderIcon.id}`} />
             </svg>
           )}

@@ -37,40 +37,19 @@ describe('BookCard', () => {
 
   test('calls the "onLike" prop', () => {
     const wrapper = render(
-      <BookCard
-        book={book}
-        onViewDetails={handleViewDetails}
-        onLike={handleLike}
-      />
+      <BookCard book={book} onViewDetails={handleViewDetails} onLike={handleLike} />
     );
 
     fireEvent.click(wrapper.getByTestId('like-button'));
     expect(handleLike).toHaveBeenCalledTimes(1);
   });
 
-  test('calls the "onViewDetails" prop when clicking the image', () => {
+  test('calls the "onViewDetails" prop on click', () => {
     const wrapper = render(
-      <BookCard
-        book={book}
-        onViewDetails={handleViewDetails}
-        onLike={handleLike}
-      />
+      <BookCard book={book} onViewDetails={handleViewDetails} onLike={handleLike} />
     );
 
-    fireEvent.click(wrapper.container.querySelector('.book-card__image'));
-    expect(handleViewDetails).toHaveBeenCalledTimes(1);
-  });
-
-  test('calls the "onViewDetails" prop when clicking the header', () => {
-    const wrapper = render(
-      <BookCard
-        book={book}
-        onViewDetails={handleViewDetails}
-        onLike={handleLike}
-      />
-    );
-
-    fireEvent.click(wrapper.container.querySelector('.book-card__header'));
+    fireEvent.click(wrapper.container.querySelector('.book-card'));
     expect(handleViewDetails).toHaveBeenCalledTimes(1);
   });
 
@@ -83,8 +62,6 @@ describe('BookCard', () => {
       />
     );
 
-    expect(wrapper.getByTestId('relative-date')).toHaveTextContent(
-      '6 months ago'
-    );
+    expect(wrapper.getByTestId('relative-date')).toHaveTextContent('6 months ago');
   });
 });
