@@ -111,6 +111,7 @@
     "webpack-bundle-analyzer": "webpack-bundle-analyzer ./stats.json ./dist",
     "serve": "yarn build && node ./server-dist/server.bundle.js",
     "storybook": "start-storybook -p 9001 -c .storybook",
-    "lint": "eslint -c ./config/linters/.eslintrc.json --ext tsx,ts src"
+    "lint": "eslint -c ./config/linters/.eslintrc.json --ext tsx,ts src",
+    "build-storybook": "build-storybook -c .storybook -o public"
   }
 }

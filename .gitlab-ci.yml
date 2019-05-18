@@ -1,0 +1,27 @@
+image: node:latest
+
+stages:
+  - test
+  - deploy
+
+# Cache modules in between jobs
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+  - node_modules/
+
+before_script:
+  - yarn install
+
+run_tests:
+  stage: test
+  script:
+    - yarn test
+
+pages:
+  stage: deploy
+  script:
+    - yarn build-storybook
+  artifacts:
+    paths:
+      - public
