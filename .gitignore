@@ -3,4 +3,6 @@
 /server-dist
 /coverage
 /public
+/testcafe/screenshots/latest
+/testcafe/screenshots/diffs
 stats.json

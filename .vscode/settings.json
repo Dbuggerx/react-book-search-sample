@@ -14,7 +14,7 @@
   "typescript.referencesCodeLens.enabled": true,
   "eslint.enable": true,
   "eslint.options": {
-    "configFile": "./config/linters/.eslintrc.json",
+    "configFile": "./config/linters/.eslintrc.json"
   },
   "eslint.validate": ["javascript", "typescript", "typescriptreact"],
   "prettier.stylelintIntegration": true,
@@ -22,5 +22,11 @@
   "prettier.eslintIntegration": true,
   "jest.pathToJest": "",
   "jest.pathToConfig": "config/jest/config.json",
-  "jest.restartJestOnSnapshotUpdate": true
+  "jest.restartJestOnSnapshotUpdate": true,
+  "cucumberautocomplete.onTypeFormat": true,
+  "cucumberautocomplete.steps": ["testcafe/steps/*.js"],
+  "cucumberautocomplete.syncfeatures": "testcafe/features/*feature",
+  "cucumberautocomplete.strictGherkinValidation": true,
+  "cucumberautocomplete.smartSnippets": true,
+  "cucumberautocomplete.stepsInvariants": true
 }
