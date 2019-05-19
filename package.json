@@ -107,7 +107,7 @@
     "typecheck": "tsc --resolveJsonModule",
     "test": "cross-env NODE_ENV='test' jest --config config/jest/config.json --verbose",
     "prestart-server": "webpack --config config/webpack/server/config.js",
-    "start-server": "node server-dist/server.bundle.js",
+    "start-server": "node ./run-server.js",
     "prestart": "yarn typecheck",
     "start": "yarn start-server & webpack-dev-server --config config/webpack/client/config.js",
     "prebuild": "yarn typecheck",

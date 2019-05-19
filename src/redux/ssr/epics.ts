@@ -12,7 +12,6 @@ const ready = () => ({
 });
 
 function setHomeSsrReady(action$: Observable<any>, state$: StateObservable<State>) {
-  debugger;
   return action$.pipe(
     filter(action => action.type !== 'react-book-search/ssr/RENDER_READY'),
     withLatestFrom(state$),
@@ -27,7 +26,6 @@ function setHomeSsrReady(action$: Observable<any>, state$: StateObservable<State
 }
 
 function setDetailSsrReady(action$: Observable<any>, state$: StateObservable<State>) {
-  debugger;
   return action$.pipe(
     filter(action => action.type !== 'react-book-search/ssr/RENDER_READY'),
     withLatestFrom(state$),

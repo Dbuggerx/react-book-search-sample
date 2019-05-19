@@ -21,8 +21,11 @@ module.exports = {
     __dirname: false
   },
   context: sourcePath,
-  entry: './server/index.ts',
+  entry: './server/app.ts',
   output: {
+    libraryTarget: 'commonjs2',
+    libraryExport: 'default',
+    auxiliaryComment: 'Exported express app',
     path: distPath,
     filename: 'server.bundle.js'
   },
