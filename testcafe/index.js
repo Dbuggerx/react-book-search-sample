@@ -24,7 +24,7 @@ const server = app.listen(port, addr, err => {
       return (
         runner
           .src([`${__dirname}/steps/**/*.js`, `${__dirname}/features/**/*.feature`])
-          .browsers(['chrome'])
+          .browsers(['chrome:headless'])
           .screenshots(
             utils.getScreenshotsPath(isBaseScreenshot),
             true,
@@ -33,8 +33,7 @@ const server = app.listen(port, addr, err => {
           .run({
             selectorTimeout: 20000,
             pageLoadTimeout: 10000,
-            quarantineMode: true,
-            debugOnFail: true
+            quarantineMode: true
           })
       );
     })

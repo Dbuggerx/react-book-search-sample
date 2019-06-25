@@ -87,7 +87,7 @@ async function diffScreenshots() {
     else fs.mkdirSync(diffsPath);
     await Promise.all(getScreenshotsPaths().map(r => compareImgs(...r)));
   } catch (err) {
-    console.error(err.message);
+    console.error(`Error: ${err.message}`);
   }
 }
 

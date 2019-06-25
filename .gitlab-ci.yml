@@ -2,6 +2,7 @@ image: node:latest
 
 stages:
   - test
+  - e2e
   - deploy
 
 # Cache modules in between jobs
@@ -17,6 +18,17 @@ run_tests:
   stage: test
   script:
     - yarn test
+
+e2e_tests:
+  stage: e2e
+  image: circleci/node:latest-browsers
+  script:
+    - yarn build
+    - yarn e2e
+  artifacts:
+    paths:
+      - testcafe/screenshots/latest
+      - testcafe/screenshots/diffs
 
 pages:
   stage: deploy
