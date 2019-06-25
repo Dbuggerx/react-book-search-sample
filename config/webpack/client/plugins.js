@@ -5,11 +5,14 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 
-const devPlugins = [new webpack.HotModuleReplacementPlugin(), new webpack.NamedModulesPlugin()];
+const devPlugins = [
+  new webpack.HotModuleReplacementPlugin(),
+  new webpack.NamedModulesPlugin()
+];
 
 const prodPlugins = distPath => [
   new CleanWebpackPlugin(),

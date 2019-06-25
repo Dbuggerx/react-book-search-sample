@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent, cleanup } from 'react-testing-library'; // eslint-disable-line
+import { render, fireEvent, cleanup } from '@testing-library/react'; // eslint-disable-line
 import 'jest-dom/extend-expect'; // eslint-disable-line
 import BookCard from './index';
 

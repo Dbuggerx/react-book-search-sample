@@ -32,7 +32,7 @@ function getServerPreloadedState(): InitialState | null {
 
 export default function createReduxStore(rootEpic: Epic) {
   const middlewares = [];
-  if (process.env.NODE_ENV === 'development')
+  if (process.env.NODE_ENV === 'development' && !process.env.SERVER)
     // eslint-disable-next-line import/no-extraneous-dependencies, global-require
     middlewares.push(require('redux-logger').logger);
 

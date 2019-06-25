@@ -3,10 +3,9 @@
 const webpack = require('webpack');
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
-const isProductionMode =
-  (process.env.NODE_ENV || 'development') === 'production';
+const isProductionMode = (process.env.NODE_ENV || 'development') === 'production';
 const sourcePath = path.join(__dirname, '../../../src');
 const distPath = path.join(__dirname, '../../../server-dist/');
 
@@ -65,19 +64,19 @@ module.exports = {
           }
         ]
       },
-      {
-        enforce: 'pre',
-        test: /\.(ts|tsx)$/,
-        exclude: /node_modules/,
-        include: [sourcePath],
-        use: {
-          loader: 'eslint-loader',
-          options: {
-            configFile: 'config/linters/.eslintrc.json',
-            failOnError: true
-          }
-        }
-      },
+      // {
+      //   enforce: 'pre',
+      //   test: /\.(ts|tsx)$/,
+      //   exclude: /node_modules/,
+      //   include: [sourcePath],
+      //   use: {
+      //     loader: 'eslint-loader',
+      //     options: {
+      //       configFile: 'config/linters/.eslintrc.json',
+      //       failOnError: true
+      //     }
+      //   }
+      // },
       {
         test: /\.(ts|tsx)$/,
         exclude: /node_modules/,

@@ -1,13 +1,12 @@
-/* eslint-disable @typescript-eslint/no-var-requires, import/no-extraneous-dependencies */
-// const createTestCafe = require('testcafe');
+/* eslint-disable @typescript-eslint/no-var-requires, import/no-extraneous-dependencies, no-console */
 const createTestCafe = require('gherkin-testcafe');
 const utils = require('./utils');
-/* eslint-disable @typescript-eslint/no-var-requires */
 const app = require('../server-dist/server.bundle');
 
 const port = 3001;
-const addr = '0.0.0.0';
+const addr = 'localhost';
 const isBaseScreenshot = process.argv.slice(2).includes('--base-screenshots');
+const isLive = process.argv.slice(2).includes('--live');
 let testcafe = null;
 
 const server = app.listen(port, addr, err => {
@@ -20,22 +19,22 @@ const server = app.listen(port, addr, err => {
   createTestCafe()
     .then(tc => {
       testcafe = tc;
+
+      const runner = isLive ? testcafe.createLiveModeRunner() : testcafe.createRunner();
       return (
-        testcafe
-          .createRunner()
-          // .src(`${__dirname}/tests`)
+        runner
           .src([`${__dirname}/steps/**/*.js`, `${__dirname}/features/**/*.feature`])
-          .browsers(['firefox'])
+          .browsers(['chrome'])
           .screenshots(
             utils.getScreenshotsPath(isBaseScreenshot),
             true,
             '${BROWSER}/${FIXTURE}-${TEST}-${FILE_INDEX}' // eslint-disable-line
           )
-          // .concurrency(3)
           .run({
             selectorTimeout: 20000,
             pageLoadTimeout: 10000,
-            quarantineMode: true
+            quarantineMode: true,
+            debugOnFail: true
           })
       );
     })
@@ -48,7 +47,7 @@ const server = app.listen(port, addr, err => {
       if (isBaseScreenshot) return;
       console.log('Comparing images...');
       // eslint-disable-next-line global-require
-      // require('./compare-imgs');
+      require('./compare-imgs');
     })
     .catch(console.error)
     .finally(() => {

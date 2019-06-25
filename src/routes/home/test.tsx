@@ -1,6 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
-import { render, fireEvent, cleanup, RenderResult } from 'react-testing-library';
+import { render, fireEvent, cleanup, RenderResult } from '@testing-library/react';
 import 'jest-dom/extend-expect';
 import { Provider } from 'react-redux';
 import { MemoryRouter, Route } from 'react-router';

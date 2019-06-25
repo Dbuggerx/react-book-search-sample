@@ -5,8 +5,8 @@ import React from 'react';
 import BookCard from './index';
 
 const book = {
-  author: { avatar: 'http://lorempixel.com/250/250/', name: 'Author name' },
-  cover: 'http://lorempixel.com/500/700/',
+  author: { avatar: 'http://picsum.photos/250/250/', name: 'Author name' },
+  cover: 'http://picsum.photos/500/700/',
   description: 'Book description',
   genre: { category: 'Non-Fiction', name: 'History' },
   id: '123',

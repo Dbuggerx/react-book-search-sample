@@ -1,7 +1,7 @@
 [
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "JRR Tolkein" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "JRR Tolkein" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "WH Auden thought this tale of fantastic creatures looking for lost jewellery was a \"masterpiece\".",
     "genre": { "category": "Non-Fiction", "name": "History" },
@@ -13,8 +13,8 @@
     "published": "2003-09-18T01:59:14.918Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Harper Lee" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Harper Lee" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "A child’s-eye view of racial prejudice and freaky neighbours in Thirties Alabama.",
     "genre": { "category": "Non-Fiction", "name": "Arts" },
@@ -26,8 +26,8 @@
     "published": "2012-12-12T15:59:48.420Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Rabindranath Tagore" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Rabindranath Tagore" },
+    "cover": "http://picsum.photos/250/250/",
     "description": "A rich Bengali noble lives happily until a radical revolutionary appears.",
     "genre": { "category": "Non-Fiction", "name": "Christian Books" },
     "id": "b283256024",
@@ -38,8 +38,8 @@
     "published": "1977-09-28T18:27:52.687Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Douglas Adams" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Douglas Adams" },
+    "cover": "http://picsum.photos/250/250/",
     "description": "Earth is demolished to make way for a Hyperspatial Express Route. Don’t panic.",
     "genre": { "category": "Fiction", "name": "Fantasy" },
     "id": "b21269727",
@@ -50,8 +50,8 @@
     "published": "2003-12-25T20:30:15.766Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Laurence Housman" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Laurence Housman" },
+    "cover": "http://picsum.photos/250/250/",
     "description": "A Persian king’s new bride tells tales to stall post-coital execution.",
     "genre": { "category": "Non-Fiction", "name": "Technology" },
     "id": "b508538873",
@@ -62,8 +62,8 @@
     "published": "1976-12-26T06:59:01.872Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Johann Wolfgang von Goethe" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Johann Wolfgang von Goethe" },
+    "cover": "http://picsum.photos/250/250/",
     "description": "Werther loves Charlotte, but she’s already engaged. Woe is he!",
     "genre": { "category": "Non-Fiction", "name": "Sciences" },
     "id": "b687861548",
@@ -74,8 +74,8 @@
     "published": "1980-11-28T15:57:16.371Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Salman Rushdie" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Salman Rushdie" },
+    "cover": "http://picsum.photos/250/250/",
     "description": "The children of poor Hindus and wealthy Muslims are switched at birth.",
     "genre": { "category": "Fiction", "name": "Children's Books" },
     "id": "b466546144",
@@ -86,8 +86,8 @@
     "published": "1975-04-01T00:28:41.376Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "John le Carré" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "John le Carré" },
+    "cover": "http://picsum.photos/250/250/",
     "description": "Nursery rhyme provides the code names for British spies suspected of treason.",
     "genre": { "category": "Non-Fiction", "name": "Health" },
     "id": "b806776654",
@@ -98,8 +98,8 @@
     "published": "1990-12-04T00:38:33.187Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Stella Gibbons" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Stella Gibbons" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "Hilarious satire on doom-laden rural romances. \"Something nasty\" has been observed in the woodshed.",
     "genre": { "category": "Non-Fiction", "name": "Calendars" },
@@ -111,8 +111,8 @@
     "published": "1977-03-06T22:00:33.028Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Lady Murasaki" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Lady Murasaki" },
+    "cover": "http://picsum.photos/250/250/",
     "description": "The life and loves of an emperor’s son. And the world’s first novel?",
     "genre": { "category": "Fiction", "name": "Comics" },
     "id": "b175620929",
@@ -123,8 +123,8 @@
     "published": "2015-01-04T05:54:58.575Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Iris Murdoch" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Iris Murdoch" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "A feckless writer has dealings with a canine movie star. Comedy and philosophy combined.",
     "genre": { "category": "Fiction", "name": "Comics" },
@@ -136,8 +136,8 @@
     "published": "2000-03-07T14:48:32.215Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Doris Lessing" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Doris Lessing" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "Lessing considers communism and women’s liberation in what Margaret Drabble calls \"inner space fiction\".",
     "genre": { "category": "Non-Fiction", "name": "Religion" },
@@ -149,8 +149,8 @@
     "published": "1975-08-26T06:07:19.626Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Alexander Pushkin" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Alexander Pushkin" },
+    "cover": "http://picsum.photos/250/250/",
     "description": "Passion, poetry and pistols in this verse novel of thwarted love.",
     "genre": { "category": "Non-Fiction", "name": "Law" },
     "id": "b815890314",
@@ -161,8 +161,8 @@
     "published": "2004-08-13T06:12:00.753Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Jack Kerouac" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Jack Kerouac" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "Beat generation boys aim to \"burn, burn, burn like fabulous yellow roman candles\".",
     "genre": { "category": "Fiction", "name": "Thriller" },
@@ -174,8 +174,8 @@
     "published": "1984-04-03T03:32:56.690Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Honoré de Balzac" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Honoré de Balzac" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "A disillusioning dose of Bourbon Restoration realism. The anti-hero \"Rastingnac\" became a byword for ruthless social climbing.",
     "genre": { "category": "Non-Fiction", "name": "Law" },
@@ -187,8 +187,8 @@
     "published": "1984-12-24T18:27:39.131Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Stendhal" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Stendhal" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "Plebian hero struggles against the materialism and hypocrisy of French society with his \"force d’ame\".",
     "genre": { "category": "Non-Fiction", "name": "Sports" },
@@ -200,8 +200,8 @@
     "published": "1994-11-06T21:57:53.535Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Alexandre Dumas" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Alexandre Dumas" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "\"One for all and all for one\": the eponymous swashbucklers battle the mysterious Milady.",
     "genre": { "category": "Non-Fiction", "name": "Business" },
@@ -213,8 +213,8 @@
     "published": "1981-11-04T09:39:24.570Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Emile Zola" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Emile Zola" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "Written to \"germinate\" social change, Germinal unflinchingly documents the starvation of French miners.",
     "genre": { "category": "Fiction", "name": "Fantasy" },
@@ -226,8 +226,8 @@
     "published": "1973-08-11T01:13:20.052Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Albert Camus" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Albert Camus" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "Frenchman kills an Arab friend in Algiers and accepts \"the gentle indifference of the world\".",
     "genre": { "category": "Non-Fiction", "name": "Cookbooks" },
@@ -239,8 +239,8 @@
     "published": "2013-02-04T11:04:16.753Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Umberto Eco" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Umberto Eco" },
+    "cover": "http://picsum.photos/250/250/",
     "description": "Illuminating historical whodunnit set in a 14th-century Italian monastry.",
     "genre": { "category": "Non-Fiction", "name": "Parenting" },
     "id": "b374147936",
@@ -251,8 +251,8 @@
     "published": "1998-08-19T16:06:40.853Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Peter Carey" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Peter Carey" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "An Australian heiress bets an Anglican priest he can’t move a glass church 400km.",
     "genre": { "category": "Non-Fiction", "name": "Technology" },
@@ -264,8 +264,8 @@
     "published": "1977-07-14T06:19:51.957Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Jean Rhys" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Jean Rhys" },
+    "cover": "http://picsum.photos/250/250/",
     "description": "Prequel to Jane Eyre giving moving, human voice to the mad woman in the attic.",
     "genre": { "category": "Non-Fiction", "name": "Relationships" },
     "id": "b935197352",
@@ -276,8 +276,8 @@
     "published": "1997-08-28T14:07:56.653Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Lewis Carroll" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Lewis Carroll" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "Carroll’s ludic logic makes it possible to believe six impossible things before breakfast.",
     "genre": { "category": "Non-Fiction", "name": "Relationships" },
@@ -289,8 +289,8 @@
     "published": "1995-05-24T12:57:53.597Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Joseph Heller" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Joseph Heller" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "Yossarian feels a homicidal impulse to machine gun total strangers. Isn’t that crazy?",
     "genre": { "category": "Non-Fiction", "name": "Education" },
@@ -302,8 +302,8 @@
     "published": "2001-07-14T21:40:30.935Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Franz Kafka" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Franz Kafka" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "K proclaims he’s innocent when unexpectedly arrested. But \"innocent of what\"?",
     "genre": { "category": "Non-Fiction", "name": "Religion" },
@@ -315,8 +315,8 @@
     "published": "1970-05-10T05:33:10.172Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Laurie Lee" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Laurie Lee" },
+    "cover": "http://picsum.photos/250/250/",
     "description": "Protagonist’s \"first long secret drink of golden fire\" is under a hay wagon.",
     "genre": { "category": "Fiction", "name": "Comics" },
     "id": "b869228851",
@@ -327,8 +327,8 @@
     "published": "1979-03-05T04:22:20.370Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "RK Narayan" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "RK Narayan" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "Gentle comedy in which a Gandhi-inspired Indian youth becomes an anti-British extremist.",
     "genre": { "category": "Fiction", "name": "Children's Books" },
@@ -340,8 +340,8 @@
     "published": "1976-07-07T03:30:52.709Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Erich Remarque" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Erich Remarque" },
+    "cover": "http://picsum.photos/250/250/",
     "description": "The horror of the Great War as seen by a teenage soldier.",
     "genre": { "category": "Non-Fiction", "name": "Relationships" },
     "id": "b420890329",
@@ -352,8 +352,8 @@
     "published": "1979-09-10T11:46:52.857Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Anne Tyler" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Anne Tyler" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "Three siblings are differently affected by their parents’ unexplained separation.",
     "genre": { "category": "Fiction", "name": "Thriller" },
@@ -365,8 +365,8 @@
     "published": "2008-06-17T21:33:22.984Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Cao Xueqin" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Cao Xueqin" },
+    "cover": "http://picsum.photos/250/250/",
     "description": "Profound and panoramic insight into 18th-century Chinese society.",
     "genre": { "category": "Non-Fiction", "name": "Engineering" },
     "id": "b172415205",
@@ -378,10 +378,10 @@
   },
   {
     "author": {
-      "avatar": "http://lorempixel.com/250/250/",
+      "avatar": "http://picsum.photos/250/250/",
       "name": "Giuseppe Tomasi di Lampedusa"
     },
-    "cover": "http://lorempixel.com/250/250/",
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "Garibaldi’s Redshirts sweep through Sicily, the \"jackals\" ousting the nobility, or \"leopards\".",
     "genre": { "category": "Non-Fiction", "name": "Social Sciences" },
@@ -393,8 +393,8 @@
     "published": "1976-05-21T17:02:38.954Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Italo Calvino" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Italo Calvino" },
+    "cover": "http://picsum.photos/250/250/",
     "description": "International book fraud is exposed in this playful postmodernist puzzle.",
     "genre": { "category": "Fiction", "name": "Fantasy" },
     "id": "b246870277",
@@ -405,8 +405,8 @@
     "published": "1989-08-10T13:10:00.019Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "JG Ballard" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "JG Ballard" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "Former TV scientist preaches \"a new sexuality, born from a perverse technology\".",
     "genre": { "category": "Fiction", "name": "Romance" },
@@ -418,8 +418,8 @@
     "published": "2001-05-27T03:15:43.904Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "VS Naipaul" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "VS Naipaul" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "East African Indian Salim travels to the heart of Africa and finds \"The world is what it is.\"",
     "genre": { "category": "Non-Fiction", "name": "Spirituality" },
@@ -431,8 +431,8 @@
     "published": "2000-05-12T09:38:56.310Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Fyodor Dostoyevsky" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Fyodor Dostoyevsky" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "Boy meets pawnbroker. Boy kills pawnbroker with an axe. Guilt, breakdown, Siberia, redemption.",
     "genre": { "category": "Non-Fiction", "name": "Law" },
@@ -444,8 +444,8 @@
     "published": "1970-06-19T12:14:23.897Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Boris Pasternak" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Boris Pasternak" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "Romantic young doctor’s idealism is trampled by the atrocities of the Russian Revolution.",
     "genre": { "category": "Fiction", "name": "Literature" },
@@ -457,8 +457,8 @@
     "published": "1983-08-22T08:31:24.149Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Naguib Mahfouz" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Naguib Mahfouz" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "Follows three generations of Cairenes from the First World War to the coup of 1952.",
     "genre": { "category": "Non-Fiction", "name": "Health" },
@@ -470,8 +470,8 @@
     "published": "2000-11-22T20:06:56.225Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Robert Louis Stevenson" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Robert Louis Stevenson" },
+    "cover": "http://picsum.photos/250/250/",
     "description": "Stevenson’s \"bogey tale\" came to him in a dream.",
     "genre": { "category": "Non-Fiction", "name": "Social Sciences" },
     "id": "b450487101",
@@ -482,8 +482,8 @@
     "published": "1985-06-02T00:19:10.162Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Jonathan Swift" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Jonathan Swift" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "Swift’s scribulous satire on travellers’ tall tales (the Lilliputian Court is really George I’s).",
     "genre": { "category": "Non-Fiction", "name": "Travel" },
@@ -495,8 +495,8 @@
     "published": "2008-04-23T08:15:16.600Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Orhan Pamuk" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Orhan Pamuk" },
+    "cover": "http://picsum.photos/250/250/",
     "description": "A painter is murdered in Istanbul in 1591. Unusually, we hear from the corpse.",
     "genre": { "category": "Non-Fiction", "name": "Business" },
     "id": "b443557776",
@@ -507,8 +507,8 @@
     "published": "1972-08-29T16:40:57.518Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Gabriel García Márquez" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Gabriel García Márquez" },
+    "cover": "http://picsum.photos/250/250/",
     "description": "Myth and reality melt magically together in this Colombian family saga.",
     "genre": { "category": "Non-Fiction", "name": "Business" },
     "id": "b776309538",
@@ -519,8 +519,8 @@
     "published": "1972-10-24T11:47:33.581Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Martin Amis" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Martin Amis" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "A failed novelist steals a woman’s trashed diaries which reveal she’s plotting her own murder.",
     "genre": { "category": "Fiction", "name": "Humor" },
@@ -532,8 +532,8 @@
     "published": "1983-06-23T14:37:19.634Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Roberto Bolaño" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Roberto Bolaño" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "Gang of South American poets travel the world, sleep around, challenge critics to duels.",
     "genre": { "category": "Fiction", "name": "Science Fiction" },
@@ -545,8 +545,8 @@
     "published": "1982-06-18T07:39:25.596Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Herman Hesse" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Herman Hesse" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "Intellectuals withdraw from life to play a game of musical and mathematical rules.",
     "genre": { "category": "Non-Fiction", "name": "Engineering" },
@@ -558,8 +558,8 @@
     "published": "1993-09-02T09:53:47.584Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Günter Grass" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Günter Grass" },
+    "cover": "http://picsum.photos/250/250/",
     "description": "Madhouse memories of the Second World War. Key text of European magic realism.",
     "genre": { "category": "Non-Fiction", "name": "Parenting" },
     "id": "b815471189",
@@ -570,8 +570,8 @@
     "published": "2006-02-27T07:55:18.303Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "WG Sebald" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "WG Sebald" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "Paragraph-less novel in which a Czech-born historian traces his own history back to the Holocaust.",
     "genre": { "category": "Fiction", "name": "Fantasy" },
@@ -583,8 +583,8 @@
     "published": "1990-01-22T02:10:24.246Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Vladimir Nabokov" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Vladimir Nabokov" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "Scholar’s sexual obsession with a prepubescent \"nymphet\" is complicated by her mother’s passion for him.",
     "genre": { "category": "Non-Fiction", "name": "Computers" },
@@ -596,8 +596,8 @@
     "published": "1976-02-07T12:12:32.398Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Margaret Atwood" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Margaret Atwood" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "After nuclear war has rendered most sterile, fertile women are enslaved for breeding.",
     "genre": { "category": "Non-Fiction", "name": "Calendars" },
@@ -609,8 +609,8 @@
     "published": "1999-05-05T00:41:09.998Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "JD Salinger" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "JD Salinger" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "Expelled from a \"phony\" prep school, adolescent anti-hero goes through a difficult phase.",
     "genre": { "category": "Non-Fiction", "name": "History" },
@@ -622,8 +622,8 @@
     "published": "2012-03-21T06:21:00.044Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Don DeLillo" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Don DeLillo" },
+    "cover": "http://picsum.photos/250/250/",
     "description": "From baseball to nuclear waste, all late-20th-century American life is here.",
     "genre": { "category": "Non-Fiction", "name": "Medical Books" },
     "id": "b942206553",
@@ -634,8 +634,8 @@
     "published": "1987-09-26T02:28:33.803Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Toni Morrison" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Toni Morrison" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "Brutal, haunting, jazz-inflected journey down the darkest narrative rivers of American slavery.",
     "genre": { "category": "Non-Fiction", "name": "Engineering" },
@@ -647,8 +647,8 @@
     "published": "2014-02-16T07:53:49.433Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "John Steinbeck" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "John Steinbeck" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "\"Okies\" set out from the Depression dustbowl seeking decent wages and dignity.",
     "genre": { "category": "Non-Fiction", "name": "Arts" },
@@ -660,8 +660,8 @@
     "published": "1983-05-07T20:47:13.093Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "James Baldwin" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "James Baldwin" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "Explores the role of the Christian Church in Harlem’s African-American community.",
     "genre": { "category": "Non-Fiction", "name": "Medical Books" },
@@ -673,8 +673,8 @@
     "published": "2003-08-02T02:17:42.064Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Milan Kundera" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Milan Kundera" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "A doctor’s infidelities distress his wife. But if life means nothing, it can’t matter.",
     "genre": { "category": "Non-Fiction", "name": "Technology" },
@@ -686,8 +686,8 @@
     "published": "2009-06-28T19:25:56.308Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Muriel Spark" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Muriel Spark" },
+    "cover": "http://picsum.photos/250/250/",
     "description": "A meddling teacher is betrayed by a favourite pupil who becomes a nun.",
     "genre": { "category": "Non-Fiction", "name": "Politics" },
     "id": "b529495302",
@@ -698,8 +698,8 @@
     "published": "2002-12-27T00:25:57.322Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Alain Robbe-Grillet" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Alain Robbe-Grillet" },
+    "cover": "http://picsum.photos/250/250/",
     "description": "Did the watch salesman kill the girl on the beach. If so, who heard?",
     "genre": { "category": "Non-Fiction", "name": "Health" },
     "id": "b391907540",
@@ -710,8 +710,8 @@
     "published": "1989-04-29T07:28:19.471Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Jean-Paul Sartre" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Jean-Paul Sartre" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "A historian becomes increasingly sickened by his existence, but decides to muddle on.",
     "genre": { "category": "Non-Fiction", "name": "Sciences" },
@@ -723,8 +723,8 @@
     "published": "1995-04-15T07:54:46.625Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "John Updike" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "John Updike" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "A former high school basketball star is unsatisfied by marriage, fatherhood and sales jobs.",
     "genre": { "category": "Non-Fiction", "name": "Medical Books" },
@@ -736,8 +736,8 @@
     "published": "1976-12-29T20:37:45.081Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Mark Twain" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Mark Twain" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "A boy and a runaway slave set sail on the Mississippi, away from Antebellum \"sivilisation\".",
     "genre": { "category": "Non-Fiction", "name": "History" },
@@ -749,8 +749,8 @@
     "published": "1985-09-04T10:35:25.254Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Arthur Conan Doyle" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Arthur Conan Doyle" },
+    "cover": "http://picsum.photos/250/250/",
     "description": "A drug addict chases a ghostly dog across the midnight moors.",
     "genre": { "category": "Fiction", "name": "Fantasy" },
     "id": "b255859111",
@@ -761,8 +761,8 @@
     "published": "1970-01-05T18:55:52.755Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Edith Wharton" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Edith Wharton" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "Lily Bart craves luxury too much to marry for love. Scandal and sleeping pills ensue.",
     "genre": { "category": "Non-Fiction", "name": "Business" },
@@ -774,8 +774,8 @@
     "published": "1975-05-29T00:37:37.223Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Chinua Achebe" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Chinua Achebe" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "A Nigerian yam farmer’s local leadership is shaken by accidental death and a missionary’s arrival.",
     "genre": { "category": "Non-Fiction", "name": "Business" },
@@ -787,8 +787,8 @@
     "published": "1989-12-30T09:35:51.906Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "F Scott Fitzgerald" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "F Scott Fitzgerald" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "A mysterious millionaire’s love for a woman with \"a voice full of money\" gets him in trouble.",
     "genre": { "category": "Non-Fiction", "name": "Engineering" },
@@ -800,8 +800,8 @@
     "published": "1984-03-23T23:57:55.728Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Anthony Trollope" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Anthony Trollope" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "\"Of all novelists in any country, Trollope best understands the role of money,\" said W?H Auden.",
     "genre": { "category": "Non-Fiction", "name": "Politics" },
@@ -813,8 +813,8 @@
     "published": "1981-08-29T10:59:23.124Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Victor Hugo" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Victor Hugo" },
+    "cover": "http://picsum.photos/250/250/",
     "description": "An ex-convict struggles to become a force for good, but it ends badly.",
     "genre": { "category": "Fiction", "name": "Thriller" },
     "id": "b165872728",
@@ -825,8 +825,8 @@
     "published": "1999-10-30T16:29:35.038Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Kingsley Amis" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Kingsley Amis" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "An uncommitted history lecturer clashes with his pompous boss, gets drunk and gets the girl.",
     "genre": { "category": "Fiction", "name": "Thriller" },
@@ -838,8 +838,8 @@
     "published": "1984-10-01T04:14:12.645Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Raymond Chandler" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Raymond Chandler" },
+    "cover": "http://picsum.photos/250/250/",
     "description": "\"Dead men are heavier than broken hearts\" in this hardboiled crime noir.",
     "genre": { "category": "Fiction", "name": "Literature" },
     "id": "b374034717",
@@ -850,8 +850,8 @@
     "published": "1992-08-04T06:54:47.272Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Samuel Richardson" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Samuel Richardson" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "Epistolary adventure whose heroine’s bodice is savagely unlaced by the brothel-keeping Robert Lovelace.",
     "genre": { "category": "Non-Fiction", "name": "Medical Books" },
@@ -863,8 +863,8 @@
     "published": "2005-08-30T18:19:14.789Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Anthony Powell" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Anthony Powell" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "Twelve-book saga whose most celebrated character wears \"the wrong kind of overcoat\".",
     "genre": { "category": "Non-Fiction", "name": "Education" },
@@ -876,8 +876,8 @@
     "published": "1970-08-01T16:15:31.703Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Irène Némirovsky" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Irène Némirovsky" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "Published 60 years after their author was gassed, these two novellas portray city and village life in Nazi-occupied France.",
     "genre": { "category": "Fiction", "name": "Comics" },
@@ -889,8 +889,8 @@
     "published": "2009-01-11T10:51:28.956Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Ian McEwan" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Ian McEwan" },
+    "cover": "http://picsum.photos/250/250/",
     "description": "Puts the \"c\" word in the classic English country house novel.",
     "genre": { "category": "Fiction", "name": "Romance" },
     "id": "b157740351",
@@ -901,8 +901,8 @@
     "published": "1992-10-08T22:24:05.575Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Georges Perec" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Georges Perec" },
+    "cover": "http://picsum.photos/250/250/",
     "description": "The jigsaw puzzle of lives in a Parisian apartment block. Plus empty rooms.",
     "genre": { "category": "Fiction", "name": "Comics" },
     "id": "b406475951",
@@ -913,8 +913,8 @@
     "published": "2004-03-25T20:09:13.963Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Henry Fielding" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Henry Fielding" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "Thigh-thwacking yarn of a foundling boy sowing his wild oats before marrying the girl next door.",
     "genre": { "category": "Non-Fiction", "name": "Arts" },
@@ -926,8 +926,8 @@
     "published": "1994-10-15T11:33:11.141Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Mary Shelley" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Mary Shelley" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "Human endeavours \"to mock the stupendous mechanism of the Creator of the world\" have tragic consequences.",
     "genre": { "category": "Non-Fiction", "name": "Religion" },
@@ -939,8 +939,8 @@
     "published": "1986-04-04T04:53:04.123Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Elizabeth Gaskell" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Elizabeth Gaskell" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "Northern villagers turn their bonnets against the social changes accompanying the industrial revolution.",
     "genre": { "category": "Non-Fiction", "name": "Engineering" },
@@ -952,8 +952,8 @@
     "published": "1973-09-29T01:47:47.927Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Wilkie Collins" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Wilkie Collins" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "Hailed by TS Eliot as \"the first, the longest, and the best of modern English detective novels\".",
     "genre": { "category": "Fiction", "name": "Children's Books" },
@@ -965,8 +965,8 @@
     "published": "1984-11-01T18:59:15.487Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "James Joyce" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "James Joyce" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "Modernist masterpiece reworking of Homer with humour. Contains one of the longest \"sentences\" in English literature: 4,391 words.",
     "genre": { "category": "Non-Fiction", "name": "Self-Help" },
@@ -978,8 +978,8 @@
     "published": "1986-07-11T16:21:47.618Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Gustave Flaubert" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Gustave Flaubert" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "Buying the lies of romance novels leads a provincial doctor’s wife to an agonising end.",
     "genre": { "category": "Non-Fiction", "name": "Medical Books" },
@@ -991,8 +991,8 @@
     "published": "1998-09-16T17:12:28.462Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "EM Forster" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "EM Forster" },
+    "cover": "http://picsum.photos/250/250/",
     "description": "A false accusation exposes the racist oppression of British rule in India.",
     "genre": { "category": "Fiction", "name": "Comics" },
     "id": "b407295499",
@@ -1003,8 +1003,8 @@
     "published": "1975-10-01T23:45:46.843Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "George Orwell" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "George Orwell" },
+    "cover": "http://picsum.photos/250/250/",
     "description": "In which Big Brother is even more sinister than the TV series it inspired.",
     "genre": { "category": "Non-Fiction", "name": "Calendars" },
     "id": "b470717025",
@@ -1015,8 +1015,8 @@
     "published": "1976-05-23T10:02:15.172Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Laurence Sterne" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Laurence Sterne" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "Samuel Johnson thought Sterne’s bawdy, experimental novel was too odd to last. Pah!",
     "genre": { "category": "Non-Fiction", "name": "Travel" },
@@ -1028,8 +1028,8 @@
     "published": "1988-09-20T20:03:36.656Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "HG Wells" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "HG Wells" },
+    "cover": "http://picsum.photos/250/250/",
     "description": "Bloodsucking Martian invaders are wiped out by a dose of the sniffles.",
     "genre": { "category": "Non-Fiction", "name": "Technology" },
     "id": "b643396520",
@@ -1040,8 +1040,8 @@
     "published": "1993-02-15T09:37:14.398Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Evelyn Waugh" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Evelyn Waugh" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "Waugh based the hapless junior reporter in this journalistic farce on former Telegraph editor Bill Deedes.",
     "genre": { "category": "Fiction", "name": "Science Fiction" },
@@ -1053,8 +1053,8 @@
     "published": "2012-05-04T18:14:03.883Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Thomas Hardy" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Thomas Hardy" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "Sexual double standards are held up to the cold, Wessex light in this rural tragedy.",
     "genre": { "category": "Non-Fiction", "name": "Health" },
@@ -1066,8 +1066,8 @@
     "published": "1996-06-20T05:43:43.776Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Graham Greene" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Graham Greene" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "A seaside sociopath mucks up murder and marriage in Greene’s literary Punch and Judy show.",
     "genre": { "category": "Fiction", "name": "Thriller" },
@@ -1079,8 +1079,8 @@
     "published": "1978-01-12T09:04:57.188Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "PG Wodehouse" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "PG Wodehouse" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "A scrape-prone toff and pals are suavely manipulated by his gentleman’s personal gentleman.",
     "genre": { "category": "Non-Fiction", "name": "Medical Books" },
@@ -1092,8 +1092,8 @@
     "published": "1979-06-22T05:13:34.979Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Emily Brontë" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Emily Brontë" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "Out on the winding, windy moors Cathy and Heathcliff become each other’s \"souls\". Then he storms off.",
     "genre": { "category": "Non-Fiction", "name": "Technology" },
@@ -1105,8 +1105,8 @@
     "published": "2010-07-28T17:01:10.966Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Charles Dickens" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Charles Dickens" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "Debt and deception in Dickens’s semi-autobiographical Bildungsroman crammed with cads, creeps and capital fellows.",
     "genre": { "category": "Fiction", "name": "Teen" },
@@ -1118,8 +1118,8 @@
     "published": "1982-05-06T06:39:21.857Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Daniel Defoe" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Daniel Defoe" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "A slave trader is shipwrecked but finds God, and a native to convert, on a desert island.",
     "genre": { "category": "Fiction", "name": "Literature" },
@@ -1131,8 +1131,8 @@
     "published": "1981-01-02T16:10:04.958Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Jane Austen" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Jane Austen" },
+    "cover": "http://picsum.photos/250/250/",
     "description": "Every proud posh boy deserves a prejudiced girl. And a stately pile.",
     "genre": { "category": "Non-Fiction", "name": "Christian Books" },
     "id": "b224204727",
@@ -1143,8 +1143,8 @@
     "published": "2008-11-24T04:37:33.934Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Miguel de Cervantes" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Miguel de Cervantes" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "Picaresque tale about quinquagenarian gent on a skinny horse tilting at windmills.",
     "genre": { "category": "Non-Fiction", "name": "History" },
@@ -1156,8 +1156,8 @@
     "published": "2005-03-14T23:16:26.304Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Virginia Woolf" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Virginia Woolf" },
+    "cover": "http://picsum.photos/250/250/",
     "description": "Septimus’s suicide doesn’t spoil our heroine’s stream-of-consciousness party.",
     "genre": { "category": "Non-Fiction", "name": "Business" },
     "id": "b200877126",
@@ -1168,8 +1168,8 @@
     "published": "1983-11-08T22:29:55.745Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "JM Coetzee" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "JM Coetzee" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "An English professor in post-apartheid South Africa loses everything after seducing a student.",
     "genre": { "category": "Non-Fiction", "name": "Relationships" },
@@ -1181,8 +1181,8 @@
     "published": "1998-01-14T08:50:18.544Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Charlotte Brontë" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Charlotte Brontë" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "Poor and obscure and plain as she is, Mr Rochester wants to marry her. Illegally.",
     "genre": { "category": "Fiction", "name": "Science Fiction" },
@@ -1194,8 +1194,8 @@
     "published": "2015-06-16T05:30:11.952Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Marcel Proust" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Marcel Proust" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "Seven-volume meditation on memory, featuring literature’s most celebrated lemony cake.",
     "genre": { "category": "Fiction", "name": "Humor" },
@@ -1207,8 +1207,8 @@
     "published": "1974-10-17T15:24:25.890Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Joseph Conrad" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Joseph Conrad" },
+    "cover": "http://picsum.photos/250/250/",
     "description": "\"The conquest of the earth,\" said Conrad, \"is not a pretty thing.\"",
     "genre": { "category": "Non-Fiction", "name": "Biographies" },
     "id": "b207524058",
@@ -1219,8 +1219,8 @@
     "published": "1973-01-13T07:48:26.765Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Henry James" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Henry James" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "An American heiress in Europe \"affronts her destiny\" by marrying an adulterous egoist.",
     "genre": { "category": "Fiction", "name": "Thriller" },
@@ -1232,8 +1232,8 @@
     "published": "1995-06-20T08:50:42.454Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Leo Tolstoy" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Leo Tolstoy" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "Tolstoy’s doomed adulteress grew from a daydream of \"a bare exquisite aristocratic elbow\".",
     "genre": { "category": "Non-Fiction", "name": "Travel" },
@@ -1245,8 +1245,8 @@
     "published": "1973-11-01T02:55:21.145Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "Herman Melville" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "Herman Melville" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "Monomaniacal Captain Ahab seeks vengeance on the white whale which ate his leg.",
     "genre": { "category": "Non-Fiction", "name": "Calendars" },
@@ -1258,8 +1258,8 @@
     "published": "1998-09-15T05:40:16.824Z"
   },
   {
-    "author": { "avatar": "http://lorempixel.com/250/250/", "name": "George Eliot" },
-    "cover": "http://lorempixel.com/250/250/",
+    "author": { "avatar": "http://picsum.photos/250/250/", "name": "George Eliot" },
+    "cover": "http://picsum.photos/250/250/",
     "description":
       "\"One of the few English novels written for grown-up people,\" said Virginia Woolf.",
     "genre": { "category": "Non-Fiction", "name": "History" },
