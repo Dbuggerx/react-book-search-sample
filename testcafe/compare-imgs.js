@@ -67,7 +67,7 @@ async function compareImgs(imgPath1, imgPath2) {
     imgs[0].width,
     imgs[0].height,
     {
-      threshold: 0.3
+      threshold: 0.2
     }
   );
 

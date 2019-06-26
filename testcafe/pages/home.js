@@ -65,4 +65,8 @@ module.exports = class HomePage {
     await this.t.resizeWindow(1280, 800);
     await removeImagesOnAllCards.with({ boundTestRun: this.t })();
   }
+
+  get booksContainer() {
+    return Selector('.main-layout__books').with({ boundTestRun: this.t });
+  }
 };

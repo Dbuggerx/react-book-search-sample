@@ -22,6 +22,6 @@ Then(
     await t.expect(bookCards.length).eql(bookCardCount);
 
     await t.ctx.page.prepareForScreenshot();
-    await t.takeScreenshot();
+    await t.takeElementScreenshot(t.ctx.page.booksContainer);
   }
 );
