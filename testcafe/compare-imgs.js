@@ -3,10 +3,9 @@ const fs = require('fs');
 const path = require('path');
 const { PNG } = require('pngjs');
 const pixelmatch = require('pixelmatch');
-const utils = require('./utils');
+const { clearDir, getScreenshotsPath } = require('./utils');
 
 const diffsPath = path.join(__dirname, 'screenshots', 'diffs');
-const { clearDir } = require('./utils');
 
 function removeThumbnailsDir(browserDir) {
   const thumbsDir = path.join(browserDir, 'thumbnails');
@@ -16,8 +15,8 @@ function removeThumbnailsDir(browserDir) {
 }
 
 function removeAllThumbnailsDirs() {
-  const latestSnapshotsDir = utils.getScreenshotsPath(false);
-  const baseSnapshotsDir = utils.getScreenshotsPath(true);
+  const latestSnapshotsDir = getScreenshotsPath(false);
+  const baseSnapshotsDir = getScreenshotsPath(true);
   fs.readdirSync(latestSnapshotsDir).forEach(browserDir => {
     removeThumbnailsDir(path.join(latestSnapshotsDir, browserDir));
     removeThumbnailsDir(path.join(baseSnapshotsDir, browserDir));
@@ -40,8 +39,8 @@ function getFileNamesFromDir(dir) {
 }
 
 function getScreenshotsPaths() {
-  const latestSnapshotsDir = utils.getScreenshotsPath(false);
-  const baseSnapshotsDir = utils.getScreenshotsPath(true);
+  const latestSnapshotsDir = getScreenshotsPath(false);
+  const baseSnapshotsDir = getScreenshotsPath(true);
   return fs
     .readdirSync(latestSnapshotsDir)
     .reduce(
@@ -72,24 +71,24 @@ async function compareImgs(imgPath1, imgPath2) {
   );
 
   if (mismatchedPixels === 0) return;
+
   const imgFileName = path.basename(imgPath1);
   const browserDir = path.basename(path.dirname(imgPath1));
 
-  console.log(`${mismatchedPixels} mismatched pixels for "${imgFileName}"`);
   if (!fs.existsSync(path.join(diffsPath, browserDir)))
     fs.mkdirSync(path.join(diffsPath, browserDir));
   diff.pack().pipe(fs.createWriteStream(path.join(diffsPath, browserDir, imgFileName)));
+
+  throw new Error(`${mismatchedPixels} mismatched pixels for "${imgFileName}"`);
 }
 
 async function diffScreenshots() {
-  try {
-    if (fs.existsSync(diffsPath)) clearDir(diffsPath);
-    else fs.mkdirSync(diffsPath);
-    await Promise.all(getScreenshotsPaths().map(r => compareImgs(...r)));
-  } catch (err) {
-    console.error(`Error: ${err.message}`);
-  }
+  if (fs.existsSync(diffsPath)) clearDir(diffsPath);
+  else fs.mkdirSync(diffsPath);
+  await Promise.all(getScreenshotsPaths().map(r => compareImgs(...r)));
 }
 
-removeAllThumbnailsDirs();
-diffScreenshots();
+module.exports = function compareScreenshots() {
+  removeAllThumbnailsDirs();
+  return diffScreenshots();
+};
