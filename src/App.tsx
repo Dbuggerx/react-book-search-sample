@@ -1,12 +1,13 @@
 import React from 'react';
 import { hot } from 'react-hot-loader/root';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { BehaviorSubject } from 'rxjs';
 import { Epic } from 'redux-observable';
 import { setConfig } from 'react-hot-loader';
 import getRoutes from './routes';
 import './components/mainStyles';
 import { RouteModuleInfo } from './routes/types';
+import { routePath as homeRoutePath } from './routes/home/routeDefinition';
 
 type Props = {
   loadedChunkNames?: string[];
@@ -16,6 +17,7 @@ type Props = {
 
 const App = (props: Props) => (
   <Switch>
+    <Redirect exact from="/" to={homeRoutePath} />
     {getRoutes(
       props.loadedChunkNames,
       props.appendAsyncReducer,

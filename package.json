@@ -16,6 +16,7 @@
     "dayjs": "^1.8.14",
     "express": "^4.17.1",
     "material-design-icons": "^3.0.1",
+    "path-to-regexp": "^3.0.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-hot-loader": "^4.11.1",

@@ -7,6 +7,8 @@ import asyncComponent from '../../components/asyncComponent';
 import { GetBookPageAction } from '../../redux/books/types';
 import { RouteDefinition, RouteModuleInfo } from '../types';
 
+export const routePath = '/home';
+
 export default function getRouteDefinition(
   loadedChunkNames?: string[],
   appendAsyncReducer?: (newModuleInfo: RouteModuleInfo) => void,
@@ -14,7 +16,7 @@ export default function getRouteDefinition(
 ): RouteDefinition {
   return {
     exact: true,
-    path: '/home',
+    path: routePath,
     render: props => {
       const AsyncHome = asyncComponent(
         appendAsyncReducer,
