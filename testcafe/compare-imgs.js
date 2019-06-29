@@ -56,6 +56,8 @@ function getScreenshotsPaths() {
 }
 
 async function compareImgs(imgPath1, imgPath2) {
+  // eslint-disable-next-line no-console
+  console.log(`Comparing images: "${path.basename(imgPath1)}"`);
   const imgs = await Promise.all([getPngData(imgPath1), getPngData(imgPath2)]);
   const diff = new PNG({ width: imgs[0].width, height: imgs[0].height });
 

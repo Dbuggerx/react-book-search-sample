@@ -1,8 +1,6 @@
-Feature: Home route feature
+Feature: Home route
 
-  I want to see book cards
-
-  Scenario: Accessing the Home route
+  Scenario: I see book cards
     When I navigate to the home route
     Then I should see 10 book cards
 
