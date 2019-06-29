@@ -51,3 +51,21 @@ Then('some server response contains the Redux state', async t => {
     )
     .ok();
 });
+
+Then('some server response contains', async (t, _, table) => {
+  /** @type { ReturnType<RequestLogger> } */
+  const logger = t.ctx.requestLogger;
+
+  // eslint-disable-next-line no-restricted-syntax
+  for (const { pattern } of table.hashes())
+    // eslint-disable-next-line no-await-in-loop
+    await t
+      .expect(
+        logger.contains(
+          record =>
+            typeof record.response.body === 'string' &&
+            new RegExp(pattern).test(record.response.body)
+        )
+      )
+      .ok();
+});

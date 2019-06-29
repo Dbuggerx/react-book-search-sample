@@ -6840,10 +6840,9 @@ getpass@^0.1.1:
   dependencies:
     assert-plus "^1.0.0"
 
-gherkin-testcafe@^2.3.2:
+"gherkin-testcafe@https://github.com/Dbuggerx/gherkin-testcafe.git":
   version "2.3.2"
-  resolved "https://registry.yarnpkg.com/gherkin-testcafe/-/gherkin-testcafe-2.3.2.tgz#d2afbe2d8553911f9149e2da03d3cb07327b6d6d"
-  integrity sha512-dGYcve3Yxy5LI08/f3m3G5w+Xb1G8FhtPFuCmxEDBSC0FlmWMr1kDrZvDB+N3/L+52zeYOee7+2gc57IGot2YQ==
+  resolved "https://github.com/Dbuggerx/gherkin-testcafe.git#ff53a78b96b14b2f216c8a77297b644aad268eaa"
   dependencies:
     gherkin "^6.0.17"
 
