@@ -16,6 +16,10 @@ const Dropdown = <T extends {}>(props: Props<T>) => {
     setIsOpened(!isOpened);
   };
 
+  const handleMouseLeave = () => {
+    setIsOpened(false);
+  };
+
   const handleSelect = (item: T) => {
     setSelectedItem(item);
     setIsOpened(false);
@@ -23,7 +27,10 @@ const Dropdown = <T extends {}>(props: Props<T>) => {
   };
 
   return (
-    <div className={`dropdown ${isOpened && 'dropdown--opened'}`}>
+    <div
+      className={`dropdown ${isOpened && 'dropdown--opened'}`}
+      onMouseLeave={handleMouseLeave}
+    >
       <div className="dropdown__button" onClick={handleToggle}>
         {selectedItem && props.renderItem(selectedItem).el}
         <svg className="dropdown__arrow-icon" viewBox={arrowIcon.viewBox}>
