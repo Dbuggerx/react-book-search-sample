@@ -29,6 +29,7 @@ const server = app.listen(port, addr, err => {
           true,
           '${BROWSER}/${FIXTURE}-${TEST}-${FILE_INDEX}' // eslint-disable-line
         )
+        .parameterTypeRegistryFile(require.resolve('./param-type-registry.js'))
         .run();
     })
     .then(failedCount => {

@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const { Selector, ClientFunction } = require('testcafe');
+const BasePage = require('./base-page');
 
 class BookCard {
   /**
@@ -33,25 +34,11 @@ const removeImagesOnAllCards = ClientFunction(() =>
   })
 );
 
-module.exports = class HomePage {
-  /**
-   * @param {string} appUrl
-   * @param {TestController} t
-   */
-  constructor(appUrl, t) {
-    this.url = `${appUrl}/home`;
-    this.t = t;
+module.exports = class HomePage extends BasePage {
+  constructor() {
+    super('home', '.main-layout');
   }
 
-  navigate() {
-    return this.t.navigateTo(this.url);
-  }
-
-  get mainLayoutSelector() {
-    return Selector('.main-layout').with({ boundTestRun: this.t });
-  }
-
-  // eslint-disable-next-line class-methods-use-this
   async getBookCards() {
     const bookCardSelector = await Selector('.book-card').with({ boundTestRun: this.t });
 
