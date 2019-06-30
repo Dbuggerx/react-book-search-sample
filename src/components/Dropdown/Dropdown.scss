@@ -9,6 +9,7 @@
   vertical-align: middle;
   position: relative;
   width: 100%;
+  font-family: 'Roboto', Arial, Verdana, Tahoma, sans-serif;
 
   &__button {
     @extend %input-color;
@@ -22,13 +23,20 @@
     cursor: pointer;
   }
 
+  &__selected-text {
+    flex: 1 0 auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: calc(100% - 3.5em);
+    white-space: nowrap;
+  }
+
   &__menu {
     @extend %input-color;
 
     border: solid 1px get($colors, greys, 2000);
     border-top: 0;
     padding: 0;
-    cursor: pointer;
     margin: 0;
     position: absolute;
     right: 0;
@@ -40,11 +48,24 @@
     transform-origin: top center;
     transform: scaleY(0);
     transition: $transition;
+
+    &--placeholder-selected {
+      color: get($colors, greys, 3000);
+    }
+  }
+
+  &__menu-item,
+  &__placeholder {
+    list-style: none;
+    padding: get($spaces, 500) get($spaces, 1000);
+  }
+
+  &__placeholder {
+    color: get($colors, greys, 3000);
   }
 
   &__menu-item {
-    list-style: none;
-    padding: get($spaces, 500) get($spaces, 1000);
+    cursor: pointer;
 
     &:hover {
       background: get($colors, action);
@@ -56,13 +77,18 @@
     }
   }
 
-  &__arrow-icon {
+  &__icon {
     @extend %svg-icon;
 
     height: 2em;
     width: 2em;
     margin-left: auto;
     transition: $transition;
+
+    &--clear {
+      max-width: 1.2em;
+      fill: get($colors, greys, 3000);
+    }
   }
 
   &--opened {
@@ -71,7 +97,7 @@
       transform: scaleY(1);
     }
 
-    .dropdown__arrow-icon {
+    .dropdown__icon--arrow {
       transform: rotate(180deg);
     }
   }

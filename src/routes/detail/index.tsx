@@ -64,7 +64,7 @@ export default connect(
   mapDispatchToProps
 )(Detail);
 
-export const routeModule: Pick<RouteModule, Exclude<keyof RouteModule, 'state'>> = {
+export const routeModule: Omit<RouteModule, 'state'> = {
   routeName: 'details',
   epic,
   reducer

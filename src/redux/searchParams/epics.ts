@@ -1,4 +1,4 @@
-import { ofType } from 'redux-observable';
+import { ofType, combineEpics } from 'redux-observable';
 import { Observable, of } from 'rxjs';
 import {
   AjaxCreationMethod,
@@ -9,12 +9,15 @@ import {
   Action,
   GetCategoriesAction,
   CategoriesReceivedAction,
+  GenresReceivedAction,
   CategoriesErrorAction,
-  State
+  State,
+  GetGenresAction,
+  GenresErrorAction
 } from './types';
 import * as actions from './actions';
 
-export default function getCategoriesEpic(
+function getCategoriesEpic(
   action$: Observable<Action>,
   state$: Observable<State>,
   { ajax }: { ajax: AjaxCreationMethod }
@@ -33,3 +36,25 @@ export default function getCategoriesEpic(
     )
   );
 }
+
+function getGenresEpic(
+  action$: Observable<Action>,
+  state$: Observable<State>,
+  { ajax }: { ajax: AjaxCreationMethod }
+): Observable<GenresReceivedAction | GetGenresAction | GenresErrorAction> {
+  return action$.pipe(
+    ofType('react-book-search/searchParams/GET_GENRES'),
+    mergeMap(() =>
+      ajax({
+        url: 'http://localhost:3001/api/searchGenres'
+      }).pipe(
+        map(result => actions.genresReceived(result.response)),
+        catchError((error: AjaxError) =>
+          of<GenresErrorAction>(actions.genresError(error.message))
+        )
+      )
+    )
+  );
+}
+
+export default combineEpics(getCategoriesEpic, getGenresEpic);

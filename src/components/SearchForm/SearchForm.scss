@@ -1,3 +1,55 @@
+@import '../scss/variables';
+@import '../scss/placeholders';
+
+/* @define search-form */
 .search-form {
-  font-size: 1em;
+  width: 100%;
+
+  &__selected-vals-container {
+    display: inline-flex;
+    flex-flow: row nowrap;
+  }
+
+  &__selected-name {
+    color: get($colors, greys, 3000);
+    margin-right: get($spaces, 500);
+  }
+
+  &__fields-container {
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+  }
+
+  &__field {
+    flex: 1 1 auto;
+
+    & + & {
+      margin-left: get($spaces, 1000);
+    }
+
+    &--input {
+      @extend %input-color;
+
+      border: solid 1px get($colors, greys, 2000);
+      padding: get($spaces, 500) get($spaces, 1000);
+      outline: 0;
+      font-family: 'Roboto', Arial, Verdana, Tahoma, sans-serif;
+      font-size: 1em;
+
+      &::placeholder {
+        color: get($colors, greys, 3000);
+      }
+    }
+  }
+
+  &__button {
+    cursor: pointer;
+    flex: 0 1 auto;
+    margin-left: get($spaces, 1000);
+    border: 0;
+    background: none;
+    padding: 0;
+    outline: 0;
+  }
 }

@@ -1,87 +1,116 @@
-import React, { ChangeEvent, Component } from 'react';
+import React, { useCallback, useState, ChangeEvent, FormEvent } from 'react';
+import Dropdown from '../Dropdown';
+import { SearchParam } from '../../redux/searchParams/types';
+import searchIcon from 'material-design-icons/action/svg/production/ic_search_24px.svg';
 
-type State = {
-  category: string;
-  genre: string;
-  query: string;
-};
+import './SearchForm.scss';
 
 export type Props = {
   search: (category: string, genre: string, query: string) => void;
-  category?: string;
-  genre?: string;
-  query?: string;
+  selectedCategory?: string;
+  selectedGenre?: string;
+  selectedQuery?: string;
+  availableCategories?: SearchParam[];
+  availableGenres?: SearchParam[];
 };
 
-class SearchForm extends Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      category: '',
-      genre: '',
-      query: ''
-    };
-  }
+const SearchForm = (props: Props) => {
+  const [category, setCategory] = useState('');
+  const [genre, setGenre] = useState('');
+  const [query, setQuery] = useState('');
 
-  handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { target } = event;
-    const { value, name } = target;
+  const handleQueryChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+    setQuery(event.target.value);
+  }, []);
 
-    // @see: https://stackoverflow.com/questions/53039935/typescript-reactjs-how-to-dynamically-set-state/53040447#53040447
-    this.setState({
-      [name]: value
-    } as Pick<State, keyof State>);
+  const handleCategorySelected = useCallback((selectedCategory?: SearchParam) => {
+    setCategory(selectedCategory ? selectedCategory.label : '');
+  }, []);
+
+  const handleGenreSelected = useCallback((selectedGenre?: SearchParam) => {
+    setGenre(selectedGenre ? selectedGenre.label : '');
+  }, []);
+
+  const doSearch = (event: FormEvent<EventTarget>) => {
+    event.preventDefault();
+    props.search(category, genre, query);
   };
 
-  doSearch = () => {
-    this.props.search(this.state.category, this.state.genre, this.state.query);
-  };
+  return (
+    <div className="search-form">
+      {(props.selectedCategory || props.selectedGenre || props.selectedQuery) && (
+        <div>
+          <div className="search-form__selected-vals-container">
+            {props.selectedCategory && (
+              <div className="search-form__field">
+                <span className="search-form__selected-name">Category:</span>
+                <span className="search-form__field" data-testid="current-category">
+                  {props.selectedCategory}
+                </span>
+              </div>
+            )}
 
-  render() {
-    return (
-      <div>
-        <ul>
-          <li>
-            Category: <span data-testid="current-category">{this.props.category}</span>
-          </li>
-          <li>
-            Genre: <span data-testid="current-genre">{this.props.genre}</span>
-          </li>
-          <li>
-            Query: <span data-testid="current-query">{this.props.query}</span>
-          </li>
-        </ul>
+            {props.selectedGenre && (
+              <div className="search-form__field">
+                <span className="search-form__selected-name">Genre:</span>
+                <span className="search-form__field" data-testid="current-genre">
+                  {props.selectedGenre}
+                </span>
+              </div>
+            )}
 
+            {props.selectedQuery && (
+              <div className="search-form__field">
+                <span className="search-form__selected-name">Query:</span>
+                <span className="search-form__field" data-testid="current-query">
+                  {props.selectedQuery}
+                </span>
+              </div>
+            )}
+          </div>
+          <hr />
+        </div>
+      )}
+
+      <form className="search-form__fields-container" onSubmit={doSearch}>
+        <div className="search-form__field" data-testid="category-dropdown">
+          <Dropdown<SearchParam>
+            items={props.availableCategories || []}
+            renderItem={i => ({ id: i.id, el: i.label })}
+            onSelect={handleCategorySelected}
+            placeholder="Category"
+          />
+        </div>
+        <div className="search-form__field" data-testid="genre-dropdown">
+          <Dropdown<SearchParam>
+            items={props.availableGenres || []}
+            renderItem={i => ({ id: i.id, el: i.label })}
+            onSelect={handleGenreSelected}
+            placeholder="Genre"
+          />
+        </div>
         <input
-          name="category"
-          type="text"
-          value={this.state.category}
-          onChange={this.handleSearchChange}
-          data-testid="categ-input"
-        />
-
-        <input
-          name="genre"
-          type="text"
-          value={this.state.genre}
-          onChange={this.handleSearchChange}
-          data-testid="genre-input"
-        />
-
-        <input
+          className="search-form__field search-form__field--input"
           name="query"
           type="text"
-          value={this.state.query}
-          onChange={this.handleSearchChange}
+          placeholder="Search"
+          value={query}
+          onChange={handleQueryChange}
           data-testid="query-input"
         />
-
-        <button onClick={this.doSearch} data-testid="search-button">
-          Search
+        <button type="submit" className="search-form__button" data-testid="search-button">
+          <svg
+            className="dropdown__icon dropdown__icon--arrow"
+            viewBox={searchIcon.viewBox}
+          >
+            <use xlinkHref={`#${searchIcon.id}`} />
+          </svg>
         </button>
-      </div>
-    );
-  }
-}
+      </form>
+    </div>
+  );
+};
+
+SearchForm.displayName = 'SearchForm';
 
 export default SearchForm;

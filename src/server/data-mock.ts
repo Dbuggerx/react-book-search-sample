@@ -1,4 +1,4 @@
-import { Book, SearchParams } from '../redux/books/types';
+import { Book } from '../redux/books/types';
 import { SearchParam } from '../redux/searchParams/types';
 import rawBookData from './bookData.json';
 
@@ -8,7 +8,7 @@ const bookData = rawBookData.map(b => ({
   cover: `${b.cover}?${Math.random() * 10}`
 }));
 
-function paramsHaveValues(params: SearchParams) {
+function paramsHaveValues(params) {
   return params.category || params.genre || params.query;
 }
 
@@ -24,7 +24,7 @@ function bookPropContainsVal(bookProp: string, val: string) {
   return val ? normalizeString(bookProp).indexOf(normalizeString(val)) !== -1 : true;
 }
 
-function filterBookResults(params: SearchParams): Book[] {
+function filterBookResults(params): Book[] {
   return bookData.filter(
     (book: Book) =>
       (params.category
@@ -69,7 +69,7 @@ export function* getRelatedBooks(bookId: string, qty: number): Iterable<Book> {
   }
 }
 
-export function getPagedBooksSearch(params: SearchParams): BookResult {
+export function getPagedBooksSearch(params): BookResult {
   const currentIndex = (params.page - 1 || 0) * pageSize;
   const books = paramsHaveValues(params) ? filterBookResults(params) : bookData;
   return {

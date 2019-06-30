@@ -34,6 +34,7 @@ storiesOf('Dropdown', module)
         items={getSearchParams(5)}
         renderItem={i => ({ id: i.id, el: <div>{i.label}</div> })}
         onSelect={action('onSelect')}
+        placeholder='Choose an item'
       />
       <DummyText />
       <DummyText />
@@ -45,6 +46,7 @@ storiesOf('Dropdown', module)
         items={getSearchParams(35)}
         renderItem={i => ({ id: i.id, el: <div>{i.label}</div> })}
         onSelect={action('onSelect')}
+        placeholder='Choose an item'
       />
       <DummyText />
       <DummyText />

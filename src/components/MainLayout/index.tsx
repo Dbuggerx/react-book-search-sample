@@ -1,14 +1,13 @@
 import React from 'react';
-import BookList, { Props as BookListProps } from '../BookList';
-import Pagination, { Props as PaginationProps } from '../Pagination';
-import SearchForm, { Props as SearchFormProps } from '../SearchForm';
 import './MainLayout.scss';
 
-type StatusProps = {
+type Props = {
   loadingBooks: boolean;
   error?: string;
+  bookList: React.ReactElement;
+  searchForm: React.ReactElement;
+  pagination: React.ReactElement;
 };
-type Props = StatusProps & BookListProps & SearchFormProps & PaginationProps;
 
 const MainLayout = (props: Props) => (
   <div className="main-layout">
@@ -16,28 +15,9 @@ const MainLayout = (props: Props) => (
       {props.loadingBooks && <h2>Loading...</h2>}
       {props.error && <h2>{props.error}</h2>}
     </div>
-    <div className="main-layout__books">
-      <BookList
-        books={props.books}
-        onBookClick={props.onBookClick}
-        onBookLike={props.onBookLike}
-      />
-    </div>
-    <div className="main-layout__search">
-      <SearchForm
-        search={props.search}
-        category={props.category}
-        genre={props.genre}
-        query={props.query}
-      />
-    </div>
-    <div className="main-layout__pagination">
-      <Pagination
-        currentPage={props.currentPage}
-        pageCount={props.pageCount}
-        showPage={props.showPage}
-      />
-    </div>
+    <div className="main-layout__books">{props.bookList}</div>
+    <div className="main-layout__search">{props.searchForm}</div>
+    <div className="main-layout__pagination">{props.pagination}</div>
     <div className="main-layout__info">
       <h2>This is still a work in progress</h2>
       For now, I would ask to please consider the technical aspects involved, like:
@@ -102,6 +82,38 @@ const MainLayout = (props: Props) => (
             Sass
           </a>{' '}
           styles
+        </li>
+        <li>
+          Testing with{' '}
+          <a href="https://jestjs.io/" target="_blank" rel="noopener noreferrer">
+            Jest
+          </a>{' '}
+          and{' '}
+          <a
+            href="https://testing-library.com/docs/react-testing-library/intro"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            React Testing Library
+          </a>
+        </li>
+        <li>
+          End-to-end tests using{' '}
+          <a
+            href="https://devexpress.github.io/testcafe/documentation/getting-started/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            TestCafe
+          </a>{' '}
+          and{' '}
+          <a
+            href="https://github.com/Dbuggerx/gherkin-testcafe"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            gherkin-testcafe
+          </a>
         </li>
       </ul>
     </div>

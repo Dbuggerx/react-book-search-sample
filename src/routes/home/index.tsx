@@ -12,17 +12,21 @@ import { combineEpics } from 'redux-observable';
 import MainLayout from '../../components/MainLayout';
 import booksReducer, {
   actions as booksActions,
-  selectors,
+  selectors as booksSelectors,
   epic as booksEpic
 } from '../../redux/books';
 import searchParamsReducer, {
   actions as searchActions,
-  epic as searchParamsEpic
+  epic as searchParamsEpic,
+  selectors as searchParamsSelectors
 } from '../../redux/searchParams';
 import { Book } from '../../redux/books/types';
 import { State } from '../../redux/store';
 import { SearchParam } from '../../redux/searchParams/types';
 import { RouteModule } from './types';
+import BookList from '../../components/BookList';
+import SearchForm from '../../components/SearchForm';
+import Pagination from '../../components/Pagination';
 
 type StateProps = {
   currentPage?: number;
@@ -38,6 +42,11 @@ type StateProps = {
     loading: boolean;
     error?: string;
   };
+  searchGenres: {
+    results: SearchParam[];
+    loading: boolean;
+    error?: string;
+  };
 };
 
 type ActionProps = {
@@ -49,6 +58,7 @@ export class Home extends Component<StateProps & ActionProps & RouteChildrenProp
     if (this.props.books.length === 0) this.props.actions.getBookPage(1);
     if (this.props.searchCategories.results.length === 0)
       this.props.actions.getCategories();
+    if (this.props.searchGenres.results.length === 0) this.props.actions.getGenres();
   }
 
   handleSearch = (category: string, genre: string, query: string) => {
@@ -77,18 +87,32 @@ export class Home extends Component<StateProps & ActionProps & RouteChildrenProp
     return (
       <StrictMode>
         <MainLayout
+          bookList={
+            <BookList
+              books={this.props.books}
+              onBookClick={this.handleBookClick}
+              onBookLike={this.handleBookLike}
+            />
+          }
+          searchForm={
+            <SearchForm
+              search={this.handleSearch}
+              selectedCategory={this.props.category}
+              selectedGenre={this.props.genre}
+              selectedQuery={this.props.query}
+              availableCategories={this.props.searchCategories.results}
+              availableGenres={this.props.searchGenres.results}
+            />
+          }
+          pagination={
+            <Pagination
+              currentPage={this.props.currentPage || 0}
+              pageCount={this.props.pageCount || 0}
+              showPage={this.handleShowPage}
+            />
+          }
           error={this.props.error}
-          books={this.props.books}
-          currentPage={this.props.currentPage || 0}
           loadingBooks={this.props.loadingBooks}
-          pageCount={this.props.pageCount || 0}
-          search={this.handleSearch}
-          category={this.props.category}
-          genre={this.props.genre}
-          query={this.props.query}
-          showPage={this.handleShowPage}
-          onBookClick={this.handleBookClick}
-          onBookLike={this.handleBookLike}
         />
       </StrictMode>
     );
@@ -96,20 +120,15 @@ export class Home extends Component<StateProps & ActionProps & RouteChildrenProp
 }
 
 function mapStateToProps(state: State): StateProps {
-  const books = selectors(state);
-  const loading =
-    state.home && state.home.bookResults ? state.home.bookResults.loading : false;
-  const error =
-    state.home && state.home.bookResults ? state.home.bookResults.error : undefined;
-  const bookResults = state.home && state.home.bookResults;
+  const bookResults = booksSelectors.bookResults(state);
 
-  const searchCategories = state.home
-    ? state.home.searchParams.categories
-    : {
-      loading: false,
-      results: []
-    };
-  return { ...bookResults, books, loadingBooks: loading, error, searchCategories };
+  return {
+    ...bookResults,
+    loadingBooks: booksSelectors.loading(state),
+    error: booksSelectors.error(state),
+    searchCategories: searchParamsSelectors.categories(state),
+    searchGenres: searchParamsSelectors.genres(state)
+  };
 }
 
 function mapDispatchToProps(dispatch: ReduxDispatch<AnyAction>): ActionProps {
@@ -125,7 +144,7 @@ export default hot(
   )(Home)
 );
 
-export const routeModule: Pick<RouteModule, Exclude<keyof RouteModule, 'state'>> = {
+export const routeModule: Omit<RouteModule, 'state'> = {
   routeName: 'home',
   epic: combineEpics(booksEpic, searchParamsEpic),
   reducer: combineReducers({

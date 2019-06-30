@@ -10,12 +10,10 @@
   box-shadow: 0 2px 4px get($colors, greys, 2000);
   flex-basis: 15em;
   flex-grow: 0;
-  margin: 0 1em;
   position: relative;
   transition: all 0.2s ease-in-out;
   max-width: 15em;
   cursor: pointer;
-  margin-bottom: get($spaces, 2000);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -23,6 +21,7 @@
   display: flex;
   flex-flow: column nowrap;
   justify-content: flex-end;
+  margin: 1em;
 
   &:hover,
   &:focus {

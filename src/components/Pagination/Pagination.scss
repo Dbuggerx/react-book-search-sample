@@ -24,6 +24,7 @@
     @extend %button;
 
     width: 2em;
+    outline: 0;
 
     @media #{map-get($breakpoints, medium)} {
       width: 3em;

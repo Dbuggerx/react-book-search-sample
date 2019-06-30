@@ -35,4 +35,8 @@ apiRouter.get('/searchCategories', (req, res) => {
   res.json(dataMock.bookCategories);
 });
 
+apiRouter.get('/searchGenres', (req, res) => {
+  res.json(dataMock.bookGenres);
+});
+
 export default apiRouter;

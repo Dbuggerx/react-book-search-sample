@@ -16,47 +16,47 @@ export type Props = {
 
 dayjs.extend(relativeTime);
 
-const BookCard = (props: Props) => {
+const BookCard = ({onViewDetails, onLike, book}: Props) => {
   const handleViewDetails = useCallback(() => {
-    props.onViewDetails(props.book);
-  }, [props.onViewDetails, props.book]);
+    onViewDetails(book);
+  }, [onViewDetails, book]);
 
   const handleLike = useCallback(
     (event: React.MouseEvent<HTMLElement>) => {
       event.stopPropagation();
-      props.onLike(props.book);
+      onLike(book);
     },
-    [props.onLike, props.book]
+    [onLike, book]
   );
 
   const [relativeDate, setRelativeDate] = useState('');
   useEffect(() => {
-    setRelativeDate(dayjs(props.book.published).fromNow());
-  }, [props.book.published]);
+    setRelativeDate(dayjs(book.published).fromNow());
+  }, [book.published]);
 
   return (
     <div
       className="book-card"
-      style={{ backgroundImage: `url(${props.book.cover})`, }}
+      style={{ backgroundImage: `url(${book.cover})`, }}
       onClick={handleViewDetails}
     >
       <div className="book-card__header">
-        <div className="book-card__title">{props.book.name}</div>
-        <div className="book-card__author">{props.book.author.name}</div>
+        <div className="book-card__title">{book.name}</div>
+        <div className="book-card__author">{book.author.name}</div>
       </div>
       <div className="book-card__actions">
         <div className="book-card__action" onClick={handleLike} data-testid="like-button">
-          {props.book.liked && (
+          {book.liked && (
             <svg viewBox={favoriteIcon.viewBox} className="book-card__icon">
               <use xlinkHref={`#${favoriteIcon.id}`} />
             </svg>
           )}
-          {!props.book.liked && (
+          {!book.liked && (
             <svg viewBox={favoriteBorderIcon.viewBox} className="book-card__icon">
               <use xlinkHref={`#${favoriteBorderIcon.id}`} />
             </svg>
           )}
-          {`${props.book.likes} ${props.book.likes > 1 ? 'likes' : 'like'}`}
+          {`${book.likes} ${book.likes > 1 ? 'likes' : 'like'}`}
         </div>
         <div className="book-card__action book-card__action--align-right book-card__action--no-click">
           <svg viewBox={calendarIcon.viewBox} className="book-card__icon">
