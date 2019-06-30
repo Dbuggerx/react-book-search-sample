@@ -30,6 +30,7 @@ module.exports = function getLoaders(isProductionMode, srcPath) {
         loader: 'babel-loader',
         options: {
           cacheDirectory: true,
+          babelrc: false,
           plugins: [
             '@babel/plugin-proposal-object-rest-spread',
             '@babel/plugin-syntax-dynamic-import',

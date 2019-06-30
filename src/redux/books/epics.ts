@@ -13,7 +13,7 @@ import {
   BookServerErrorAction,
   State
 } from './types';
-import actions from './actions';
+import * as actions from './actions';
 
 function handleError(error: AjaxError) {
   return of<BookServerErrorAction>(actions.serverError(error));
@@ -38,18 +38,11 @@ function getBookPageEpic(
       return ajax({
         url: `http://localhost:3001/api/books?${queryParams}`
       }).pipe(
-        map(
-          result =>
-            ({
-              type: 'react-book-search/books/PAGED_BOOKS_RECEIVED',
-              payload: {
-                books: result.response,
-                pageCount: parseInt(
-                  result.xhr.getResponseHeader('x-total-count') || '',
-                  10
-                )
-              }
-            } as PagedBooksReceivedAction)
+        map(result =>
+          actions.booksReceived(
+            result.response,
+            parseInt(result.xhr.getResponseHeader('x-total-count') || '', 10)
+          )
         ),
         catchError(handleError)
       );
@@ -65,24 +58,18 @@ function likeBookEpic(
   return action$.pipe(
     ofType('react-book-search/books/LIKE_BOOK'),
     debounceTime(500),
-    switchMap(action => ajax.patch(
-      `http://localhost:3001/api/books/${action.payload.bookId}`,
-      {
-        liked: action.payload.liked
-      },
-      {
-        'Content-Type': 'application/json'
-      }
-    )),
-    map(
-      result =>
-        ({
-          type: 'react-book-search/books/BOOK_REFRESHED',
-          payload: {
-            book: result.response
-          }
-        } as BookRefreshedAction)
+    switchMap(action =>
+      ajax.patch(
+        `http://localhost:3001/api/books/${action.payload.bookId}`,
+        {
+          liked: action.payload.liked
+        },
+        {
+          'Content-Type': 'application/json'
+        }
+      )
     ),
+    map(result => actions.bookRefreshed(result.response)),
     catchError(handleError)
   );
 }

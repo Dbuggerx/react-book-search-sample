@@ -1,3 +1,5 @@
+import * as actions from './actions';
+
 export type BookDetail = {
   author: {
     avatar: string;
@@ -16,19 +18,9 @@ export type BookDetail = {
   published: Date;
 };
 
-export type GetBookDetailAction = {
-  type: 'react-book-search/bookDetail/GET_BOOK_DETAIL';
-  payload: {
-    bookId: string;
-  };
-};
+export type GetBookDetailAction = ReturnType<typeof actions.getBookDetail>;
 
-export type BookDetailReceivedAction = {
-  type: 'react-book-search/bookDetail/BOOK_DETAIL_RECEIVED';
-  payload: {
-    bookDetail: BookDetail;
-  };
-};
+export type BookDetailReceivedAction = ReturnType<typeof actions.bookDetailsReceived>;
 
 export type Action = GetBookDetailAction | BookDetailReceivedAction;
 

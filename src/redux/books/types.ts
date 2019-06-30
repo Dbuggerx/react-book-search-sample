@@ -1,3 +1,5 @@
+import * as actions from './actions';
+
 export type Book = {
   author: {
     avatar: string;
@@ -17,47 +19,15 @@ export type Book = {
   liked?: boolean;
 };
 
-export type SearchParams = {
-  page: number;
-  category?: string;
-  genre?: string;
-  query?: string;
-};
+export type GetBookPageAction = ReturnType<typeof actions.getBookPage>;
 
-export type GetBookPageAction = {
-  type: 'react-book-search/books/GET_BOOK_PAGE';
-  payload: SearchParams;
-};
+export type PagedBooksReceivedAction = ReturnType<typeof actions.booksReceived>;
 
-export type PagedBooksReceivedAction = {
-  type: 'react-book-search/books/PAGED_BOOKS_RECEIVED';
-  payload: {
-    books: Book[];
-    pageCount: number;
-  };
-};
+export type LikeBookAction = ReturnType<typeof actions.likeBook>;
 
-export type LikeBookAction = {
-  type: 'react-book-search/books/LIKE_BOOK';
-  payload: {
-    bookId: string;
-    liked: boolean;
-  };
-};
+export type BookRefreshedAction = ReturnType<typeof actions.bookRefreshed>;
 
-export type BookRefreshedAction = {
-  type: 'react-book-search/books/BOOK_REFRESHED';
-  payload: {
-    book: Book;
-  };
-};
-
-export type BookServerErrorAction = {
-  type: 'react-book-search/books/SERVER_ERROR';
-  payload: {
-    error: string;
-  };
-};
+export type BookServerErrorAction = ReturnType<typeof actions.serverError>;
 
 export type Action =
   | GetBookPageAction

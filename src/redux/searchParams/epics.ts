@@ -25,13 +25,7 @@ export default function getCategoriesEpic(
       ajax({
         url: 'http://localhost:3001/api/searchCategories'
       }).pipe(
-        map(
-          result =>
-            ({
-              type: 'react-book-search/searchParams/CATEGORIES_RECEIVED',
-              payload: result.response
-            } as CategoriesReceivedAction)
-        ),
+        map(result => actions.categoriesReceived(result.response)),
         catchError((error: AjaxError) =>
           of<CategoriesErrorAction>(actions.categoriesError(error.message))
         )
@@ -39,4 +33,3 @@ export default function getCategoriesEpic(
     )
   );
 }
-

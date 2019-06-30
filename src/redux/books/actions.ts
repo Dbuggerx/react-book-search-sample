@@ -1,18 +1,6 @@
-import {
-  Book,
-  GetBookPageAction,
-  PagedBooksReceivedAction,
-  LikeBookAction,
-  BookRefreshedAction,
-  BookServerErrorAction
-} from './types';
+import { Book } from './types';
 
-function getBookPage(
-  page: number,
-  category?: string,
-  genre?: string,
-  query?: string
-): GetBookPageAction {
+export function getBookPage(page: number, category?: string, genre?: string, query?: string) {
   return {
     type: 'react-book-search/books/GET_BOOK_PAGE',
     payload: {
@@ -21,55 +9,43 @@ function getBookPage(
       genre,
       query
     }
-  };
+  } as const;
 }
 
-function booksReturned(
-  books: Book[],
-  page: number,
-  pageCount: number
-): PagedBooksReceivedAction {
+export function booksReceived(books: Book[], pageCount: number) {
   return {
     type: 'react-book-search/books/PAGED_BOOKS_RECEIVED',
     payload: {
       books,
       pageCount
     }
-  };
+  } as const;
 }
 
-function likeBook(bookId: string, liked: boolean): LikeBookAction {
+export function likeBook(bookId: string, liked: boolean) {
   return {
     type: 'react-book-search/books/LIKE_BOOK',
     payload: {
       bookId,
       liked
     }
-  };
+  } as const;
 }
 
-function bookRefreshed(book: Book): BookRefreshedAction {
+export function bookRefreshed(book: Book) {
   return {
     type: 'react-book-search/books/BOOK_REFRESHED',
     payload: {
       book
     }
-  };
+  } as const;
 }
 
-function serverError(err: Error): BookServerErrorAction {
+export function serverError(err: Error) {
   return {
     type: 'react-book-search/books/SERVER_ERROR',
     payload: {
       error: err.message
     }
-  };
+  } as const;
 }
-
-export default {
-  getBookPage,
-  booksReturned,
-  likeBook,
-  bookRefreshed,
-  serverError
-};

@@ -1,26 +1,21 @@
-import { BookDetail, BookDetailReceivedAction, GetBookDetailAction } from './types';
+import { BookDetail } from './types';
 
-function getBookDetail(
+export function getBookDetail(
   bookId: string
-): GetBookDetailAction {
+) {
   return {
     type: 'react-book-search/bookDetail/GET_BOOK_DETAIL',
     payload: {
       bookId
     }
-  };
+  } as const;
 }
 
-function bookDetailsReturned(bookDetail: BookDetail): BookDetailReceivedAction {
+export function bookDetailsReceived(bookDetail: BookDetail) {
   return {
     type: 'react-book-search/bookDetail/BOOK_DETAIL_RECEIVED',
     payload: {
       bookDetail
     }
-  };
+  } as const;
 }
-
-export default {
-  getBookDetail,
-  bookDetailsReturned
-};

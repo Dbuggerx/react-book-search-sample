@@ -1,3 +1,5 @@
+import * as actions from './actions';
+
 export type SearchParam = {
   id: number;
   label: string;
@@ -11,18 +13,10 @@ export type State = Readonly<{
   };
 }>;
 
-export type GetCategoriesAction = {
-  type: 'react-book-search/searchParams/GET_CATEGORIES';
-};
+export type GetCategoriesAction = ReturnType<typeof actions.getCategories>;
 
-export type CategoriesReceivedAction = {
-  type: 'react-book-search/searchParams/CATEGORIES_RECEIVED';
-  payload: SearchParam[];
-};
+export type CategoriesReceivedAction = ReturnType<typeof actions.categoriesReceived>;
 
-export type CategoriesErrorAction = {
-  type: 'react-book-search/searchParams/CATEGORIES_ERROR';
-  payload: string;
-};
+export type CategoriesErrorAction = ReturnType<typeof actions.categoriesError>;
 
 export type Action = GetCategoriesAction | CategoriesReceivedAction;

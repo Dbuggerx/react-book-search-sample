@@ -1,9 +1,6 @@
-export type SsrRenderAction = {
-  type: 'react-book-search/ssr/RENDER_READY';
-  payload: {
-    ready: boolean;
-  };
-};
+import * as actions from './actions';
+
+export type SsrRenderAction = ReturnType<typeof actions.ssrReady>;
 
 export type Action = SsrRenderAction;
 
