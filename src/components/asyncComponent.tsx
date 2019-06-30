@@ -2,6 +2,7 @@ import React, { Component, ComponentType } from 'react';
 import { Epic } from 'redux-observable';
 import { BehaviorSubject } from 'rxjs';
 import { RouteModuleInfo } from '../routes/types';
+import ErrorBoundary from '../ErrorBoundary';
 
 type State = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -63,7 +64,11 @@ export default function asyncComponent(
 
     render() {
       const C = this.state.component;
-      return <div ref={this.elementRef}>{C ? <C {...this.props} /> : 'Loading...'}</div>;
+      return (
+        <ErrorBoundary>
+          <div ref={this.elementRef}>{C ? <C {...this.props} /> : 'Loading...'}</div>
+        </ErrorBoundary>
+      );
     }
   };
 }
