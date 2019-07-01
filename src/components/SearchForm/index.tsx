@@ -36,6 +36,8 @@ const SearchForm = (props: Props) => {
     props.search(category, genre, query);
   };
 
+  const renderDropdownItem = useCallback((item: SearchParam) => ({ id: item.id, el: item.label }), []);
+
   return (
     <div className="search-form">
       {(props.selectedCategory || props.selectedGenre || props.selectedQuery) && (
@@ -76,7 +78,7 @@ const SearchForm = (props: Props) => {
         <div className="search-form__field" data-testid="category-dropdown">
           <Dropdown<SearchParam>
             items={props.availableCategories || []}
-            renderItem={i => ({ id: i.id, el: i.label })}
+            renderItem={renderDropdownItem}
             onSelect={handleCategorySelected}
             placeholder="Category"
           />
@@ -84,7 +86,7 @@ const SearchForm = (props: Props) => {
         <div className="search-form__field" data-testid="genre-dropdown">
           <Dropdown<SearchParam>
             items={props.availableGenres || []}
-            renderItem={i => ({ id: i.id, el: i.label })}
+            renderItem={renderDropdownItem}
             onSelect={handleGenreSelected}
             placeholder="Genre"
           />
@@ -113,4 +115,4 @@ const SearchForm = (props: Props) => {
 
 SearchForm.displayName = 'SearchForm';
 
-export default SearchForm;
+export default React.memo(SearchForm);
