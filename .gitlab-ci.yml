@@ -25,7 +25,8 @@ e2e_tests:
   script:
     - yarn build
     - yarn e2e
-  artifacts:
+  artifacts
+    when: on_failure
     paths:
       - testcafe/screenshots/latest
       - testcafe/screenshots/diffs
