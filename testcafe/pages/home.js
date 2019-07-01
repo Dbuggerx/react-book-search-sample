@@ -56,4 +56,9 @@ module.exports = class HomePage extends BasePage {
   get booksContainer() {
     return Selector('.main-layout__books').with({ boundTestRun: this.t });
   }
+
+  async takeScreenshotOfBooksContainer() {
+    await this.prepareForScreenshot();
+    await this.t.takeScreenshot();
+  }
 };

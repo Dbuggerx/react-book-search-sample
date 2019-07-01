@@ -34,7 +34,7 @@
       border: solid 1px get($colors, greys, 2000);
       padding: get($spaces, 500) get($spaces, 1000);
       outline: 0;
-      font-family: 'Roboto', Arial, Verdana, Tahoma, sans-serif;
+      font-family: $default-font-family;
       font-size: 1em;
 
       &::placeholder {

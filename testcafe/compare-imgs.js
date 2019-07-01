@@ -55,12 +55,9 @@ function getScreenshotsPaths() {
     );
 }
 
-async function compareImgs(imgPath1, imgPath2) {
-  // eslint-disable-next-line no-console
-  console.log(`Comparing images: "${path.basename(imgPath1)}"`);
+async function getMistachedPixels(imgPath1, imgPath2) {
   const imgs = await Promise.all([getPngData(imgPath1), getPngData(imgPath2)]);
   const diff = new PNG({ width: imgs[0].width, height: imgs[0].height });
-
   const mismatchedPixels = pixelmatch(
     imgs[0].data,
     imgs[1].data,
@@ -71,23 +68,50 @@ async function compareImgs(imgPath1, imgPath2) {
       threshold: 0.2
     }
   );
+  return { mismatchedPixels, diff };
+}
 
-  if (mismatchedPixels === 0) return;
-
-  const imgFileName = path.basename(imgPath1);
-  const browserDir = path.basename(path.dirname(imgPath1));
-
+function handleMismatchError(imgPath, diff, mismatchedPixels) {
+  const imgFileName = path.basename(imgPath);
+  const browserDir = path.basename(path.dirname(imgPath));
   if (!fs.existsSync(path.join(diffsPath, browserDir)))
     fs.mkdirSync(path.join(diffsPath, browserDir));
-  diff.pack().pipe(fs.createWriteStream(path.join(diffsPath, browserDir, imgFileName)));
 
-  throw new Error(`${mismatchedPixels} mismatched pixels for "${imgFileName}"`);
+  return new Promise(resolve => {
+    const writableStream = fs.createWriteStream(
+      path.join(diffsPath, browserDir, imgFileName)
+    );
+
+    diff.pack().pipe(writableStream);
+
+    writableStream.once('close', () =>
+      resolve({
+        imgFileName,
+        mismatchedPixels
+      })
+    );
+  });
+}
+
+async function compareImgs(imgPath1, imgPath2) {
+  // eslint-disable-next-line no-console
+  console.log(`Comparing images: "${path.basename(imgPath1)}"`);
+  const { mismatchedPixels, diff } = await getMistachedPixels(imgPath1, imgPath2);
+
+  if (mismatchedPixels === 0) return null;
+
+  return handleMismatchError(imgPath1, diff, mismatchedPixels);
 }
 
 async function diffScreenshots() {
   if (fs.existsSync(diffsPath)) clearDir(diffsPath);
   else fs.mkdirSync(diffsPath);
-  await Promise.all(getScreenshotsPaths().map(r => compareImgs(...r)));
+  const results = await Promise.all(getScreenshotsPaths().map(r => compareImgs(...r)));
+  if (results.some(r => !!r)) {
+    // eslint-disable-next-line no-console
+    console.table(results);
+    throw new Error('Visual regression errors were found');
+  }
 }
 
 module.exports = function compareScreenshots() {

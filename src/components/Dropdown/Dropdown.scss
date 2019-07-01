@@ -9,7 +9,7 @@
   vertical-align: middle;
   position: relative;
   width: 100%;
-  font-family: 'Roboto', Arial, Verdana, Tahoma, sans-serif;
+  font-family: $default-font-family;
 
   &__button {
     @extend %input-color;
