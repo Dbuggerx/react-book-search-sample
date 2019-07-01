@@ -9,8 +9,6 @@ Then(
   async (t, [bookCardCount]) => {
     const bookCards = await t.ctx.page.getBookCards();
     await t.expect(bookCards.length).eql(bookCardCount);
-
-    await t.ctx.page.prepareForScreenshot();
-    await t.takeElementScreenshot(t.ctx.page.booksContainer);
+    await t.ctx.page.takeScreenshotOfBooksContainer();
   }
 );

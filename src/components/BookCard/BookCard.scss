@@ -4,7 +4,7 @@
 .book-card {
   $card-border: solid 1px get($colors, border);
 
-  font-family: 'Roboto', Arial, Verdana, Tahoma, sans-serif;
+  font-family: $default-font-family;
   border: $card-border;
   border-radius: get($spaces, border-radius);
   box-shadow: 0 2px 4px get($colors, greys, 2000);
