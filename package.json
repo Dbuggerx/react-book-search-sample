@@ -89,7 +89,7 @@
     "redux-logger": "^3.0.6",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
-    "stylelint": "^10.1.0",
+    "stylelint": "^15.10.1",
     "stylelint-config-standard": "^18.3.0",
     "stylelint-no-unsupported-browser-features": "^3.0.2",
     "stylelint-scss": "^3.8.0",
